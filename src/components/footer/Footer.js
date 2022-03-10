@@ -5,11 +5,11 @@ const Footer = () => {
   return (
     <footer>
       <p className="copyright">
-        Made with{' '}
+        {/* Made with{' '}
         <span role="img" aria-label="thinking">
           ❤️
-        </span>{' '}
-        by Patrick Smith
+        </span>{' '} */}
+        Made by Patrick Smith
       </p>
     </footer>
   )

@@ -27,9 +27,9 @@ const Home = () => {
             />
             <h1 className="greeting-text">
               Hi, I'm <span className="name">Patrick Smith</span>.{' '}
-              <span className="wave-emoji" role="img" aria-label="waving hand">
+              {/* <span className="wave-emoji" role="img" aria-label="waving hand">
                 👋
-              </span>
+              </span> */}
             </h1>
             <h1 className="greeting-text">
               <Typewriter

@@ -14,29 +14,29 @@ const About = () => {
           <div className="about-text">
             <h2>Who am I?</h2>
             <p>
-              I'm Patrick{' '}
-              <span role="img" aria-label="lightning">
+              I'm Patrick!{' '}
+              {/* <span role="img" aria-label="lightning">
                 😄
-              </span>{' '}
+              </span>{' '} */}
             </p>
             <p>
-              <span role="img" aria-label="lightning">
+              {/* <span role="img" aria-label="lightning">
                 ⚡
-              </span>{' '}
-              I'm a software engineer at Travelers, focusing on Front-End web development.
+              </span>{' '} */}
+              - I'm a software engineer at Travelers, focusing on Front-End web development.
             </p>
             <p>
-              <span role="img" aria-label="lightning">
+              {/* <span role="img" aria-label="lightning">
                 ⚡
-              </span>{' '}
-              You can find me working with JavaScript, React, GraphQL, and Gatsby.
+              </span>{' '} */}
+              - You can find me working with JavaScript, React, GraphQL, and Gatsby.
             </p>
             <div className="typewriter">
               <p className="typewriter-start">
-                <span role="img" aria-label="lightning">
+                {/* <span role="img" aria-label="lightning">
                   ⚡
-                </span>{' '}
-                I love
+                </span>{' '} */}
+                - I love
               </p>
               <Typewriter
                 options={{
