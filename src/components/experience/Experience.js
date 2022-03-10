@@ -10,8 +10,8 @@ const Experience = () => {
     <Section title="Experience">
       <div className="experience-content">
         <ul className="experience-list">
-          {experienceData.experience.reverse().map((exp) => (
-            <li key={`experience-${exp.company}`}>
+          {experienceData.experience.reverse().map((exp, i) => (
+            <li key={`experience-${exp.company}${i}`}>
               <Fade bottom duration={1000} distance="20px">
                 <ExperienceCard experience={exp} />
               </Fade>
@@ -26,9 +26,9 @@ const Experience = () => {
             }}
           >
             <p style={{ textAlign: 'center' }}>
-              Further in-depth experience pre 2020 can be found on my{' '}
+              Further in-depth experience can be found on my{' '}
               <a
-                href="https://www.linkedin.com/in/mjigalin/"
+                href="https://www.linkedin.com/in/patrick-smith1/"
                 target="_blank"
                 rel="noopener noreferrer"
                 style={{

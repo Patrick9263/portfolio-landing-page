@@ -4,7 +4,7 @@ import { Fade } from 'react-reveal'
 import ApolloClient, { gql } from 'apollo-boost'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
-import { featured_projects } from '../../data/featured_projects.json'
+import { featured_projects } from '../../data/featured_projects.js'
 import Project from '../project/Project'
 import Section from '../section/Section'
 import FeaturedProject from '../featuredProject/FeaturedProject'
@@ -44,17 +44,17 @@ const client = new ApolloClient({
 })
 
 const queryInfo = {
-  owner: 'jigalin',
+  owner: 'Patrick9263',
   repositories: [
+    'portfolioV2',
     'portfolio-landing-page',
-    'react-pokedex',
-    'JS-DOM-for-beginners',
+    'razer-battery-status',
   ],
 }
 
 const query = gql`
   fragment repoProperties on Repository {
-    name 
+    name
     description
     url
     id
@@ -70,12 +70,12 @@ const query = gql`
   {
     user(login: "${queryInfo.owner}") {
       ${queryInfo.repositories
-        .map(
-          (repo, index) => `repo${index + 1}: repository(name: "${repo}") {
+    .map(
+      (repo, index) => `repo${index + 1}: repository(name: "${repo}") {
         ...repoProperties
       }`
-        )
-        .join('\n')}
+    )
+    .join('\n')}
     }
   }`
 
@@ -140,7 +140,7 @@ const Projects = () => {
             <div className="more-projects-wrapper">
               <a
                 className="project-link"
-                href={'https://github.com/jigalin'}
+                href={'https://github.com/Patrick9263'}
                 target="_blank"
                 rel="noopener noreferrer"
               >
