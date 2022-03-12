@@ -40,6 +40,20 @@
   text-decoration: none;
   z-index: 1;
 }
+.container {
+  width: 100%;
+}
+.container > h2 {
+  position: absolute;
+  top: 30px;
+  text-align: center;
+  font-weight: 700;
+  margin: 0 30px;
+  font-size: 22px;
+  color: white;
+  text-decoration: none;
+  z-index: 1;
+}
 .image-wrapper {
   position: absolute;
   bottom: -50px;
