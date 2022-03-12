@@ -36,8 +36,7 @@
         "React",
         "JavaScript",
         "C#",
-        "PowerShell",
-        "UI/UX"
+        "PowerShell"
       ],
       "logowidth": 80,
       "colourPrimary": "linear-gradient(to bottom, #c91818, #c91818)",
@@ -45,10 +44,10 @@
     },
     {
       "id": 2,
-      "link": "https://www.travelers.com/",
+      "link": "https://sustainability.travelers.com/",
       "company": "Travelers",
       "title": "Software Engineer",
-      "dateFrom": "2019",
+      "dateFrom": "2021",
       "dateTo": "Current",
       "info": [
         "Sustainability Team",
@@ -56,6 +55,7 @@
       ],
       "stack": [
         "React",
+        "JavaScript",
         "GatsbyJs",
         "GraphQL",
         "Design",

@@ -46,9 +46,10 @@ const client = new ApolloClient({
 const queryInfo = {
   owner: 'Patrick9263',
   repositories: [
-    'portfolioV2',
     'portfolio-landing-page',
     'razer-battery-status',
+    'telegram-bot-starter',
+    'rs-bot',
   ],
 }
 
