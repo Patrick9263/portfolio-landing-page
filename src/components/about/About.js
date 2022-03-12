@@ -46,7 +46,6 @@ const About = () => {
                     'solving complex problems',
                     'snowboarding',
                     'fixing hard-to-fix bugs',
-                    'trying new things',
                     'collaborating with others',
                   ],
                   autoStart: true,
