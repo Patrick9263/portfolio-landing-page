@@ -15,7 +15,8 @@
   min-height: 158px;
   transition: 0.2s;
   height: 100%;
-  cursor: pointer;
+  /* cursor: pointer; */
+  cursor: default;
 }
 .experience-card-wrapper:hover .experience-card {
   transform: translateY(-10px);

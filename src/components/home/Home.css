@@ -47,6 +47,7 @@
 }
 .greeting {
   margin: -63px 20px 0 20px;
+  width: 100%;
 }
 .hide {
   display: none;

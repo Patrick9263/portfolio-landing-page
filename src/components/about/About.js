@@ -41,18 +41,14 @@ const About = () => {
               <Typewriter
                 options={{
                   strings: [
-                    'learning new technologies',
-                    'exercising',
-                    'solving complex problems',
-                    'snowboarding',
-                    'fixing hard-to-fix bugs',
-                    'collaborating with others',
+                    'learning new technologies.',
+                    'solving complex problems.',
+                    'collaborating with others.',
                   ],
                   autoStart: true,
                   loop: true,
                 }}
               />
-              <p>.</p>
             </div>
             <p>
               Since 2019 - I've spent my time seeking and learning new

@@ -2,13 +2,17 @@ import React from 'react'
 import './ExperienceCard.css'
 
 const ExperienceCard = ({ experience }) => {
-  let { link, company, title, dateFrom, dateTo, info, stack } = experience
+  // eslint-disable-next-line no-unused-vars
+  let { _link, company, title, dateFrom, dateTo, info, stack } = experience
   return (
-    <a
+    // <a
+    //   className="experience-link"
+    //   href={link}
+    //   target="_blank"
+    //   rel="noopener noreferrer"
+    // >
+    <div
       className="experience-link"
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
     >
       <div className="experience-card-wrapper">
         <div className="experience-card">
@@ -38,8 +42,8 @@ const ExperienceCard = ({ experience }) => {
                 style={
                   experience.logoheight
                     ? {
-                        height: `${experience.logoheight}%`,
-                      }
+                      height: `${experience.logoheight}%`,
+                    }
                     : { width: `${experience.logowidth}%` }
                 }
               />
@@ -67,7 +71,8 @@ const ExperienceCard = ({ experience }) => {
           </div>
         </div>
       </div>
-    </a>
+    </div>
+    // </a>
   )
 }
 
