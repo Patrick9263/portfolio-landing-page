@@ -8,8 +8,8 @@
       "dateFrom": "2019",
       "dateTo": "2020",
       "info": [
-        "Business Intelligence & Analytics team",
-        "Worked with  to consume and manipulate data used for analytics further down the data stream in order to make business decisions."
+        "Business Intelligence & Analytics",
+        "Used ETL to consume and manipulate data for analytics further down the data stream in order to make business decisions."
       ],
       "stack": [
         "Ab Initio",
@@ -30,7 +30,7 @@
       "dateTo": "2021",
       "info": [
         "Strategic UI team",
-        "Maintained an application used by agents to quote and issue insurance policies made with a custom Javascript framework and React."
+        "Maintained an application used by agents to quote and issue insurance policies."
       ],
       "stack": [
         "React",
@@ -58,6 +58,28 @@
         "JavaScript",
         "GatsbyJs",
         "GraphQL",
+        "Design",
+        "UI/UX"
+      ],
+      "logowidth": 80,
+      "colourPrimary": "linear-gradient(to bottom, #c91818, #c91818)",
+      "colourSecondary": "linear-gradient(to bottom, #ffffff, #ffffff)"
+    },
+    {
+      "id": 3,
+      "link": "https://sustainability.travelers.com/",
+      "company": "Travelers",
+      "title": "Software Engineer",
+      "dateFrom": "2021",
+      "dateTo": "Current",
+      "info": [
+        "Sustainability Team",
+        "Used React to modernize AngularJS app. The app allows insurance customers to make payments for their policy by either making a one time payment or enrolling in automatic payments."
+      ],
+      "stack": [
+        "React",
+        "JavaScript",
+        "AngularJS",
         "Design",
         "UI/UX"
       ],

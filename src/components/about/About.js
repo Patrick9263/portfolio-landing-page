@@ -53,7 +53,7 @@ const About = () => {
             <p>
               Since 2019 - I've spent my time seeking and learning new
               technologies and forms of digital expression. This has led to me
-              working on some amazing world-class{' '}
+              working on some fun personal{' '}
               <Link
                 className="textLink"
                 to="projects"
@@ -63,7 +63,7 @@ const About = () => {
               >
                 projects
               </Link>
-              , worked at some{' '}
+              , gaining{' '}
               <Link
                 className="textLink"
                 to="experience"
@@ -71,9 +71,9 @@ const About = () => {
                 smooth={true}
                 duration={500}
               >
-                amazing places
+                great experience
               </Link>
-              , and worked with some great people.
+              , and working with some great people.
             </p>
             <div className="location-wrapper">
               <svg
