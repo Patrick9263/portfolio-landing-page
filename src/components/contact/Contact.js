@@ -12,7 +12,7 @@ const Contact = () => {
     <Section title="Contact">
       <ContactForm />
       <Bounce cascade>
-        <div className="links">
+        <div className="contact-links">
           <a
             href="https://github.com/Patrick9263"
             target="_blank"

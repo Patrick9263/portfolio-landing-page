@@ -10,6 +10,7 @@ import Navbar from '../navbar/Navbar'
 import config from '../../config'
 import profile from '../../images/patrick.png'
 import linkedin from '../../images/social/linkedin.png'
+import github from '../../images/social/github.png'
 
 const Home = () => {
   const [imageLoaded, setImageLoaded] = useState(false)
@@ -47,17 +48,30 @@ const Home = () => {
                 }}
               />
             </h1>
-            <Bounce cascade>
-              <div className="links">
-                <a
-                  href="https://www.linkedin.com/in/patrick-smith1/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <img src={linkedin} alt="Linkedin Logo" width="50px" />
-                </a>
-              </div>
-            </Bounce>
+            <div className="home-link-container">
+              <Bounce cascade>
+                <div className="home-links">
+                  <a
+                    href="https://github.com/Patrick9263/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={github} alt="Github Logo" width="50px" />
+                  </a>
+                </div>
+              </Bounce>
+              <Bounce cascade>
+                <div className="home-links">
+                  <a
+                    href="https://www.linkedin.com/in/patrick-smith1/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img src={linkedin} alt="Linkedin Logo" width="50px" />
+                  </a>
+                </div>
+              </Bounce>
+            </div>
             <div className="scroll-down">
               <Link
                 activeClass="active"
