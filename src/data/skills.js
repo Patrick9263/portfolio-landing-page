@@ -7,42 +7,42 @@ const skills = [
   {
     "id": 1,
     "skillName": "Gatsby",
-    "amount": "85"
+    "amount": "88"
   },
   {
     "id": 2,
     "skillName": "REST",
-    "amount": "83"
+    "amount": "85"
   },
   {
     "id": 3,
     "skillName": "Git/GitHub",
-    "amount": "82"
+    "amount": "84"
   },
   {
     "id": 4,
     "skillName": "GraphQL",
-    "amount": "78"
+    "amount": "82"
   },
   {
     "id": 5,
     "skillName": "Node.js",
-    "amount": "70"
+    "amount": "81"
   },
   {
     "id": 6,
     "skillName": "Python",
-    "amount": "65"
+    "amount": "79"
   },
   {
     "id": 7,
-    "skillName": "C/C++",
-    "amount": "60"
+    "skillName": "C/C#/C++",
+    "amount": "78"
   },
   {
     "id": 8,
     "skillName": "Scripting",
-    "amount": "55"
+    "amount": "76"
   }
 ];
 
