@@ -48,7 +48,7 @@ const queryInfo = {
   repositories: [
     'portfolio-landing-page',
     'razer-battery-status',
-    'telegram-bot-starter',
+    'telegram-bot',
     'rs-bot',
   ],
 }
