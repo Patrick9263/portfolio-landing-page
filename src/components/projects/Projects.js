@@ -32,9 +32,9 @@ const useStyles = makeStyles((theme) => ({
 const client = new ApolloClient({
   uri: 'https://api.github.com/graphql',
   request: (operation) => {
-    console.log(
-      `Token is ${process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`
-    )
+    // console.log(
+    //   `Token is ${process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`
+    // )
     operation.setContext({
       headers: {
         authorization: `Bearer ${process.env.REACT_APP_GITHUB_PERSONAL_ACCESS_TOKEN}`,
