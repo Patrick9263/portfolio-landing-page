@@ -2,7 +2,7 @@ import React from 'react'
 import './About.css'
 import Typewriter from 'typewriter-effect'
 import { Link } from 'react-scroll'
-import { Fade } from 'react-reveal'
+import Fade from '../react-reveal/in-and-out/Fade'
 import Section from '../section/Section'
 import Skills from '../skills/Skills'
 

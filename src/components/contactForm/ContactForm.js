@@ -127,7 +127,7 @@ const ContactForm = () => {
           value={messageText}
           onChange={handleMessageChange}
           multiline
-          rows="5"
+          minRows="5"
           variant="filled"
         />
         {status === 'SUCCESS' ? (

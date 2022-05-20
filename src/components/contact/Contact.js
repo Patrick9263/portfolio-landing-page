@@ -1,7 +1,7 @@
 import React from 'react'
 import './Contact.css'
 import Section from '../section/Section'
-import { Bounce } from 'react-reveal'
+import Bounce from '../react-reveal/in-and-out/Bounce'
 import ContactForm from '../contactForm/ContactForm'
 import linkedin from '../../images/social/linkedin.png'
 import github from '../../images/social/github.png'
