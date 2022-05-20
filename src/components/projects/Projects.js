@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import './Projects.css'
-import { Fade } from 'react-reveal'
+import Fade from '../react-reveal/in-and-out/Fade'
 import ApolloClient, { gql } from 'apollo-boost'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'

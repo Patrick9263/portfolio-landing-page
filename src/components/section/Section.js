@@ -1,6 +1,6 @@
 import React from 'react'
 import './Section.css'
-import { Fade } from 'react-reveal'
+import Fade from '../react-reveal/in-and-out/Fade'
 
 const Section = (props) => {
   return (

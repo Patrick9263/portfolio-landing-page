@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 import IsVisible from 'react-is-visible'
-import { Fade } from 'react-reveal'
+import Fade from '../react-reveal/in-and-out/Fade'
 import { skills } from '../../data/skills.js'
 import { useContainerDimensions } from '../../hooks'
 
