@@ -24,9 +24,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "dockerBuild": "docker build -t portfolio .",
-    "dockerRun": "docker run -d -p 3000:3000 --name portfolio portfolio"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -44,7 +42,7 @@
     ]
   },
   "engines": {
-    "npm": ">=8.x",
-    "node": ">=18.x"
+    "npm": ">=8.0.0",
+    "node": ">=18.0.0"
   }
 }
