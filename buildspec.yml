@@ -31,7 +31,7 @@ phases:
     commands:
       - echo Build started on `date`
       - echo Building the Docker image...
-      - docker build -t portfolio .
+      - docker build -t portfolio:latest .
       - docker tag portfolio:latest public.ecr.aws/k6w3a7r7/portfolio:latest
   post_build:
     commands:
