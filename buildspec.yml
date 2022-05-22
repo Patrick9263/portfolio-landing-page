@@ -38,6 +38,7 @@ phases:
       - echo Build completed on `date`
       - echo Pushing the Docker image...
       - docker push public.ecr.aws/k6w3a7r7/portfolio:latest
-  artifacts:
-    files:
-      - '**/*'
+
+artifacts:
+  files:
+    - '**/*'
