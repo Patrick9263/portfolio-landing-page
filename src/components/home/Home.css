@@ -54,13 +54,13 @@
 }
 .profile {
   border-radius: 50%;
-  border: 0.2rem solid #8f40e9;
+  border: 0.2rem solid #1bdbdb;
 }
 .greeting-text {
   margin: 15px;
 }
 .name {
-  color: #8f40e9;
+  color: #1bdbdb;
 }
 .home-link-container {
   display: flex;

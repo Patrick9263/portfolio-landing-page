@@ -1,7 +1,7 @@
 import React from 'react'
 import './ExperienceCard.css'
 
-const ExperienceCard = ({ experience }) => {
+const ExperienceCard = ({ experience, companyColor="white" }) => {
   // eslint-disable-next-line no-unused-vars
   let { _link, company, title, dateFrom, dateTo, info, stack } = experience
   return (
@@ -22,7 +22,7 @@ const ExperienceCard = ({ experience }) => {
               style={{ background: experience.colourPrimary }}
             ></div>
             <div className="container">
-              <h2>{company}</h2>
+              <h2 style={{color: companyColor}}>{company}</h2>
             </div>
             <div className="image-wrapper">
               <div
