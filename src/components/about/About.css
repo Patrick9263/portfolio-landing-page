@@ -22,8 +22,11 @@
   margin: 0;
 }
 .textLink {
-  color: #a178d1;
+  color: #1bdbdb;
   cursor: pointer;
+}
+.textLink:hover {
+  color: #52f5f5;
 }
 .location-wrapper {
   display: flex;
@@ -59,7 +62,7 @@
   display: flex;
   flex-direction: column;
   height: 30px;
-  background-color: #8f40e9;
+  background-color: #52f5f5;
   border-radius: 2px 0px 0px 2px;
 }
 @media screen and (min-width: 960px) {
@@ -77,9 +80,9 @@
     width: 80px;
     height: 30px;
     font-size: 12px;
-    background-color: #a178d1;
+    background-color: #1bdbdb;
     font-weight: 600;
-    color: white;
+    color: #252525;
   }
 }
 @media screen and (max-width: 959px) and (min-width: 600px) {
@@ -99,7 +102,7 @@
     width: 80px;
     height: 30px;
     font-size: 12px;
-    background-color: #a178d1;
+    background-color: #1bdbdb;
     font-weight: 600;
     color: white;
   }
@@ -124,7 +127,7 @@
     width: 65px;
     height: 30px;
     font-size: 10px;
-    background-color: #a178d1;
+    background-color: #1bdbdb;
     font-weight: 600;
     color: white;
   }

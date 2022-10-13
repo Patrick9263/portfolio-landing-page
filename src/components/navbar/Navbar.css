@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   background-color: #23252a;
-  border-bottom: 3px solid #8f40e9;
+  border-bottom: 3px solid #1bdbdb;
   pointer-events: fill;
 }
 .navbar a {

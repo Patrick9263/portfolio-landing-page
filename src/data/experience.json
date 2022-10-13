@@ -48,16 +48,18 @@
       "company": "Travelers",
       "title": "Software Engineer",
       "dateFrom": "2021",
-      "dateTo": "Current",
+      "dateTo": "2022",
       "info": [
         "Sustainability Team",
-        "Created a dynamic, content-enabled website that displays company-wide sustainability information"
+        "Created a dynamic, content-enabled website that displays company-wide sustainability information.",
+        "Used React to modernize AngularJS app. The app allows insurance customers to make payments for their policy by either making a one time payment or enrolling in automatic payments."
       ],
       "stack": [
         "React",
         "JavaScript",
         "GatsbyJs",
         "GraphQL",
+        "AngularJS",
         "Design",
         "UI/UX"
       ],
@@ -67,25 +69,27 @@
     },
     {
       "id": 3,
-      "link": "https://sustainability.travelers.com/",
-      "company": "Travelers",
+      "link": "https://www.godaddy.com/",
+      "company": "GoDaddy",
       "title": "Software Engineer",
-      "dateFrom": "2021",
+      "dateFrom": "2022",
       "dateTo": "Current",
       "info": [
-        "Sustainability Team",
-        "Used React to modernize AngularJS app. The app allows insurance customers to make payments for their policy by either making a one time payment or enrolling in automatic payments."
+        "Experimentation Platform",
+        "Used React to work on a traffic bucketing application for GoDaddy's experimentation platform.",
+        "This application helps teams at Goddady test new features by splitting incoming traffic to determine the effectiveness of these new features."
       ],
       "stack": [
         "React",
         "JavaScript",
-        "AngularJS",
+        "AWS",
         "Design",
         "UI/UX"
       ],
-      "logowidth": 80,
-      "colourPrimary": "linear-gradient(to bottom, #c91818, #c91818)",
-      "colourSecondary": "linear-gradient(to bottom, #ffffff, #ffffff)"
+      "logowidth": 70,
+      "colourPrimary": "linear-gradient(to bottom, #1bdbdb, #1bdbdb)",
+      "colourSecondary": "linear-gradient(to bottom, #000000, #000000)",
+      "companyColor": "black"
     }
   ]
 }
