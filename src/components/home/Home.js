@@ -36,7 +36,7 @@ const Home = () => {
               <Typewriter
                 options={{
                   strings: [
-                    'I\'m a frontend developer.',
+                    'I\'m a software engineer.',
                     'I like to design websites.',
                     'I love learning new tech.'
                   ],

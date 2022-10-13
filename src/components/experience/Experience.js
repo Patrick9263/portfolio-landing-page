@@ -13,7 +13,7 @@ const Experience = () => {
           {experienceData.experience.reverse().map((exp, i) => (
             <li key={`experience-${exp.company}${i}`}>
               <Fade bottom duration={1000} distance="20px">
-                <ExperienceCard experience={exp} />
+                <ExperienceCard experience={exp} companyColor={exp.companyColor} />
               </Fade>
             </li>
           ))}
@@ -33,7 +33,7 @@ const Experience = () => {
                 rel="noopener noreferrer"
                 style={{
                   textDecoration: 'none',
-                  color: '#8f40e9',
+                  color: '#1bdbdb',
                   cursor: 'pointer',
                 }}
               >

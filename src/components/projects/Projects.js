@@ -13,10 +13,10 @@ const useStyles = makeStyles((theme) => ({
   moreProjects: {
     '&': {
       margin: '20px auto',
-      backgroundColor: '#8f00e9',
+      backgroundColor: '#1bdbdb',
       boxShadow: 'none',
       '&:hover': {
-        backgroundColor: '#8f40e9',
+        backgroundColor: '#1bdbdb',
         boxShadow: 'none',
       },
     },
