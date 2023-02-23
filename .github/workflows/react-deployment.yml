@@ -8,6 +8,8 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    permissions:
+      packages: write
     strategy:
       matrix:
         node-version: [12.x]
