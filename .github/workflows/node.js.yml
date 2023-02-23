@@ -56,6 +56,6 @@ jobs:
       with:
         # GitHub token
         # token: ${{ github.token }}
-        github_token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ secrets.GITHUB_TOKEN }}
         # Name of the artifact to deploy
         artifact_name: github-pages
