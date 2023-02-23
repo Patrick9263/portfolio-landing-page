@@ -40,7 +40,7 @@ jobs:
         # Artifact name
         name: github-pages
         # Path of the directory containing the static assets.
-        path: _site/
+        path: build/
     
     
     - name: Deploy GitHub Pages site
