@@ -55,9 +55,14 @@ const ExperienceCard = ({ experience, companyColor="white" }) => {
               <h3>
                 {dateFrom} - {dateTo}
               </h3>
-              <ul>
+              <ul className='experience-card-bullet-list'>
                 {info.map((point, idx) => (
-                  <li key={`${company}-point-${idx}`}>{point}</li>
+                  <li
+                    key={`${company}-point-${idx}`}
+                    className='experience-card-bullet'
+                  >
+                    {point}
+                  </li>
                 ))}
               </ul>
             </div>
