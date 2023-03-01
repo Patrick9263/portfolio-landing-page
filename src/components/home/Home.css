@@ -56,11 +56,20 @@
   border-radius: 50%;
   border: 0.2rem solid #1bdbdb;
 }
+.hi-greeting-text {
+  margin: 15px;
+}
 .greeting-text {
   margin: 15px;
 }
 .name {
   color: #1bdbdb;
+}
+@media screen and (max-width: 599px) {
+  .greeting-text {
+    margin: 0 15px;
+    min-height: 78px;
+  }
 }
 .home-link-container {
   display: flex;

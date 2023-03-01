@@ -26,7 +26,7 @@ const Home = () => {
               src={profile}
               onLoad={() => setImageLoaded(true)}
             />
-            <h1 className="greeting-text">
+            <h1 className="hi-greeting-text">
               Hi, I'm <span className="name">Patrick Smith</span>.{' '}
               {/* <span className="wave-emoji" role="img" aria-label="waving hand">
                 👋
