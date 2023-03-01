@@ -57,7 +57,7 @@ const useStyles = makeStyles((theme) => ({
       },
     },
     '& > *': {
-      color: 'white',
+      // color: 'white',
       fontSize: '15px',
       fontWeight: '600',
     },
