@@ -13,18 +13,18 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 
 function App() {
-  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+  const queryParameters = new URLSearchParams(window.location.search)
+  const [photosParam, setPhotosParam] = useState(queryParameters.get('photos'))
 
   useEffect(() => {
-    setCurrentPath(window.location.pathname)
+    const queryParameters = new URLSearchParams(window.location.search)
+    const photosParam = queryParameters.get('photos')
+    setPhotosParam(photosParam)
   }, [])
-
-  const isPhotosPath =
-    currentPath.endsWith('photos') || currentPath.endsWith('photos/')
 
   return (
     <div className="App">
-      {isPhotosPath ? (
+      {photosParam?.toLowerCase() === 'true' ? (
         <PhotosPage />
       ) : (
         <>

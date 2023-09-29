@@ -27,7 +27,7 @@ const Photos = () => {
   const classes = useStyles()
   return (
     <Section title="Photos">
-      <a href={'/photos'} rel="noopener noreferrer">
+      <a href={'/?photos=true'} rel="noopener noreferrer">
         <Button
           className={classes.openGallery}
           type="button"
