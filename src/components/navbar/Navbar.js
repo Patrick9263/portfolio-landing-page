@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
-import './Navbar.css'
 import { Link } from 'react-scroll'
 import MobileNav from '../mobileNav/MobileNav'
+import './Navbar.css'
 
-const Navbar = () => {
+const Navbar = (props) => {
+  const { top = false } = props
   const [mobilenavVisible, setMobilenavVisible] = useState(false)
   const [hamburgerClass, setHamburgerClass] = useState('')
   const toggleMobilenavVisible = () => {
@@ -14,6 +15,21 @@ const Navbar = () => {
       setHamburgerClass('')
     }
   }
+
+  if (top) {
+    return (
+      <div className="navbar-top">
+        <div style={{ marginLeft: '5%' }}>
+          <div className="navlink-wrapper">
+            <a href="/" rel="noopener noreferrer">
+              HOME
+            </a>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="navbar">
       <div className="navlinks">

@@ -7,17 +7,37 @@ import Projects from './components/projects/Projects'
 import Contact from './components/contact/Contact'
 import Footer from './components/footer/Footer'
 import TopButton from './components/topButton/TopButton'
+import PhotosPage from './components/photos-page/PhotosPage'
+import Photos from './components/photos-page/Photos'
+import { useState } from 'react'
+import { useEffect } from 'react'
 
 function App() {
+  const [currentPath, setCurrentPath] = useState(window.location.pathname)
+
+  useEffect(() => {
+    setCurrentPath(window.location.pathname)
+  }, [])
+
+  const isPhotosPath =
+    currentPath.endsWith('photos') || currentPath.endsWith('photos/')
+
   return (
     <div className="App">
-      <Home />
-      <About />
-      <Experience />
-      <Projects />
-      <Contact />
-      <Footer />
-      <TopButton />
+      {isPhotosPath ? (
+        <PhotosPage />
+      ) : (
+        <>
+          <Home />
+          <About />
+          <Experience />
+          <Projects />
+          <Contact />
+          <Photos />
+          <Footer />
+          <TopButton />
+        </>
+      )}
     </div>
   )
 }

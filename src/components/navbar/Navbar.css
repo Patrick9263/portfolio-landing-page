@@ -9,9 +9,21 @@
   border-bottom: 3px solid #1bdbdb;
   pointer-events: fill;
 }
-.navbar a {
+.navbar-top {
+  position: relative;
+  width: 100%;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  background-color: #23252a;
+  border-bottom: 3px solid #1bdbdb;
+  pointer-events: fill;
+}
+.navbar,.navbar-top a {
   cursor: pointer;
   font-weight: 600;
+  color: white;
+  text-decoration: none;
 }
 .navlink-wrapper {
   width: 20%;

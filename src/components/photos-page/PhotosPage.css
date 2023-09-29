@@ -1,0 +1,14 @@
+.photos {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    background-color: #2c323f;
+}
+
+.photo-container {
+    width: 95%;
+    padding: 1% 0 3% 0;
+}
