@@ -4,9 +4,9 @@ import Navbar from '../navbar/Navbar'
 import ClipLoader from 'react-spinners/ClipLoader'
 
 import PhotoAlbum from 'react-photo-album' // https://github.com/igordanchenko/react-photo-album/
-import photo1 from '../../images/photos/DSC01592.png'
-import photo2 from '../../images/photos/DSC01593.png'
-import photo3 from '../../images/photos/DSC01621.png'
+// import photo1 from '../../images/photos/DSC01592.png'
+// import photo2 from '../../images/photos/DSC01593.png'
+// import photo3 from '../../images/photos/DSC01621.png'
 // import photo4 from '../../images/photos/DSC01645.png'
 // import photo5 from '../../images/photos/DSC01665.png'
 // import photo6 from '../../images/photos/DSC01693.png'
@@ -37,9 +37,9 @@ import { useEffect } from 'react'
 import './PhotosPage.css'
 
 const photoList = [
-  photo1,
-  photo2,
-  photo3,
+  // photo1,
+  // photo2,
+  // photo3,
   // photo4,
   // photo5,
   // photo6,
