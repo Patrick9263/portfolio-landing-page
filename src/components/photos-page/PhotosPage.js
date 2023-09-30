@@ -2,85 +2,41 @@ import { getImageSize } from 'react-image-size'
 import Fade from '../react-reveal/in-and-out/Fade'
 import Navbar from '../navbar/Navbar'
 import ClipLoader from 'react-spinners/ClipLoader'
-
-import PhotoAlbum from 'react-photo-album' // https://github.com/igordanchenko/react-photo-album/
-// import photo1 from '../../images/photos/DSC01592.png'
-// import photo2 from '../../images/photos/DSC01593.png'
-// import photo3 from '../../images/photos/DSC01621.png'
-// import photo4 from '../../images/photos/DSC01645.png'
-// import photo5 from '../../images/photos/DSC01665.png'
-// import photo6 from '../../images/photos/DSC01693.png'
-// import photo7 from '../../images/photos/DSC01700.png'
-// import photo8 from '../../images/photos/DSC01720.png'
-// import photo9 from '../../images/photos/DSC01721.png'
-// import photo10 from '../../images/photos/DSC01726.png'
-// import photo11 from '../../images/photos/DSC01742.png'
-// import photo12 from '../../images/photos/DSC01749.png'
-// import photo13 from '../../images/photos/DSC01755.png'
-// import photo14 from '../../images/photos/DSC01795.png'
-// import photo15 from '../../images/photos/DSC01853_1.png'
-// import photo16 from '../../images/photos/DSC01856.png'
-// import photo17 from '../../images/photos/DSC01905.png'
-// import photo18 from '../../images/photos/DSC01965.png'
-// import photo19 from '../../images/photos/DSC01970.png'
-// import photo20 from '../../images/photos/DSC02089.png'
-// import photo21 from '../../images/photos/DSC02107.png'
-// import photo22 from '../../images/photos/DSC02113-1.png'
-// import photo23 from '../../images/photos/DSC02115.png'
-// import photo24 from '../../images/photos/DSC02142.png'
-// import photo25 from '../../images/photos/DSC02149.png'
-// import photo26 from '../../images/photos/DSC02154.png'
-// import photo27 from '../../images/photos/DSC02163.png'
-
+import PhotoAlbum from 'react-photo-album'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import './PhotosPage.css'
 
+const bucket = 'https://patrick-portfolio-photos.s3.us-east-2.amazonaws.com'
 const photoList = [
-  // photo1,
-  // photo2,
-  // photo3,
-  // photo4,
-  // photo5,
-  // photo6,
-  // photo7,
-  // photo8,
-  // photo9,
-  // photo10,
-  // photo11,
-  // photo12,
-  // photo13,
-  // photo14,
-  // photo15,
-  // photo16,
-  // photo17,
-  // photo18,
-  // photo19,
-  // photo20,
-  // photo21,
-  // photo22,
-  // photo23,
-  // photo24,
-  // photo25,
-  // photo26,
-  // photo27,
+  `${bucket}/downscaled/DSC01592.jpeg`,
+  `${bucket}/downscaled/DSC01593.jpeg`,
+  `${bucket}/downscaled/DSC01621.jpeg`,
+  `${bucket}/downscaled/DSC01645.jpeg`,
+  `${bucket}/downscaled/DSC01665.jpeg`,
+  `${bucket}/downscaled/DSC01693.jpeg`,
+  `${bucket}/downscaled/DSC01700.jpeg`,
+  `${bucket}/downscaled/DSC01720.jpeg`,
+  `${bucket}/downscaled/DSC01721.jpeg`,
+  `${bucket}/downscaled/DSC01726.jpeg`,
+  `${bucket}/downscaled/DSC01742.jpeg`,
+  `${bucket}/downscaled/DSC01749.jpeg`,
+  `${bucket}/downscaled/DSC01755.jpeg`,
+  `${bucket}/downscaled/DSC01795.jpeg`,
+  `${bucket}/downscaled/DSC01853_1.jpeg`,
+  `${bucket}/downscaled/DSC01856.jpeg`,
+  `${bucket}/downscaled/DSC01905.jpeg`,
+  `${bucket}/downscaled/DSC01965.jpeg`,
+  `${bucket}/downscaled/DSC01970.jpeg`,
+  `${bucket}/downscaled/DSC02089.jpeg`,
+  `${bucket}/downscaled/DSC02107.jpeg`,
+  `${bucket}/downscaled/DSC02113-1.jpeg`,
+  `${bucket}/downscaled/DSC02115.jpeg`,
+  `${bucket}/downscaled/DSC02142.jpeg`,
+  `${bucket}/downscaled/DSC02149.jpeg`,
+  `${bucket}/downscaled/DSC02154.jpeg`,
+  `${bucket}/downscaled/DSC02163.jpeg`,
 ]
-
-const Description = () => {
-  return (
-    <Fade duration={1000}>
-      <div className="about-text">
-        <h2>My Photo Gallery</h2>
-        <p>
-          Photography is one of my hobbies! I'm still learning, but enjoy some
-          photos I've taken 😊
-        </p>
-        <p>Currently I'm using a Sony A7R V with a 24mm lens.</p>
-        <p>Click on a photo to download the full resolution.</p>
-      </div>
-    </Fade>
-  )
-}
 
 const setAllImages = async (setPhotoAlbum, setIsLoading) => {
   const data = []
@@ -118,7 +74,14 @@ export default function PhotosPage() {
     <Fade bottom duration={1000} distance="20px">
       <div className="photos">
         <Navbar top />
-        <Description />
+        <Fade duration={1000}>
+          <div className="about-text">
+            <h2>Photos</h2>
+            <p>Photography is one of my hobbies, enjoy some that I've taken!</p>
+            <p>Currently I'm using a Sony A7R V with a 24mm lens.</p>
+            <p>Click on a photo to see the full resolution.</p>
+          </div>
+        </Fade>
         <div className="photo-container">
           {isLoading ? (
             <ClipLoader
@@ -128,7 +91,18 @@ export default function PhotosPage() {
               aria-label="Loading Spinner"
             />
           ) : (
-            <PhotoAlbum layout="rows" photos={photoAlbum} />
+            <PhotoAlbum
+              layout="rows"
+              photos={photoAlbum}
+              onClick={({ index }) => {
+                window.open(
+                  photoList[index]
+                    .replace('downscaled/', '')
+                    .replace('.jpeg', '.png'),
+                  '_blank'
+                )
+              }}
+            />
           )}
         </div>
       </div>
