@@ -5,7 +5,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import './PhotosPage.css'
 
 const useStyles = makeStyles((theme) => ({
-  openGallery: {
+  openGalleryAnchor: {
+    textDecoration: 'none',
+  },
+  openGalleryButton: {
     '&': {
       margin: '20px auto',
       backgroundColor: '#1bdbdb',
@@ -27,9 +30,13 @@ const Photos = () => {
   const classes = useStyles()
   return (
     <Section title="Photos">
-      <a href={'/?photos=true'} rel="noopener noreferrer">
+      <a
+        href={'/?photos=true'}
+        rel="noopener noreferrer"
+        className={classes.openGalleryAnchor}
+      >
         <Button
-          className={classes.openGallery}
+          className={classes.openGalleryButton}
           type="button"
           variant="contained"
         >
