@@ -26,7 +26,6 @@ const photoList = [
   `${bucket}/downscaled/DSC01853_1.jpeg`,
   `${bucket}/downscaled/DSC01856.jpeg`,
   `${bucket}/downscaled/DSC01905.jpeg`,
-  `${bucket}/downscaled/DSC01965.jpeg`,
   `${bucket}/downscaled/DSC01970.jpeg`,
   `${bucket}/downscaled/DSC02089.jpeg`,
   `${bucket}/downscaled/DSC02107.jpeg`,
@@ -39,27 +38,35 @@ const photoList = [
 ]
 
 const setAllImages = async (setPhotoAlbum, setIsLoading) => {
-  const data = []
-  const loopThruPhotos = () => {
-    photoList.forEach((photo) => {
-      try {
-        const dimensions = getImageSize(photo)
-        data.push(dimensions)
-      } catch (error) {
-        console.error(error)
-      }
+  const getDimensions = async (url) => getImageSize(url)
+  let resolvedData = []
+
+  const completeDataLoad = (index) => {
+    if (index === photoList.length - 1) {
+      setPhotoAlbum(resolvedData)
+      setIsLoading(false)
+    }
+  }
+
+  const getData = async () => {
+    let promise = Promise.resolve()
+    photoList.forEach((url, index) => {
+      promise = getDimensions(url)
+      promise.then(
+        ({ width, height }) => {
+          if (width && height)
+            resolvedData.push({
+              src: photoList[index],
+              width,
+              height,
+            })
+          completeDataLoad(index)
+        },
+        () => completeDataLoad(index)
+      )
     })
   }
-  loopThruPhotos()
-  let resolvedData = []
-  const dimensions = await Promise.all(data)
-  resolvedData = dimensions.map((dimension, index) => ({
-    src: photoList[index],
-    width: dimension?.width,
-    height: dimension?.height,
-  }))
-  setIsLoading(false)
-  setPhotoAlbum(resolvedData)
+  getData()
 }
 
 export default function PhotosPage() {
