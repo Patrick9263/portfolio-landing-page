@@ -9,6 +9,22 @@ import './PhotosPage.css'
 
 const bucket = 'https://patrick-portfolio-photos.s3.us-east-2.amazonaws.com'
 const photoList = [
+  `${bucket}/downscaled/DSC00782.jpeg`,
+  `${bucket}/downscaled/DSC00857.jpeg`,
+  `${bucket}/downscaled/DSC00881.jpeg`,
+  `${bucket}/downscaled/DSC00887.jpeg`,
+  `${bucket}/downscaled/DSC00912.jpeg`,
+  `${bucket}/downscaled/DSC00930.jpeg`,
+  `${bucket}/downscaled/DSC00962.jpeg`,
+  `${bucket}/downscaled/DSC01008.jpeg`,
+  `${bucket}/downscaled/DSC01164.jpeg`,
+  `${bucket}/downscaled/DSC01247.jpeg`,
+  `${bucket}/downscaled/DSC01261.jpeg`,
+  `${bucket}/downscaled/DSC01303.jpeg`,
+  `${bucket}/downscaled/DSC01314.jpeg`,
+  `${bucket}/downscaled/DSC01316.jpeg`,
+  `${bucket}/downscaled/DSC01323.jpeg`,
+  `${bucket}/downscaled/DSC01327.jpeg`,
   `${bucket}/downscaled/DSC01592.jpeg`,
   `${bucket}/downscaled/DSC01593.jpeg`,
   `${bucket}/downscaled/DSC01621.jpeg`,
@@ -35,6 +51,13 @@ const photoList = [
   `${bucket}/downscaled/DSC02149.jpeg`,
   `${bucket}/downscaled/DSC02154.jpeg`,
   `${bucket}/downscaled/DSC02163.jpeg`,
+  `${bucket}/downscaled/DSC02305.jpeg`,
+  `${bucket}/downscaled/DSC02346.jpeg`,
+  `${bucket}/downscaled/DSC02378.jpeg`,
+  `${bucket}/downscaled/DSC02510.jpeg`,
+  `${bucket}/downscaled/DSC02628.jpeg`,
+  `${bucket}/downscaled/DSC02699.jpeg`,
+  `${bucket}/downscaled/DSC02714.jpeg`,
 ]
 
 const setAllImages = async (setPhotoAlbum, setIsLoading) => {
