@@ -131,3 +131,6 @@ yarn-error.log*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
 node_modules
+
+# local images for dimension generating
+src/images/downscaled-photos/*jpeg

@@ -14,14 +14,11 @@
     "http": "^0.0.1-security",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-image-size": "^2.0.2",
     "react-is-visible": "^1.2.0",
     "react-photo-album": "^2.3.0",
     "react-router-dom": "^5.3.2",
     "react-scripts": "^5.0.1",
     "react-scroll": "^1.8.7",
-    "react-spinners": "^0.13.8",
-    "tsparticles": "^2.0.6",
     "typewriter-effect": "^2.18.2"
   },
   "devDependencies": {
