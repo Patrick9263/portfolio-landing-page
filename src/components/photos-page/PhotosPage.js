@@ -23,7 +23,7 @@ export default function PhotosPage() {
             photos={photoDimensions}
             onClick={({ index }) => {
               window.open(
-                photoDimensions[index]
+                photoDimensions[index].src
                   .replace('downscaled/', '')
                   .replace('.jpeg', '.png'),
                 '_blank'
