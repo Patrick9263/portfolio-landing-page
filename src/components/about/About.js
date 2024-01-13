@@ -23,13 +23,15 @@ const About = () => {
               {/* <span role="img" aria-label="lightning">
                 ⚡
               </span>{' '} */}
-              - I'm a software engineer at GoDaddy, currently focusing on Front-End web development.
+              - I'm a software engineer at GoDaddy, currently focusing on
+              Front-End web development.
             </p>
             <p>
               {/* <span role="img" aria-label="lightning">
                 ⚡
               </span>{' '} */}
-              - You can find me working with React, JavaScript, AWS, and more!
+              - You can find me working with React, TypeScript, DynamoDB, and
+              more!
             </p>
             <div className="typewriter">
               <p className="typewriter-start">
@@ -51,9 +53,9 @@ const About = () => {
               />
             </div>
             <p>
-              Since 2019 - I've spent my time seeking and learning new
-              technologies and forms of digital expression. This has led to me
-              working on some fun personal{' '}
+              I've spent my time seeking and learning new technologies and forms
+              of digital expression. This has led to me working on some fun
+              personal{' '}
               <Link
                 className="textLink"
                 to="projects"
