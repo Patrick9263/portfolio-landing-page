@@ -11,12 +11,7 @@
         "Business Intelligence & Analytics",
         "Used ETL to consume and manipulate data for analytics further down the data stream in order to make business decisions."
       ],
-      "stack": [
-        "Ab Initio",
-        "Teradata/SQL",
-        "Jenkins/UCD",
-        "PowerShell"
-      ],
+      "stack": ["Ab Initio", "Teradata/SQL", "Jenkins/UCD", "PowerShell"],
       "logowidth": 80,
       "colourPrimary": "linear-gradient(to bottom, #c91818, #c91818)",
       "colourSecondary": "linear-gradient(to bottom, #ffffff, #ffffff)"
@@ -32,12 +27,7 @@
         "Strategic UI team",
         "Maintained an application used by agents to quote and issue insurance policies."
       ],
-      "stack": [
-        "React",
-        "JavaScript",
-        "C#",
-        "PowerShell"
-      ],
+      "stack": ["React", "JavaScript", "C#", "PowerShell"],
       "logowidth": 80,
       "colourPrimary": "linear-gradient(to bottom, #c91818, #c91818)",
       "colourSecondary": "linear-gradient(to bottom, #ffffff, #ffffff)"
@@ -60,7 +50,6 @@
         "GatsbyJs",
         "GraphQL",
         "AngularJS",
-        "Design",
         "UI/UX"
       ],
       "logowidth": 80,
@@ -75,16 +64,18 @@
       "dateFrom": "2022",
       "dateTo": "Current",
       "info": [
-        "Experimentation Platform",
-        "Used React to work on a traffic bucketing application for GoDaddy's experimentation platform.",
-        "This application helps teams at Goddady test new features by splitting incoming traffic to determine the effectiveness of these new features."
+        "Hivemind Experimentation Platform",
+        "Uses a React to work on a traffic bucketing application for GoDaddy's experimentation platform.",
+        "This application helps teams at GoDaddy test new features by splitting incoming traffic to determine the effectiveness of potential new features."
       ],
       "stack": [
         "React",
-        "JavaScript",
-        "AWS",
-        "Design",
-        "UI/UX"
+        "TypeScript",
+        "Node",
+        "DynamoDB",
+        "Figma",
+        "GitHub Actions",
+        "Jenkins"
       ],
       "logowidth": 70,
       "colourPrimary": "linear-gradient(to bottom, #1bdbdb, #1bdbdb)",
