@@ -1,16 +1,27 @@
 import React from 'react'
 import './ExperienceCard.css'
 
-const ExperienceCard = ({ experience, companyColor = 'white' }) => {
-  // eslint-disable-next-line no-unused-vars
-  let { _link, company, title, dateFrom, dateTo, info, stack } = experience
+const logoImages = import.meta.glob('../../images/logos/*.{png,jpg,jpeg,svg}', {
+  eager: true,
+  query: '?url',
+  import: 'default',
+})
+
+const getCompanyLogo = (company) => {
+  const logoName = company.replace(/ /g, '').toLowerCase()
   return (
-    // <a
-    //   className="experience-link"
-    //   href={link}
-    //   target="_blank"
-    //   rel="noopener noreferrer"
-    // >
+    logoImages[`../../images/logos/${logoName}.png`] ||
+    logoImages[`../../images/logos/${logoName}.jpg`] ||
+    logoImages[`../../images/logos/${logoName}.jpeg`] ||
+    logoImages[`../../images/logos/${logoName}.svg`]
+  )
+}
+
+const ExperienceCard = ({ experience, companyColor = 'white' }) => {
+  const { company, title, dateFrom, dateTo, info, stack } = experience
+  const logoSrc = getCompanyLogo(company)
+
+  return (
     <div className="experience-link">
       <div className="experience-card-wrapper">
         <div className="experience-card">
@@ -19,9 +30,11 @@ const ExperienceCard = ({ experience, companyColor = 'white' }) => {
               className="experience-bg"
               style={{ background: experience.colourPrimary }}
             ></div>
+
             <div className="container">
               <h2 style={{ color: companyColor }}>{company}</h2>
             </div>
+
             <div className="image-wrapper">
               <div
                 className="experience-bg logo-bg"
@@ -31,30 +44,31 @@ const ExperienceCard = ({ experience, companyColor = 'white' }) => {
                     : experience.colourPrimary,
                 }}
               ></div>
-              <img
-                className="company-logo"
-                src={require(
-                  `../../images/logos/${company
-                    .replace(/ /g, '')
-                    .toLowerCase()}.png`
-                )}
-                alt={`${company}-logo`}
-                style={
-                  experience.logoheight
-                    ? {
-                        height: `${experience.logoheight}%`,
-                      }
-                    : { width: `${experience.logowidth}%` }
-                }
-              />
+
+              {logoSrc ? (
+                <img
+                  className="company-logo"
+                  src={logoSrc}
+                  alt={`${company}-logo`}
+                  style={
+                    experience.logoheight
+                      ? {
+                          height: `${experience.logoheight}%`,
+                        }
+                      : { width: `${experience.logowidth}%` }
+                  }
+                />
+              ) : null}
             </div>
           </div>
+
           <div className="experience-card-bottom">
             <div>
               <h2>{title}</h2>
               <h3>
                 {dateFrom} - {dateTo}
               </h3>
+
               <ul className="experience-card-bullet-list">
                 {info.map((point, idx) => (
                   <li
@@ -66,6 +80,7 @@ const ExperienceCard = ({ experience, companyColor = 'white' }) => {
                 ))}
               </ul>
             </div>
+
             <div className="experience-card-tech">
               <ul>
                 {stack.map((tech) => (
@@ -77,7 +92,6 @@ const ExperienceCard = ({ experience, companyColor = 'white' }) => {
         </div>
       </div>
     </div>
-    // </a>
   )
 }
 

@@ -20,7 +20,17 @@
   pointer-events: fill;
 }
 .navbar,
-.navbar-top a {
+.navbar a,
+.navbar a:link,
+.navbar a:visited,
+.navbar a:hover,
+.navbar a:active,
+.navbar-top,
+.navbar-top a,
+.navbar-top a:link,
+.navbar-top a:visited,
+.navbar-top a:hover,
+.navbar-top a:active {
   cursor: pointer;
   font-weight: 600;
   color: white;

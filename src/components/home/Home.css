@@ -35,6 +35,17 @@
     display: none;
   }
 }
+.scroll-down,
+a.scroll-down,
+a.scroll-down:link,
+a.scroll-down:visited,
+a.scroll-down:hover,
+a.scroll-down:active,
+.scroll-down svg,
+.scroll-down svg path {
+  color: white;
+  text-decoration: none;
+}
 .home {
   position: relative;
   display: flex;
