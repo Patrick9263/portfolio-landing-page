@@ -14,22 +14,17 @@
     "typewriter-effect": "^2.18.2"
   },
   "devDependencies": {
-    "gh-pages": "^4.0.0",
+    "@vitejs/plugin-react": "^6.0.2",
     "prettier": "^3.8.4",
-    "react-scripts": "^5.0.1"
+    "vite": "^8.0.16"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "start": "vite",
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
     "format": "prettier --write \"src/**/*.{js,jsx,css,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx,css,json,md}\""
-  },
-  "eslintConfig": {
-    "extends": "react-app"
   },
   "browserslist": {
     "production": [
