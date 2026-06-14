@@ -18,17 +18,20 @@ const Home = () => {
     <div className="home-wrapper">
       <div className="home">
         {/* <Particles className="particles" params={config.particles} /> */}
+
         <div className={`greeting${!imageLoaded ? ' hide' : ''}`}>
           <Fade bottom distance="40px">
             <img
               className="profile"
-              alt="m.patrick profile"
+              alt="Patrick Smith profile"
               src={profile}
               onLoad={() => setImageLoaded(true)}
             />
+
             <h1 className="hi-greeting-text">
               Hi, I'm <span className="name">Patrick Smith</span>.{' '}
             </h1>
+
             <h1 className="greeting-text">
               <Typewriter
                 options={{
@@ -45,6 +48,7 @@ const Home = () => {
                 }}
               />
             </h1>
+
             <div className="home-link-container">
               <Bounce cascade>
                 <div className="home-links">
@@ -57,6 +61,7 @@ const Home = () => {
                   </a>
                 </div>
               </Bounce>
+
               <Bounce cascade>
                 <div className="home-links">
                   <a
@@ -64,32 +69,34 @@ const Home = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <img src={linkedin} alt="Linkedin Logo" width="50px" />
+                    <img src={linkedin} alt="LinkedIn Logo" width="50px" />
                   </a>
                 </div>
               </Bounce>
             </div>
-            <div className="scroll-down">
-              <Link
-                activeClass="active"
-                to="about"
-                spy={true}
-                smooth={true}
-                offset={-63}
-                duration={500}
-              >
-                <svg
-                  className="scroll-down-icon"
-                  aria-hidden="true"
-                  viewBox="0 0 24 24"
-                  focusable="false"
-                >
-                  <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 14.5L6.5 11l1.4-1.4 4.1 4.1 4.1-4.1L17.5 11 12 16.5Z" />
-                </svg>
-              </Link>
-            </div>
           </Fade>
+
+          <div className="scroll-down">
+            <Link
+              activeClass="active"
+              to="about"
+              spy={true}
+              smooth={true}
+              offset={-63}
+              duration={500}
+            >
+              <svg
+                className="scroll-down-icon"
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                focusable="false"
+              >
+                <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 14.5L6.5 11l1.4-1.4 4.1 4.1 4.1-4.1L17.5 11 12 16.5Z" />
+              </svg>
+            </Link>
+          </div>
         </div>
+
         <Navbar />
       </div>
     </div>
