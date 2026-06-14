@@ -12,3 +12,26 @@
   width: 95%;
   padding: 1% 0 3% 0;
 }
+
+.open-gallery-anchor {
+  text-decoration: none;
+}
+
+.open-gallery-button {
+  margin: 20px auto;
+  padding: 8px 16px;
+  background-color: #1bdbdb;
+  border: none;
+  border-radius: 4px;
+  box-shadow: none;
+  cursor: pointer;
+  color: black;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.open-gallery-button:hover {
+  background-color: #1bdbdb;
+  box-shadow: none;
+}

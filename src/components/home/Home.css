@@ -46,6 +46,13 @@ a.scroll-down:active,
   color: white;
   text-decoration: none;
 }
+.scroll-down-icon {
+  width: 35px;
+  height: 35px;
+  fill: currentColor;
+  pointer-events: fill;
+  cursor: pointer;
+}
 .home {
   position: relative;
   display: flex;

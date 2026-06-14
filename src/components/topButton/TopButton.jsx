@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
 import './TopButton.css'
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward'
 import { Link } from 'react-scroll'
 
 const TopButton = () => {
   const [topButtonVisible, setTopButtonVisible] = useState(false)
-  // When the user scrolls down 20px from the top of the document, show the button
+
   const scrollFunction = () => {
     if (
       document.body.scrollTop > window.innerHeight + 63 ||
@@ -16,12 +15,15 @@ const TopButton = () => {
       setTopButtonVisible(false)
     }
   }
+
   window.onscroll = function () {
     scrollFunction()
   }
+
   window.onload = function () {
     scrollFunction()
   }
+
   return (
     <Link
       activeClass="active"
@@ -34,10 +36,16 @@ const TopButton = () => {
       <button
         className={'topButton ' + (topButtonVisible ? 'on' : 'off')}
         title="Go to top"
+        type="button"
       >
-        <i aria-hidden="true">
-          <ArrowUpwardIcon />
-        </i>
+        <svg
+          className="topButton-icon"
+          aria-hidden="true"
+          viewBox="0 0 24 24"
+          focusable="false"
+        >
+          <path d="M4 12l1.4 1.4L11 7.8V20h2V7.8l5.6 5.6L20 12 12 4l-8 8Z" />
+        </svg>
       </button>
     </Link>
   )

@@ -5,7 +5,6 @@ import Bounce from '../react-reveal/in-and-out/Bounce'
 import { Link } from 'react-scroll'
 // import Particles from 'react-particles-js'
 import Typewriter from 'typewriter-effect'
-import ArrowDropDownCircleIcon from '@material-ui/icons/ArrowDropDownCircle'
 import Navbar from '../navbar/Navbar'
 // import config from '../../config'
 import profile from '../../images/patrick.png'
@@ -14,6 +13,7 @@ import github from '../../images/social/github.png'
 
 const Home = () => {
   const [imageLoaded, setImageLoaded] = useState(false)
+
   return (
     <div className="home-wrapper">
       <div className="home">
@@ -28,9 +28,6 @@ const Home = () => {
             />
             <h1 className="hi-greeting-text">
               Hi, I'm <span className="name">Patrick Smith</span>.{' '}
-              {/* <span className="wave-emoji" role="img" aria-label="waving hand">
-                👋
-              </span> */}
             </h1>
             <h1 className="greeting-text">
               <Typewriter
@@ -81,10 +78,14 @@ const Home = () => {
                 offset={-63}
                 duration={500}
               >
-                <ArrowDropDownCircleIcon
-                  fontSize="large"
-                  style={{ pointerEvents: 'fill', cursor: 'pointer' }}
-                />
+                <svg
+                  className="scroll-down-icon"
+                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  focusable="false"
+                >
+                  <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 14.5L6.5 11l1.4-1.4 4.1 4.1 4.1-4.1L17.5 11 12 16.5Z" />
+                </svg>
               </Link>
             </div>
           </Fade>

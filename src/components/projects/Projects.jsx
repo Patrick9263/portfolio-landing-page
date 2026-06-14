@@ -1,36 +1,13 @@
 import React from 'react'
 import './Projects.css'
 import Fade from '../react-reveal/in-and-out/Fade'
-import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core/styles'
 import { featured_projects } from '../../data/featured_projects.js'
 import { github_projects } from '../../data/github_projects.js'
 import Project from '../project/Project'
 import Section from '../section/Section'
 import FeaturedProject from '../featuredProject/FeaturedProject'
 
-const useStyles = makeStyles((theme) => ({
-  moreProjects: {
-    '&': {
-      margin: '20px auto',
-      backgroundColor: '#1bdbdb',
-      boxShadow: 'none',
-      '&:hover': {
-        backgroundColor: '#1bdbdb',
-        boxShadow: 'none',
-      },
-    },
-    '& > *': {
-      padding: 4,
-      fontSize: '15px',
-      fontWeight: '600',
-    },
-  },
-}))
-
 const Projects = () => {
-  const classes = useStyles()
-
   return (
     <Section title="Projects">
       <div className="projects-content">
@@ -66,13 +43,9 @@ const Projects = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Button
-                className={classes.moreProjects}
-                type="button"
-                variant="contained"
-              >
+              <button className="more-projects-button" type="button">
                 more projects
-              </Button>
+              </button>
             </a>
           </div>
         </Fade>

@@ -1,85 +1,22 @@
 import React, { useState } from 'react'
 import './ContactForm.css'
-import TextField from '@material-ui/core/TextField'
-import Button from '@material-ui/core/Button'
-import { makeStyles } from '@material-ui/core/styles'
-
-const useStyles = makeStyles((theme) => ({
-  email: {
-    '& > *': {
-      marginBottom: theme.spacing(2),
-      backgroundColor: '#3b4353',
-      color: 'white',
-      '&:hover': {
-        backgroundColor: '#3b4353',
-        color: 'white',
-      },
-      '&.Mui-focused': {
-        backgroundColor: '#3b4353',
-        color: 'white',
-      },
-      '&.MuiFilledInput-underline:before': {
-        borderBottom: '2px solid #6f7b9b',
-      },
-      '&.MuiFilledInput-underline:after': {
-        borderBottom: '2px solid #258b9e',
-      },
-    },
-  },
-  message: {
-    '& > *': {
-      marginBottom: theme.spacing(2),
-      backgroundColor: '#3b4353',
-      color: 'white',
-      '&:hover': {
-        backgroundColor: '#3b4353',
-        color: 'white',
-      },
-      '&.Mui-focused': {
-        backgroundColor: '#3b4353',
-        color: 'white',
-      },
-      '&.MuiFilledInput-underline:before': {
-        borderBottom: '2px solid #6f7b9b',
-      },
-      '&.MuiFilledInput-underline:after': {
-        borderBottom: '2px solid #258b9e',
-      },
-    },
-  },
-  submit: {
-    '&': {
-      backgroundColor: '#1bdbdb',
-      boxShadow: 'none',
-      '&:hover': {
-        backgroundColor: '#009b9b',
-        boxShadow: 'none',
-      },
-    },
-    '& > *': {
-      // color: 'white',
-      fontSize: '15px',
-      fontWeight: '600',
-    },
-  },
-}))
 
 const ContactForm = () => {
   const [status, setStatus] = useState('')
   const [emailText, setEmailText] = useState('')
   const [messageText, setMessageText] = useState('')
 
-  const classes = useStyles()
-
   const submitForm = (ev) => {
     ev.preventDefault()
     const form = ev.target
     const data = new FormData(form)
     const xhr = new XMLHttpRequest()
+
     xhr.open(form.method, form.action)
     xhr.setRequestHeader('Accept', 'application/json')
     xhr.onreadystatechange = () => {
       if (xhr.readyState !== XMLHttpRequest.DONE) return
+
       if (xhr.status === 200) {
         setEmailText('')
         setMessageText('')
@@ -89,17 +26,16 @@ const ContactForm = () => {
         setStatus('ERROR')
       }
     }
+
     xhr.send(data)
   }
 
   const handleEmailChange = (event) => {
-    const input = String(event.target.value)
-    setEmailText(input)
+    setEmailText(String(event.target.value))
   }
 
   const handleMessageChange = (event) => {
-    const input = String(event.target.value)
-    setMessageText(input)
+    setMessageText(String(event.target.value))
   }
 
   return (
@@ -110,33 +46,38 @@ const ContactForm = () => {
         action="https://formspree.io/f/xayvjzbj"
         method="POST"
       >
-        <TextField
-          className={classes.email}
+        <label className="contact-label" htmlFor="contact-email">
+          Email
+        </label>
+        <input
+          id="contact-email"
+          className="contact-field"
           type="email"
           name="email"
-          label="Email"
           value={emailText}
           onChange={handleEmailChange}
-          variant="filled"
         />
-        <TextField
-          className={classes.message}
-          type="text"
+
+        <label className="contact-label" htmlFor="contact-message">
+          Message
+        </label>
+        <textarea
+          id="contact-message"
+          className="contact-field contact-message"
           name="message"
-          label="Message"
           value={messageText}
           onChange={handleMessageChange}
-          multiline
-          minRows="5"
-          variant="filled"
+          rows="5"
         />
+
         {status === 'SUCCESS' ? (
           <p className="email-success">Thanks!</p>
         ) : (
-          <Button className={classes.submit} type="submit" variant="contained">
+          <button className="contact-submit" type="submit">
             Submit
-          </Button>
+          </button>
         )}
+
         {status === 'ERROR' && <p>Ooops! There was an error.</p>}
       </form>
     </div>

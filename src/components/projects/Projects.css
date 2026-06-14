@@ -29,6 +29,23 @@
   display: flex;
   justify-content: center;
 }
+.more-projects-button {
+  margin: 20px auto;
+  padding: 8px 16px;
+  background-color: #1bdbdb;
+  border: none;
+  border-radius: 4px;
+  box-shadow: none;
+  cursor: pointer;
+  color: black;
+  font-size: 15px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.more-projects-button:hover {
+  background-color: #1bdbdb;
+  box-shadow: none;
+}
 @media screen and (max-width: 599px) {
   .projects-list {
     width: 100%;
