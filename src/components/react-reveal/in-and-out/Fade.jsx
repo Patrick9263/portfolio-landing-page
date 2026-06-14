@@ -68,19 +68,16 @@ function make(
   return lookup[checksum]
 }
 
-function Fade(
-  {
-    children,
-    out,
-    forever,
-    timeout,
-    duration = defaults.duration,
-    delay = defaults.delay,
-    count = defaults.count,
-    ...props
-  } = defaults,
-  context = false
-) {
+function Fade({
+  children,
+  out,
+  forever,
+  timeout,
+  duration = defaults.duration,
+  delay = defaults.delay,
+  count = defaults.count,
+  ...props
+} = defaults) {
   const effect = {
     make,
     duration: timeout === undefined ? duration : timeout,
@@ -90,7 +87,8 @@ function Fade(
     style: { animationFillMode: 'both' },
     reverse: props.left,
   }
-  return context ? wrap(props, effect, effect, children) : effect
+
+  return children !== undefined ? wrap(props, effect, effect, children) : effect
 }
 
 Fade.propTypes = propTypes
