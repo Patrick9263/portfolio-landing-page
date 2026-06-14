@@ -1,7 +1,7 @@
 import React from 'react'
 import './ExperienceCard.css'
 
-const ExperienceCard = ({ experience, companyColor="white" }) => {
+const ExperienceCard = ({ experience, companyColor = 'white' }) => {
   // eslint-disable-next-line no-unused-vars
   let { _link, company, title, dateFrom, dateTo, info, stack } = experience
   return (
@@ -11,9 +11,7 @@ const ExperienceCard = ({ experience, companyColor="white" }) => {
     //   target="_blank"
     //   rel="noopener noreferrer"
     // >
-    <div
-      className="experience-link"
-    >
+    <div className="experience-link">
       <div className="experience-card-wrapper">
         <div className="experience-card">
           <div className="experience-card-top">
@@ -22,7 +20,7 @@ const ExperienceCard = ({ experience, companyColor="white" }) => {
               style={{ background: experience.colourPrimary }}
             ></div>
             <div className="container">
-              <h2 style={{color: companyColor}}>{company}</h2>
+              <h2 style={{ color: companyColor }}>{company}</h2>
             </div>
             <div className="image-wrapper">
               <div
@@ -35,15 +33,17 @@ const ExperienceCard = ({ experience, companyColor="white" }) => {
               ></div>
               <img
                 className="company-logo"
-                src={require(`../../images/logos/${company
-                  .replace(/ /g, '')
-                  .toLowerCase()}.png`)}
+                src={require(
+                  `../../images/logos/${company
+                    .replace(/ /g, '')
+                    .toLowerCase()}.png`
+                )}
                 alt={`${company}-logo`}
                 style={
                   experience.logoheight
                     ? {
-                      height: `${experience.logoheight}%`,
-                    }
+                        height: `${experience.logoheight}%`,
+                      }
                     : { width: `${experience.logowidth}%` }
                 }
               />
@@ -55,11 +55,11 @@ const ExperienceCard = ({ experience, companyColor="white" }) => {
               <h3>
                 {dateFrom} - {dateTo}
               </h3>
-              <ul className='experience-card-bullet-list'>
+              <ul className="experience-card-bullet-list">
                 {info.map((point, idx) => (
                   <li
                     key={`${company}-point-${idx}`}
-                    className='experience-card-bullet'
+                    className="experience-card-bullet"
                   >
                     {point}
                   </li>

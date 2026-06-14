@@ -8,18 +8,17 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import { bool, number } from 'prop-types';
-import wrap from '../lib/wrap';
-import { animation, defaults } from '../lib/globals';
+import { bool, number } from 'prop-types'
+import wrap from '../lib/wrap'
+import { animation, defaults } from '../lib/globals'
 
-const
-  propTypes = {
-    duration: number,
-    timeout: number,
-    delay: number,
-    count: number,
-    forever: bool,
-  };
+const propTypes = {
+  duration: number,
+  timeout: number,
+  delay: number,
+  count: number,
+  forever: bool,
+}
 
 const rule = `
 from, to {
@@ -33,18 +32,33 @@ from, to {
   20%, 40%, 60%, 80% {
     transform: translate3d(10px, 0, 0);
 }
-`;
+`
 
-let name = false;
+let name = false
 function make() {
-  return name || (name = animation(rule));
+  return name || (name = animation(rule))
 }
 
-
-function Shake({ children, out, timeout, duration = defaults.duration, delay = defaults.delay, count = defaults.count, forever, ...props } = defaults) {
-  const effect = { make, duration: timeout === undefined ? duration : timeout, delay, forever, count, style: { animationFillMode: 'both', } };
-  return wrap(props, effect, false, children, true);
+function Shake({
+  children,
+  out,
+  timeout,
+  duration = defaults.duration,
+  delay = defaults.delay,
+  count = defaults.count,
+  forever,
+  ...props
+} = defaults) {
+  const effect = {
+    make,
+    duration: timeout === undefined ? duration : timeout,
+    delay,
+    forever,
+    count,
+    style: { animationFillMode: 'both' },
+  }
+  return wrap(props, effect, false, children, true)
 }
 
-Shake.propTypes = propTypes;
-export default Shake;
+Shake.propTypes = propTypes
+export default Shake

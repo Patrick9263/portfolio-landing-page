@@ -7,13 +7,16 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
+import React from 'react'
 
 function withReveal(WrappedComponent, effect) {
-  let refProp = undefined;
-  if (typeof WrappedComponent === 'function' && typeof WrappedComponent.styledComponentId === 'string')
-    refProp = "innerRef";
-  return function({
+  let refProp = undefined
+  if (
+    typeof WrappedComponent === 'function' &&
+    typeof WrappedComponent.styledComponentId === 'string'
+  )
+    refProp = 'innerRef'
+  return function ({
     force,
     mountOnEnter,
     unmountOnExit,
@@ -55,9 +58,8 @@ function withReveal(WrappedComponent, effect) {
       >
         <WrappedComponent {...props} />
       </effect.type>
-    );
+    )
   }
-
 }
 
-export default withReveal;
+export default withReveal

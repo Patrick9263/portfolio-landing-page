@@ -20,9 +20,9 @@ const FeaturedProject = ({ name, link, description, colour, languages }) => {
           <div className="featured-project-top">
             <img
               className="featured-project-image"
-              src={require(`../../images/logos/${name
-                .replace(/ /g, '')
-                .toLowerCase()}.png`)}
+              src={require(
+                `../../images/logos/${name.replace(/ /g, '').toLowerCase()}.png`
+              )}
               alt={`${name}-logo`}
             />
           </div>

@@ -37,6 +37,6 @@ const featured_projects = [
   //     }
   //   ]
   // }
-];
+]
 
-export { featured_projects };
+export { featured_projects }

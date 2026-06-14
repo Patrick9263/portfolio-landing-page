@@ -18,10 +18,10 @@ const Skills = () => {
               style={
                 isVisibleSkillsWrapper
                   ? {
-                    transition: '1s opacity ease-in-out',
-                    transform: `translateX(0)`,
-                    opacity: 1,
-                  }
+                      transition: '1s opacity ease-in-out',
+                      transform: `translateX(0)`,
+                      opacity: 1,
+                    }
                   : {}
               }
             >
@@ -35,13 +35,14 @@ const Skills = () => {
                         style={
                           isVisibleSkillsWrapper
                             ? {
-                              transition: `${1 + skills.id / 10
+                                transition: `${
+                                  1 + skills.id / 10
                                 }s width ease-in-out`,
-                              width: width * (skills.amount / 100),
-                            }
+                                width: width * (skills.amount / 100),
+                              }
                             : {
-                              width: 1,
-                            }
+                                width: 1,
+                              }
                         }
                       ></div>
                       <div className="skill-name">{skills.skillName}</div>
