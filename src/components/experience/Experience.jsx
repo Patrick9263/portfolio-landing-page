@@ -1,4 +1,3 @@
-import React from 'react'
 import './Experience.css'
 import Fade from '../react-reveal/in-and-out/Fade'
 import Section from '../section/Section'

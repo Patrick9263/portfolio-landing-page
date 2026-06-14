@@ -1,4 +1,3 @@
-import React from 'react'
 import './Project.css'
 
 const Project = ({ project, type }) => {

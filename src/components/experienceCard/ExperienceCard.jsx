@@ -1,4 +1,3 @@
-import React from 'react'
 import './ExperienceCard.css'
 
 const logoImages = import.meta.glob('../../images/logos/*.{png,jpg,jpeg,svg}', {

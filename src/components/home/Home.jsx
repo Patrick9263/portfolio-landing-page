@@ -1,12 +1,10 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './Home.css'
 import Fade from '../react-reveal/in-and-out/Fade'
 import Bounce from '../react-reveal/in-and-out/Bounce'
 import { Link } from 'react-scroll'
-// import Particles from 'react-particles-js'
 import Typewriter from 'typewriter-effect'
 import Navbar from '../navbar/Navbar'
-// import config from '../../config'
 import profile from '../../images/patrick.png'
 import linkedin from '../../images/social/linkedin.png'
 import github from '../../images/social/github.png'
@@ -17,8 +15,6 @@ const Home = () => {
   return (
     <div className="home-wrapper">
       <div className="home">
-        {/* <Particles className="particles" params={config.particles} /> */}
-
         <div className={`greeting${!imageLoaded ? ' hide' : ''}`}>
           <Fade bottom distance="40px">
             <img
@@ -29,7 +25,7 @@ const Home = () => {
             />
 
             <h1 className="hi-greeting-text">
-              Hi, I'm <span className="name">Patrick Smith</span>.{' '}
+              Hi, I&apos;m <span className="name">Patrick Smith</span>.{' '}
             </h1>
 
             <h1 className="greeting-text">

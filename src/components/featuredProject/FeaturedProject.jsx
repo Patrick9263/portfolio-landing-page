@@ -1,4 +1,3 @@
-import React from 'react'
 import './FeaturedProject.css'
 
 const logoImages = import.meta.glob('../../images/logos/*.{png,jpg,jpeg,svg}', {

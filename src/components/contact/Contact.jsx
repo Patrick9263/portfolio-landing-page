@@ -1,4 +1,3 @@
-import React from 'react'
 import './Contact.css'
 import Section from '../section/Section'
 import Bounce from '../react-reveal/in-and-out/Bounce'

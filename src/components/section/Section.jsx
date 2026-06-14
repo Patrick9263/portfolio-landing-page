@@ -1,4 +1,3 @@
-import React from 'react'
 import './Section.css'
 import Fade from '../react-reveal/in-and-out/Fade'
 

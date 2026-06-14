@@ -1,4 +1,3 @@
-import React from 'react'
 import './Projects.css'
 import Fade from '../react-reveal/in-and-out/Fade'
 import { featured_projects } from '../../data/featured_projects.js'

@@ -1,4 +1,3 @@
-import React from 'react'
 import './About.css'
 import Typewriter from 'typewriter-effect'
 import { Link } from 'react-scroll'

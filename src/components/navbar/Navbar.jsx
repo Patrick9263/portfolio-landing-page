@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-scroll'
 import MobileNav from '../mobileNav/MobileNav'
 import './Navbar.css'
@@ -60,7 +60,7 @@ const Navbar = (props) => {
         </div>
       </div>
       <div className="hamburger">
-        <div
+        <button
           id="hamburger-icon"
           className={hamburgerClass}
           onClick={toggleMobilenavVisible}
@@ -69,7 +69,7 @@ const Navbar = (props) => {
           <span></span>
           <span></span>
           <span></span>
-        </div>
+        </button>
       </div>
       <MobileNav
         toggleMobilenavVisible={toggleMobilenavVisible}

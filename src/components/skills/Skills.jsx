@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Fade from '../react-reveal/in-and-out/Fade'
 import { skills } from '../../data/skills.js'
 

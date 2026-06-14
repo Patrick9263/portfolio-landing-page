@@ -35,6 +35,7 @@
   font-weight: 600;
   color: white;
   text-decoration: none;
+  cursor: pointer;
 }
 .navlink-wrapper {
   width: 20%;
@@ -124,9 +125,21 @@
   .navlinks {
     display: none;
   }
+  .navbar {
+    cursor: default;
+  }
   .hamburger {
     position: absolute;
     right: 30px;
     cursor: pointer;
+
+    button {
+      padding: 0;
+      background: none;
+      border: none;
+      color: inherit;
+      font: inherit;
+      cursor: pointer;
+    }
   }
 }
