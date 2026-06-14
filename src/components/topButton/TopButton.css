@@ -11,7 +11,27 @@
   padding: 10px;
   border-radius: 15px;
   font-size: 25px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.22);
+  transition:
+    opacity 180ms ease,
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
 }
+
+.topButton:hover {
+  transform: translateY(-2px);
+  border-color: rgba(27, 219, 219, 0.45);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+}
+
+.topButton:active {
+  transform: translateY(0);
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.22);
+}
+
 .topButton.on {
   opacity: 1;
   transition: opacity 0.1s linear;
@@ -22,7 +42,7 @@
 }
 .topButton-icon {
   display: block;
-  width: 25px;
-  height: 25px;
-  fill: currentColor;
+  width: 24px;
+  height: 24px;
+  color: #102a2e;
 }
