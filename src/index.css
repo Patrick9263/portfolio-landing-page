@@ -11,3 +11,82 @@ code {
   font-family:
     source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+:root {
+  --color-accent: #1bdbdb;
+  --color-accent-hover: #00b8b8;
+  --color-accent-text: #071111;
+  --color-focus: #8fffff;
+
+  --button-radius: 999px;
+  --button-shadow: none;
+  --button-shadow-hover: 0 4px 10px rgba(0, 0, 0, 0.18);
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+}
+
+.more-projects-button,
+.open-gallery-button,
+.contact-submit {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 42px;
+  padding: 10px 20px;
+  background: var(--color-accent);
+  border: 1px solid transparent;
+  border-radius: var(--button-radius);
+  box-shadow: var(--button-shadow);
+  color: var(--color-accent-text);
+  cursor: pointer;
+  font-family:
+    'Poppins',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.035em;
+  line-height: 1;
+  text-transform: uppercase;
+  transition:
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease,
+    border-color 180ms ease;
+}
+
+.more-projects-button:hover,
+.open-gallery-button:hover,
+.contact-submit:hover {
+  background: var(--color-accent-hover);
+  box-shadow: var(--button-shadow-hover);
+  transform: translateY(-1px);
+}
+
+.more-projects-button:active,
+.open-gallery-button:active,
+.contact-submit:active {
+  transform: translateY(0);
+  box-shadow: var(--button-shadow);
+}
+
+.more-projects-button:focus-visible,
+.open-gallery-button:focus-visible,
+.contact-submit:focus-visible,
+.navlinks:focus-visible,
+.scroll-down:focus-visible,
+.topButton:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 4px;
+}

@@ -44,7 +44,14 @@ const TopButton = () => {
           viewBox="0 0 24 24"
           focusable="false"
         >
-          <path d="M4 12l1.4 1.4L11 7.8V20h2V7.8l5.6 5.6L20 12 12 4l-8 8Z" />
+          <path
+            d="M12 19V5M6.5 10.5L12 5l5.5 5.5"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2.25"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
         </svg>
       </button>
     </Link>
