@@ -2,6 +2,8 @@ import React from 'react'
 import './Project.css'
 
 const Project = ({ project, type }) => {
+  const languages = project.languages?.nodes || project.languages || []
+
   if (type === 'github') {
     return (
       <a
@@ -29,31 +31,31 @@ const Project = ({ project, type }) => {
               </svg>
               <h2 className="project-title">{project.name}</h2>
             </div>
-            {/* <div style={{ display: 'flex' }}>
-              <div> */}
-            <p className="project-description">{project.description}</p>
-            {/* </div>
-              <div>
-                <p>Will add arrow icon here</p>
-              </div>
-            </div> */}
+
+            <p className="project-description">
+              {project.description || 'No description available.'}
+            </p>
+
             <div className="project-info">
               <div className="project-info-left">
-                {project.languages.nodes.map((language) => (
+                {languages.map((language) => (
                   <div
                     key={`${project.name}-${language.name}`}
                     className="language"
                   >
                     <div
                       className="language-colour"
-                      style={{ backgroundColor: `${language.color}` }}
+                      style={{ backgroundColor: language.color }}
                     ></div>
                     <p className="language-name">{language.name}</p>
                   </div>
                 ))}
               </div>
+
               <div className="project-info-right">
-                <p className="project-size">{project.diskUsage}KB</p>
+                {project.diskUsage ? (
+                  <p className="project-size">{project.diskUsage}KB</p>
+                ) : null}
               </div>
             </div>
           </div>
@@ -61,6 +63,8 @@ const Project = ({ project, type }) => {
       </a>
     )
   }
+
+  return null
 }
 
 export default Project

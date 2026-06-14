@@ -8,18 +8,17 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import { bool, number } from 'prop-types';
-import wrap from '../lib/wrap';
-import { animation, defaults } from '../lib/globals';
+import { bool, number } from 'prop-types'
+import wrap from '../lib/wrap'
+import { animation, defaults } from '../lib/globals'
 
-const
-  propTypes = {
-    duration: number,
-    timeout: number,
-    delay: number,
-    count: number,
-    forever: bool,
-  };
+const propTypes = {
+  duration: number,
+  timeout: number,
+  delay: number,
+  count: number,
+  forever: bool,
+}
 
 const rule = `
   from, 11.1%, to {
@@ -53,18 +52,33 @@ const rule = `
   88.8% {
     transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
 }
-`;
+`
 
-let name = false;
+let name = false
 function make() {
-  return name || (name = animation(rule));
+  return name || (name = animation(rule))
 }
 
-
-function Jello({ children, out, timeout, duration = defaults.duration, delay = defaults.delay, count = defaults.count, forever, ...props } = defaults) {
-  const effect = { make, duration: timeout === undefined ? duration : timeout, delay, forever, count, style: { animationFillMode: 'both', } };
-  return wrap(props, effect, false, children, true);
+function Jello({
+  children,
+  out,
+  timeout,
+  duration = defaults.duration,
+  delay = defaults.delay,
+  count = defaults.count,
+  forever,
+  ...props
+} = defaults) {
+  const effect = {
+    make,
+    duration: timeout === undefined ? duration : timeout,
+    delay,
+    forever,
+    count,
+    style: { animationFillMode: 'both' },
+  }
+  return wrap(props, effect, false, children, true)
 }
 
-Jello.propTypes = propTypes;
-export default Jello;
+Jello.propTypes = propTypes
+export default Jello

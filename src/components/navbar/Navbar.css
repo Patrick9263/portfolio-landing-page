@@ -19,7 +19,8 @@
   border-bottom: 3px solid #1bdbdb;
   pointer-events: fill;
 }
-.navbar,.navbar-top a {
+.navbar,
+.navbar-top a {
   cursor: pointer;
   font-weight: 600;
   color: white;

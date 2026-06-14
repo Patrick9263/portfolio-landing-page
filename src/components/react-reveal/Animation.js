@@ -7,45 +7,40 @@
  * LICENSE.txt file in the root directory of this source tree.
  */
 
-import React from 'react';
-import { element, instanceOf, object } from 'prop-types';
-import Stepper from './lib/Stepper';
+import React from 'react'
+import { element, instanceOf, object } from 'prop-types'
+import Stepper from './lib/Stepper'
 
-const
-  propTypes = {
+const propTypes = {
     steps: instanceOf(Stepper).isRequired,
     children: element.isRequired,
   },
-  defaultProps = {
-
-  },
+  defaultProps = {},
   childContextTypes = {
     stepper: object,
-  };
+  }
 
 class Animation extends React.Component {
-
   constructor(props) {
-    super(props);
-    this.stepper = props.steps;
+    super(props)
+    this.stepper = props.steps
   }
 
   getChildContext() {
-    return { stepper: this.stepper };
+    return { stepper: this.stepper }
   }
 
   static step(...args) {
-    return new Stepper().step(...args);
+    return new Stepper().step(...args)
   }
 
   render() {
-    const { steps, children, ...props } = this.props;
-    return React.cloneElement(React.Children.only(children), props);
+    const { steps, children, ...props } = this.props
+    return React.cloneElement(React.Children.only(children), props)
   }
-
 }
 
-Animation.propTypes = propTypes;
-Animation.defaultProps = defaultProps;
-Animation.childContextTypes = childContextTypes;
-export default Animation;
+Animation.propTypes = propTypes
+Animation.defaultProps = defaultProps
+Animation.childContextTypes = childContextTypes
+export default Animation
