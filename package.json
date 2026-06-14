@@ -20,6 +20,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "globals": "^17.6.0",
     "prettier": "^3.8.4",
+    "sharp": "^0.35.1",
     "vite": "^8.0.16"
   },
   "scripts": {
@@ -30,7 +31,9 @@
     "format": "prettier --write \"src/**/*.{js,jsx,css,json,md}\"",
     "format:check": "prettier --check \"src/**/*.{js,jsx,css,json,md}\"",
     "lint": "eslint \"src/**/*.{js,jsx}\"",
-    "lint:fix": "eslint \"src/**/*.{js,jsx}\" --fix"
+    "lint:fix": "eslint \"src/**/*.{js,jsx}\" --fix",
+    "photos:build": "node scripts/build-photos.mjs",
+    "photos:clean": "rm -rf public/photos src/data/photos.json"
   },
   "browserslist": {
     "production": [
