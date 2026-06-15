@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import Fade from '../react-reveal/in-and-out/Fade'
 import Navbar from '../navbar/Navbar'
 import PhotoAlbum from 'react-photo-album'
@@ -68,18 +68,20 @@ export default function PhotosPage() {
   const [lightbox, setLightbox] = useState(null)
 
   const selectedAlbum =
-    lightbox !== null ? albums.find((album) => album.id === lightbox.albumId) : null
+    lightbox !== null
+      ? albums.find((album) => album.id === lightbox.albumId)
+      : null
 
   const selectedPhoto =
     selectedAlbum && selectedAlbum.photos[lightbox.index]
       ? selectedAlbum.photos[lightbox.index]
       : null
 
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setLightbox(null)
-  }
+  }, [])
 
-  const showPreviousPhoto = () => {
+  const showPreviousPhoto = useCallback(() => {
     if (!selectedAlbum || lightbox === null) return
 
     setLightbox({
@@ -89,9 +91,9 @@ export default function PhotosPage() {
           ? selectedAlbum.photos.length - 1
           : lightbox.index - 1,
     })
-  }
+  }, [lightbox, selectedAlbum])
 
-  const showNextPhoto = () => {
+  const showNextPhoto = useCallback(() => {
     if (!selectedAlbum || lightbox === null) return
 
     setLightbox({
@@ -101,7 +103,7 @@ export default function PhotosPage() {
           ? 0
           : lightbox.index + 1,
     })
-  }
+  }, [lightbox, selectedAlbum])
 
   useEffect(() => {
     if (!selectedPhoto) return undefined
@@ -127,7 +129,7 @@ export default function PhotosPage() {
       document.body.style.overflow = ''
       window.removeEventListener('keydown', handleKeyDown)
     }
-  }, [selectedPhoto, lightbox])
+  }, [closeLightbox, selectedPhoto, showNextPhoto, showPreviousPhoto])
 
   return (
     <div className="photos-page">
@@ -179,8 +181,14 @@ export default function PhotosPage() {
           role="dialog"
           aria-modal="true"
           aria-label={selectedPhoto.alt || selectedPhoto.title || 'Photo'}
-          onClick={closeLightbox}
         >
+          <button
+            className="photo-lightbox-backdrop"
+            type="button"
+            aria-label="Close photo"
+            onClick={closeLightbox}
+          />
+
           <button
             className="photo-lightbox-close"
             type="button"
@@ -195,21 +203,20 @@ export default function PhotosPage() {
               className="photo-lightbox-nav photo-lightbox-nav-previous"
               type="button"
               aria-label="Previous photo"
-              onClick={(event) => {
-                event.stopPropagation()
-                showPreviousPhoto()
-              }}
+              onClick={showPreviousPhoto}
             >
-              ‹
+              <svg
+                className="photo-lightbox-nav-icon"
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                focusable="false"
+              >
+                <path d="M15 5L8 12l7 7" />
+              </svg>
             </button>
           ) : null}
 
-          <div
-            className="photo-lightbox-content"
-            onClick={(event) => {
-              event.stopPropagation()
-            }}
-          >
+          <div className="photo-lightbox-content">
             <img
               src={selectedPhoto.fullSrc}
               alt={selectedPhoto.alt || selectedPhoto.title || 'Selected photo'}
@@ -225,12 +232,16 @@ export default function PhotosPage() {
               className="photo-lightbox-nav photo-lightbox-nav-next"
               type="button"
               aria-label="Next photo"
-              onClick={(event) => {
-                event.stopPropagation()
-                showNextPhoto()
-              }}
+              onClick={showNextPhoto}
             >
-              ›
+              <svg
+                className="photo-lightbox-nav-icon"
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                focusable="false"
+              >
+                <path d="M9 5l7 7-7 7" />
+              </svg>
             </button>
           ) : null}
         </div>

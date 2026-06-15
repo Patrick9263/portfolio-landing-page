@@ -151,7 +151,17 @@
   backdrop-filter: blur(8px);
 }
 
+.photo-lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  border: none;
+  background: transparent;
+  cursor: default;
+}
+
 .photo-lightbox-content {
+  position: relative;
+  z-index: 1;
   max-width: min(100%, 1400px);
   max-height: 100%;
   display: flex;
@@ -176,6 +186,11 @@
 .photo-lightbox-close,
 .photo-lightbox-nav {
   position: fixed;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   border: none;
   color: white;
   background: rgba(255, 255, 255, 0.1);
@@ -205,8 +220,6 @@
   width: 52px;
   height: 72px;
   border-radius: 999px;
-  font-size: 48px;
-  line-height: 1;
   transform: translateY(-50%);
 }
 
@@ -220,6 +233,16 @@
 
 .photo-lightbox-nav-next {
   right: 24px;
+}
+
+.photo-lightbox-nav-icon {
+  width: 32px;
+  height: 32px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 @media screen and (max-width: 700px) {
@@ -239,7 +262,11 @@
   .photo-lightbox-nav {
     width: 42px;
     height: 58px;
-    font-size: 38px;
+  }
+
+  .photo-lightbox-nav-icon {
+    width: 28px;
+    height: 28px;
   }
 
   .photo-lightbox-nav-previous {
