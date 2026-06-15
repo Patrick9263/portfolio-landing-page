@@ -139,6 +139,118 @@
   transform: scale(0.995);
 }
 
+.photo-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 72px 88px;
+  background: rgba(12, 16, 24, 0.92);
+  backdrop-filter: blur(8px);
+}
+
+.photo-lightbox-content {
+  max-width: min(100%, 1400px);
+  max-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.photo-lightbox-content img {
+  max-width: 100%;
+  max-height: calc(100vh - 170px);
+  border-radius: 6px;
+  object-fit: contain;
+  box-shadow: 0 18px 60px rgba(0, 0, 0, 0.45);
+}
+
+.photo-lightbox-caption {
+  margin: 14px 0 0;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: 0.95rem;
+}
+
+.photo-lightbox-close,
+.photo-lightbox-nav {
+  position: fixed;
+  border: none;
+  color: white;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    transform 180ms ease;
+}
+
+.photo-lightbox-close:hover,
+.photo-lightbox-nav:hover {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.photo-lightbox-close {
+  top: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 999px;
+  font-size: 32px;
+  line-height: 1;
+}
+
+.photo-lightbox-nav {
+  top: 50%;
+  width: 52px;
+  height: 72px;
+  border-radius: 999px;
+  font-size: 48px;
+  line-height: 1;
+  transform: translateY(-50%);
+}
+
+.photo-lightbox-nav:hover {
+  transform: translateY(-50%) scale(1.04);
+}
+
+.photo-lightbox-nav-previous {
+  left: 24px;
+}
+
+.photo-lightbox-nav-next {
+  right: 24px;
+}
+
+@media screen and (max-width: 700px) {
+  .photo-lightbox {
+    padding: 64px 16px;
+  }
+
+  .photo-lightbox-content img {
+    max-height: calc(100vh - 150px);
+  }
+
+  .photo-lightbox-close {
+    top: 16px;
+    right: 16px;
+  }
+
+  .photo-lightbox-nav {
+    width: 42px;
+    height: 58px;
+    font-size: 38px;
+  }
+
+  .photo-lightbox-nav-previous {
+    left: 8px;
+  }
+
+  .photo-lightbox-nav-next {
+    right: 8px;
+  }
+}
+
 @media screen and (min-width: 1500px) {
   .photo-album-section {
     width: min(1280px, calc(100% - 128px));
