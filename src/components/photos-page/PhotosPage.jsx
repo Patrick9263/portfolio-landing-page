@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import Fade from '../react-reveal/in-and-out/Fade'
 import Navbar from '../navbar/Navbar'
 import PhotoAlbum from 'react-photo-album'
-import photoAlbums from '../../data/photos.json'
+import photoYears from '../../data/photos.json'
 import './PhotosPage.css'
 
 const getAlbumPhotoCount = (album) => album.photos?.length || 0
@@ -63,13 +63,30 @@ const useViewportWidth = () => {
 export default function PhotosPage() {
   const viewportWidth = useViewportWidth()
   const gallerySettings = getGallerySettings(viewportWidth)
-  const albums = photoAlbums.filter((album) => getAlbumPhotoCount(album) > 0)
+
+  const yearSections = photoYears.filter(
+    (year) => year.albums?.some((album) => getAlbumPhotoCount(album) > 0)
+  )
+
+  const allAlbums = useMemo(
+    () =>
+      yearSections.flatMap((year) =>
+        year.albums
+          .filter((album) => getAlbumPhotoCount(album) > 0)
+          .map((album) => ({
+            ...album,
+            yearId: year.id,
+            yearTitle: year.title,
+          }))
+      ),
+    [yearSections]
+  )
 
   const [lightbox, setLightbox] = useState(null)
 
   const selectedAlbum =
     lightbox !== null
-      ? albums.find((album) => album.id === lightbox.albumId)
+      ? allAlbums.find((album) => album.id === lightbox.albumId) || null
       : null
 
   const selectedPhoto =
@@ -138,35 +155,49 @@ export default function PhotosPage() {
       <Fade duration={1000}>
         <div className="photos-intro">
           <h2>Photos</h2>
-          <p>Photography is one of my hobbies. Enjoy some that I've taken!</p>
-          <p>Currently I'm using a Sony A7R V.</p>
-          <p>Click on a photo to open a larger version.</p>
+          <p>Photography is one of my hobbies. Enjoy some that I&apos;ve taken!</p>
+          <p>Currently I&apos;m using a Sony A7R V.</p>
+          <p>Browse by year and album, then click a photo to enlarge it.</p>
         </div>
       </Fade>
 
       <div className="photo-container">
-        {albums.length > 0 ? (
-          albums.map((album) => (
-            <section className="photo-album-section" key={album.id}>
-              <div className="photo-album-header">
-                <h3>{album.title}</h3>
-                <p>
-                  {getAlbumPhotoCount(album)}{' '}
-                  {getAlbumPhotoCount(album) === 1 ? 'photo' : 'photos'}
-                </p>
+        {yearSections.length > 0 ? (
+          yearSections.map((year) => (
+            <section className="photo-year-section" key={year.id}>
+              <div className="photo-year-header">
+                <h3>{year.title}</h3>
               </div>
 
-              <div className="photo-album-grid">
-                <PhotoAlbum
-                  {...gallerySettings}
-                  photos={album.photos}
-                  onClick={({ index }) => {
-                    setLightbox({
-                      albumId: album.id,
-                      index,
-                    })
-                  }}
-                />
+              <div className="photo-year-albums">
+                {year.albums
+                  .filter((album) => getAlbumPhotoCount(album) > 0)
+                  .map((album) => (
+                    <section className="photo-album-section" key={album.id}>
+                      <div className="photo-album-header">
+                        <h4>{album.title}</h4>
+                        <p>
+                          {getAlbumPhotoCount(album)}{' '}
+                          {getAlbumPhotoCount(album) === 1
+                            ? 'photo'
+                            : 'photos'}
+                        </p>
+                      </div>
+
+                      <div className="photo-album-grid">
+                        <PhotoAlbum
+                          {...gallerySettings}
+                          photos={album.photos}
+                          onClick={({ index }) => {
+                            setLightbox({
+                              albumId: album.id,
+                              index,
+                            })
+                          }}
+                        />
+                      </div>
+                    </section>
+                  ))}
               </div>
             </section>
           ))

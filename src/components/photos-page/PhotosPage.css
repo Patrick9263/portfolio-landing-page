@@ -245,6 +245,126 @@
   stroke-linejoin: round;
 }
 
+.photo-container {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 0 auto;
+  padding: 72px 0 64px;
+  background-color: var(--photos-bg);
+}
+
+.photo-year-section {
+  width: min(1120px, calc(100% - 96px));
+  box-sizing: border-box;
+  margin: 0 auto 72px;
+}
+
+.photo-year-section:last-child {
+  margin-bottom: 0;
+}
+
+.photo-year-header {
+  margin-bottom: 28px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  text-align: left;
+}
+
+.photo-year-header h3 {
+  margin: 0;
+  font-family:
+    'Poppins',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  font-size: clamp(1.75rem, 3vw, 2.4rem);
+  font-weight: 600;
+}
+
+.photo-year-albums {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.photo-album-section {
+  width: 100%;
+  margin: 0;
+}
+
+.photo-album-header {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.photo-album-header h4 {
+  margin: 0 0 6px;
+  font-family:
+    'Poppins',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+  font-size: clamp(1.1rem, 1.8vw, 1.45rem);
+  font-weight: 600;
+}
+
+.photo-album-header p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.95rem;
+}
+
+.photo-album-grid {
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+@media screen and (min-width: 1500px) {
+  .photo-year-section {
+    width: min(1280px, calc(100% - 128px));
+  }
+}
+
+@media screen and (max-width: 1400px) {
+  .photo-year-section {
+    width: min(980px, calc(100% - 80px));
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .photo-container {
+    padding-top: 56px;
+  }
+
+  .photo-year-section {
+    width: min(720px, calc(100% - 48px));
+  }
+
+  .photo-year-albums {
+    gap: 40px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .photo-container {
+    padding: 48px 0 48px;
+  }
+
+  .photo-year-section {
+    width: calc(100% - 32px);
+    margin-bottom: 48px;
+  }
+
+  .photo-year-albums {
+    gap: 32px;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .photo-lightbox {
     padding: 64px 16px;
