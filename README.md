@@ -21,3 +21,15 @@ A simple one-page react portfolio with clearly defined and modular components wh
 - [particles.js](https://github.com/VincentGarreau/particles.js/)
 - [react-reveal](https://github.com/rnosov/react-reveal)
 - [react-is-visible](https://github.com/lessp/react-is-visible)
+
+## Development checks
+
+Pull requests and pushes to `main` install the committed lockfile with Node 22, then run the same
+quality gate expected locally:
+
+```bash
+npm run lint && npm run format:check && npm run build
+```
+
+The lint and formatting scripts currently check JavaScript, JSX, CSS, JSON, and Markdown files under
+`src` only. Check other changed files separately.
