@@ -22,6 +22,19 @@ A simple one-page react portfolio with clearly defined and modular components wh
 - [react-reveal](https://github.com/rnosov/react-reveal)
 - [react-is-visible](https://github.com/lessp/react-is-visible)
 
+## Local development
+
+Use Node 22, matching CI. With [nvm](https://github.com/nvm-sh/nvm), the committed `.nvmrc` selects
+the correct major version:
+
+```bash
+nvm use
+npm ci
+npm run dev
+```
+
+Create a production build with `npm run build` and serve it locally with `npm run preview`.
+
 ## Development checks
 
 Pull requests and pushes to `main` install the committed lockfile with Node 22, then run the same
