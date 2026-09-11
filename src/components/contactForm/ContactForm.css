@@ -7,9 +7,6 @@
   display: flex;
   flex-direction: column;
 }
-.email-success {
-  text-align: center;
-}
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -46,6 +43,16 @@ input:-webkit-autofill:active {
   border-bottom-color: #258b9e;
 }
 
+.contact-field[aria-invalid='true'] {
+  border-bottom-color: #ffb4ab;
+}
+
+.contact-field-error {
+  margin: -10px 0 16px;
+  color: #ffb4ab;
+  font-size: 13px;
+}
+
 .contact-message {
   resize: vertical;
 }
@@ -66,4 +73,25 @@ input:-webkit-autofill:active {
 .contact-submit:hover {
   background-color: #009b9b;
   box-shadow: none;
+}
+
+.contact-submit:disabled,
+.contact-submit:disabled:hover {
+  background-color: #6f7b9b;
+  cursor: wait;
+  opacity: 0.8;
+}
+
+.contact-status {
+  min-height: 24px;
+  margin: 12px 0 0;
+  text-align: center;
+}
+
+.contact-status--success {
+  color: #1bdbdb;
+}
+
+.contact-status--error {
+  color: #ffb4ab;
 }
