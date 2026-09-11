@@ -1,11 +1,11 @@
 @media screen and (min-width: 599px) {
-  .profile {
+  .profile-frame {
     width: 120px;
     height: 120px;
   }
 }
 @media screen and (max-width: 599px) {
-  .profile {
+  .profile-frame {
     width: 100px;
     height: 100px;
   }
@@ -67,12 +67,43 @@ a.scroll-down:active,
   margin: -63px 20px 0 20px;
   width: 100%;
 }
-.hide {
-  display: none;
+.profile-frame {
+  position: relative;
+  margin: 0 auto;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border: 0.2rem solid #1bdbdb;
+  border-radius: 50%;
+  background: #172a31;
+}
+.profile-frame picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.profile-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: #1bdbdb;
+  font-size: 2rem;
+  font-weight: 700;
+  transition: opacity 150ms ease-in;
 }
 .profile {
-  border-radius: 50%;
-  border: 0.2rem solid #1bdbdb;
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 150ms ease-in;
+}
+.profile-frame--loaded .profile {
+  opacity: 1;
+}
+.profile-frame--loaded .profile-fallback {
+  opacity: 0;
 }
 .hi-greeting-text {
   margin: 15px;

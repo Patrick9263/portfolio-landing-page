@@ -6,23 +6,39 @@ import { Link } from 'react-scroll'
 import Typewriter from 'typewriter-effect'
 import Navbar from '../navbar/Navbar'
 import profile from '../../images/patrick.png'
+import profileAvif from '../../images/patrick-240.avif'
+import profileWebp from '../../images/patrick-240.webp'
 import linkedin from '../../images/social/linkedin.png'
 import github from '../../images/social/github.png'
 
 const Home = () => {
-  const [imageLoaded, setImageLoaded] = useState(false)
+  const [profileStatus, setProfileStatus] = useState('loading')
 
   return (
     <div className="home-wrapper">
       <div className="home">
-        <div className={`greeting${!imageLoaded ? ' hide' : ''}`}>
+        <div className="greeting">
           <Fade bottom distance="40px">
-            <img
-              className="profile"
-              alt="Patrick Smith profile"
-              src={profile}
-              onLoad={() => setImageLoaded(true)}
-            />
+            <div className={`profile-frame profile-frame--${profileStatus}`}>
+              <span className="profile-fallback" aria-hidden="true">
+                PS
+              </span>
+              <picture>
+                <source type="image/avif" srcSet={profileAvif} />
+                <source type="image/webp" srcSet={profileWebp} />
+                <img
+                  className="profile"
+                  alt="Patrick Smith profile"
+                  src={profile}
+                  width="120"
+                  height="120"
+                  decoding="async"
+                  fetchPriority="high"
+                  onLoad={() => setProfileStatus('loaded')}
+                  onError={() => setProfileStatus('error')}
+                />
+              </picture>
+            </div>
 
             <h1 className="hi-greeting-text">
               Hi, I&apos;m <span className="name">Patrick Smith</span>.{' '}
