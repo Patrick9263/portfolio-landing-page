@@ -46,3 +46,14 @@ npm run lint && npm run format:check && npm run build
 
 The lint and formatting scripts currently check JavaScript, JSX, CSS, JSON, and Markdown files under
 `src` only. Check other changed files separately.
+
+## Contact form
+
+Production submissions use the Formspree endpoint configured in `ContactForm.jsx`. Before any real
+delivery test, the repository owner should sign in to Formspree, open the form's Integration section,
+and confirm that its displayed form ID and endpoint match the committed value and that the intended
+destination email is active. Do not send a live test until that verification is complete.
+
+For local testing, set `VITE_CONTACT_FORM_ENDPOINT` to a mock server URL before starting Vite. This
+keeps validation, success, provider-error, network-error, and timeout checks away from Formspree and
+the owner's inbox.
