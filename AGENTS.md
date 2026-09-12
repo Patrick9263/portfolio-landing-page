@@ -80,11 +80,11 @@ There is currently no test runner in this repo. The local correctness gate to ru
 npm run lint && npm run format:check && npm run build
 ```
 
-CI currently runs `npm run build`; the local gate is intentionally stricter and also checks lint and
-formatting. CI uses Node 22; use that major for validation where available and report any mismatch.
-The lint/format scripts cover `src/` only, not the generator, root documentation, or configuration;
-check changed files outside that scope explicitly. Keep this section synchronized with changes to
-the workflow or scripts. If tests are added, include their command in the local gate and CI.
+CI installs the committed lockfile with Node 22, then runs the same lint, formatting, and build gate.
+Use Node 22 for local validation where available and report any mismatch. The lint/format scripts
+cover `src/` only, not the generator, root documentation, or configuration; check changed files
+outside that scope explicitly. Keep this section synchronized with changes to the workflow or
+scripts. If tests are added, include their command in the local gate and CI.
 
 ## Working sessions and Git
 
