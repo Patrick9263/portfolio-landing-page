@@ -39,6 +39,9 @@ jobs:
       - name: Check formatting
         run: npm run format:check
 
+      - name: Test photo generator
+        run: npm run test:photos
+
       - name: Build
         run: npm run build
 

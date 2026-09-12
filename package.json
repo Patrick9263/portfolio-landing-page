@@ -33,7 +33,7 @@
     "lint": "eslint \"src/**/*.{js,jsx}\"",
     "lint:fix": "eslint \"src/**/*.{js,jsx}\" --fix",
     "photos:build": "node scripts/build-photos.mjs",
-    "photos:clean": "rm -rf public/photos src/data/photos.json"
+    "test:photos": "node --test scripts/build-photos.test.mjs"
   },
   "browserslist": {
     "production": [

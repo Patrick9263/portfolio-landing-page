@@ -1,8 +1,8 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import Fade from '../react-reveal/in-and-out/Fade'
 import Navbar from '../navbar/Navbar'
 import PhotoAlbum from 'react-photo-album'
-import photoAlbums from '../../data/photos.json'
+import photoManifest from '../../data/photos.json'
 import './PhotosPage.css'
 
 const getAlbumPhotoCount = (album) => album.photos?.length || 0
@@ -63,13 +63,29 @@ const useViewportWidth = () => {
 export default function PhotosPage() {
   const viewportWidth = useViewportWidth()
   const gallerySettings = getGallerySettings(viewportWidth)
-  const albums = photoAlbums.filter((album) => getAlbumPhotoCount(album) > 0)
+
+  const sections = photoManifest.sections.filter((section) =>
+    section.albums?.some((album) => getAlbumPhotoCount(album) > 0)
+  )
+
+  const allAlbums = useMemo(
+    () =>
+      sections.flatMap((section) =>
+        section.albums
+          .filter((album) => getAlbumPhotoCount(album) > 0)
+          .map((album) => ({
+            ...album,
+            albumKey: `${section.id}/${album.id}`,
+          }))
+      ),
+    [sections]
+  )
 
   const [lightbox, setLightbox] = useState(null)
 
   const selectedAlbum =
     lightbox !== null
-      ? albums.find((album) => album.id === lightbox.albumId)
+      ? allAlbums.find((album) => album.albumKey === lightbox.albumKey) || null
       : null
 
   const selectedPhoto =
@@ -85,7 +101,7 @@ export default function PhotosPage() {
     if (!selectedAlbum || lightbox === null) return
 
     setLightbox({
-      albumId: selectedAlbum.id,
+      albumKey: selectedAlbum.albumKey,
       index:
         lightbox.index === 0
           ? selectedAlbum.photos.length - 1
@@ -97,7 +113,7 @@ export default function PhotosPage() {
     if (!selectedAlbum || lightbox === null) return
 
     setLightbox({
-      albumId: selectedAlbum.id,
+      albumKey: selectedAlbum.albumKey,
       index:
         lightbox.index === selectedAlbum.photos.length - 1
           ? 0
@@ -138,35 +154,52 @@ export default function PhotosPage() {
       <Fade duration={1000}>
         <div className="photos-intro">
           <h2>Photos</h2>
-          <p>Photography is one of my hobbies. Enjoy some that I've taken!</p>
-          <p>Currently I'm using a Sony A7R V.</p>
-          <p>Click on a photo to open a larger version.</p>
+          <p>
+            Photography is one of my hobbies. Enjoy some that I&apos;ve taken!
+          </p>
+          <p>Currently I&apos;m using a Sony A7R V.</p>
+          <p>Browse by section and album, then click a photo to enlarge it.</p>
         </div>
       </Fade>
 
       <div className="photo-container">
-        {albums.length > 0 ? (
-          albums.map((album) => (
-            <section className="photo-album-section" key={album.id}>
-              <div className="photo-album-header">
-                <h3>{album.title}</h3>
-                <p>
-                  {getAlbumPhotoCount(album)}{' '}
-                  {getAlbumPhotoCount(album) === 1 ? 'photo' : 'photos'}
-                </p>
+        {sections.length > 0 ? (
+          sections.map((section) => (
+            <section className="photo-section" key={section.id}>
+              <div className="photo-section-header">
+                <h3>{section.title}</h3>
               </div>
 
-              <div className="photo-album-grid">
-                <PhotoAlbum
-                  {...gallerySettings}
-                  photos={album.photos}
-                  onClick={({ index }) => {
-                    setLightbox({
-                      albumId: album.id,
-                      index,
-                    })
-                  }}
-                />
+              <div className="photo-section-albums">
+                {section.albums
+                  .filter((album) => getAlbumPhotoCount(album) > 0)
+                  .map((album) => (
+                    <section
+                      className="photo-album-section"
+                      key={`${section.id}/${album.id}`}
+                    >
+                      <div className="photo-album-header">
+                        {album.title ? <h4>{album.title}</h4> : null}
+                        <p>
+                          {getAlbumPhotoCount(album)}{' '}
+                          {getAlbumPhotoCount(album) === 1 ? 'photo' : 'photos'}
+                        </p>
+                      </div>
+
+                      <div className="photo-album-grid">
+                        <PhotoAlbum
+                          {...gallerySettings}
+                          photos={album.photos}
+                          onClick={({ index }) => {
+                            setLightbox({
+                              albumKey: `${section.id}/${album.id}`,
+                              index,
+                            })
+                          }}
+                        />
+                      </div>
+                    </section>
+                  ))}
               </div>
             </section>
           ))
