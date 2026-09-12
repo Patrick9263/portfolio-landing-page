@@ -27,16 +27,17 @@ concrete task benefit, with the maintenance and deployment tradeoffs explained.
 ## Photography gallery and generated assets
 
 - `photos-source/` contains local source images and is intentionally gitignored.
-- The current generator treats immediate directories as albums and reads images directly inside
-  them; it does not recursively discover nested year/album directories. A folder named for a year is
-  currently an album, not a distinct schema. Check the target branch before changing this contract.
+- The manifest uses generic ordered sections containing ordered albums. Sections may be years or
+  authored non-year groupings. The generator reads `photos-source/<section>/<album>/`; section-level
+  images require an album explicitly configured with `sourcePath: "."`.
 - `npm run photos:build` uses Sharp to generate display images under `public/photos/full/`, thumbnails
   under `public/photos/thumbs/`, and the static manifest `src/data/photos.json`.
 - `public/photos/` and `src/data/photos.json` are intentionally committed. A normal clone must build
   and deploy the existing gallery without originals or an asset-provider connection.
   Keep production-gallery regeneration out of normal install/build/CI. Test the generator using
   synthetic images in a temporary directory instead.
-- Missing sources are normal on another machine. Do not run `photos:clean` as routine build cleanup.
+- Missing sources are normal on another machine. There is no routine command that cleans published
+  gallery output.
   Before rebuilding or deleting published output, establish the intended album scope, source
   completeness, and preservation of unrelated output. Merely finding `photos-source/` is insufficient;
   it may contain only one new album. Preserve uncommitted assets before destructive operations.
@@ -70,17 +71,19 @@ npm run lint               # eslint "src/**/*.{js,jsx}"
 npm run lint:fix           # eslint --fix
 npm run format             # prettier --write "src/**/*.{js,jsx,css,json,md}"
 npm run format:check       # prettier --check "src/**/*.{js,jsx,css,json,md}"
-npm run photos:build       # scripts/build-photos.mjs — rebuilds public/photos + src/data/photos.json
-npm run photos:clean       # removes the generated photos output; see gallery warning above
+npm run photos:build -- --replace-all  # explicit full-inventory gallery replacement
+npm run test:photos        # synthetic generator contract checks
 ```
 
-There is currently no test runner in this repo. The local correctness gate to run before every push is:
+Focused Node tests cover the photo generator contract. The local correctness gate to run before every
+push is:
 
 ```bash
-npm run lint && npm run format:check && npm run build
+npm run lint && npm run format:check && npm run test:photos && npm run build
 ```
 
-CI installs the committed lockfile with Node 22, then runs the same lint, formatting, and build gate.
+CI installs the committed lockfile with Node 22, then runs the same lint, formatting, photo-test, and
+build gate.
 Use Node 22 for local validation where available and report any mismatch. The lint/format scripts
 cover `src/` only, not the generator, root documentation, or configuration; check changed files
 outside that scope explicitly. Keep this section synchronized with changes to the workflow or

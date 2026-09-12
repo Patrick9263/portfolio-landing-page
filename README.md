@@ -41,7 +41,7 @@ Pull requests and pushes to `main` install the committed lockfile with Node 22, 
 quality gate expected locally:
 
 ```bash
-npm run lint && npm run format:check && npm run build
+npm run lint && npm run format:check && npm run test:photos && npm run build
 ```
 
 The lint and formatting scripts currently check JavaScript, JSX, CSS, JSON, and Markdown files under
