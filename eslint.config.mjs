@@ -63,5 +63,17 @@ export default [
     },
   },
 
+  {
+    files: ['tests/**/*.mjs', 'playwright.config.js'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+      },
+    },
+  },
+
   eslintConfigPrettier,
 ]

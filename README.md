@@ -30,6 +30,7 @@ the correct major version:
 ```bash
 nvm use
 npm ci
+npm run test:browser:install
 npm run dev
 ```
 
@@ -41,11 +42,13 @@ Pull requests and pushes to `main` install the committed lockfile with Node 22, 
 quality gate expected locally:
 
 ```bash
-npm run lint && npm run format:check && npm run test:photos && npm run build
+npm run lint && npm run format:check && npm run test:photos && npm run build && npm run test:browser
 ```
 
-The lint and formatting scripts currently check JavaScript, JSX, CSS, JSON, and Markdown files under
-`src` only. Check other changed files separately.
+The browser suite launches Chromium against `dist/` through `vite preview`; run `npm run build` first.
+Its fixtures are injected only on localhost and use isolated in-memory image responses, so the suite
+does not require `photos-source/` or modify committed gallery data or assets. Lint and formatting
+cover `src`, the browser tests, and Playwright configuration. Check other changed files separately.
 
 ## Contact form
 

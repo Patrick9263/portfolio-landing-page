@@ -45,6 +45,12 @@ jobs:
       - name: Build
         run: npm run build
 
+      - name: Install Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Test gallery in browser
+        run: npm run test:browser
+
       - name: Upload GitHub Pages artifact
         uses: actions/upload-pages-artifact@v5
         with:
