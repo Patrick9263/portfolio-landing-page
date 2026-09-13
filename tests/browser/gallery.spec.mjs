@@ -234,12 +234,23 @@ test('renders and opens a one-photo album without navigation controls', async ({
   )
 
   await expect(page.locator('.photo-album-header p')).toHaveText('1 photo')
-  await page.locator('.photo-album-grid img').click()
+  const opener = page.getByRole('button', { name: 'Open Photo only' })
+  await opener.focus()
+  await page.keyboard.press('Enter')
   await expectSelectedPhoto(page, 'Photo only')
   await expect(
     page.getByRole('button', { name: 'Previous photo' })
   ).toHaveCount(0)
   await expect(page.getByRole('button', { name: 'Next photo' })).toHaveCount(0)
+
+  const close = page.getByRole('button', { name: 'Close photo' })
+  await expect(close).toBeFocused()
+  await page.keyboard.press('Tab')
+  await expect(close).toBeFocused()
+  await page.keyboard.press('Shift+Tab')
+  await expect(close).toBeFocused()
+  await page.keyboard.press('Escape')
+  await expect(opener).toBeFocused()
 })
 
 test('keyboard and button navigation wrap within the active album', async ({
@@ -268,7 +279,7 @@ test('Escape, backdrop, and repeated close cycles restore scroll state', async (
   page,
 }) => {
   await openGalleryWithFixture(page, interactionManifest)
-  const firstThumbnail = page.locator('.photo-album-grid img').first()
+  const firstThumbnail = page.getByRole('button', { name: 'Open Photo one' })
   const dialog = page.getByRole('dialog')
 
   await firstThumbnail.click()
@@ -277,6 +288,7 @@ test('Escape, backdrop, and repeated close cycles restore scroll state', async (
   await page.keyboard.press('Escape')
   await expect(dialog).toHaveCount(0)
   await expectBodyScroll(page, '')
+  await expect(firstThumbnail).toBeFocused()
 
   await firstThumbnail.click()
   await expect(dialog).toBeVisible()
@@ -286,6 +298,7 @@ test('Escape, backdrop, and repeated close cycles restore scroll state', async (
     .click({ position: { x: 8, y: 8 } })
   await expect(dialog).toHaveCount(0)
   await expectBodyScroll(page, '')
+  await expect(firstThumbnail).toBeFocused()
 
   await firstThumbnail.click()
   await expect(dialog).toBeVisible()
@@ -293,6 +306,7 @@ test('Escape, backdrop, and repeated close cycles restore scroll state', async (
   await page.locator('.photo-lightbox-close').click()
   await expect(dialog).toHaveCount(0)
   await expectBodyScroll(page, '')
+  await expect(firstThumbnail).toBeFocused()
 })
 
 const viewports = [
@@ -433,44 +447,147 @@ for (const { name, manifest } of invalidManifests) {
   })
 }
 
-test.describe('pending accessibility contract from issue #29', () => {
-  test.fixme('semantic thumbnail controls open with Enter and Space', async ({
+test.describe('gallery keyboard accessibility', () => {
+  test('photo buttons follow manifest order and open with Enter and Space', async ({
     page,
   }) => {
     await openGalleryWithFixture(page, interactionManifest)
-    const opener = page.getByRole('button', { name: 'Open Photo one' })
+    const homeLink = page.getByRole('link', { name: 'HOME' })
+    const firstOpener = page.getByRole('button', { name: 'Open Photo one' })
+    const secondOpener = page.getByRole('button', { name: 'Open Photo two' })
+    const lastOpener = page.getByRole('button', { name: 'Open Photo three' })
 
-    await opener.focus()
+    await homeLink.focus()
+    await page.keyboard.press('Tab')
+    await expect(firstOpener).toBeFocused()
+    await expect(firstOpener).toHaveCSS('outline-style', 'solid')
+    await expect(firstOpener).toHaveCSS('outline-width', '4px')
+    await page.keyboard.press('Tab')
+    await expect(secondOpener).toBeFocused()
+    await page.keyboard.press('Tab')
+    await expect(lastOpener).toBeFocused()
+    await page.keyboard.press('Shift+Tab')
+    await expect(secondOpener).toBeFocused()
+
+    await firstOpener.focus()
     await page.keyboard.press('Enter')
-    await expect(page.getByRole('dialog')).toBeVisible()
-    await page.locator('.photo-lightbox-close').click()
+    await expect(
+      page.getByRole('dialog', { name: 'Photo viewer' })
+    ).toBeVisible()
+    await page.getByRole('button', { name: 'Close photo' }).click()
+    await expect(firstOpener).toBeFocused()
 
-    await opener.focus()
+    const scrollPosition = await page.evaluate(() => window.scrollY)
     await page.keyboard.press('Space')
-    await expect(page.getByRole('dialog')).toBeVisible()
+    await expect(
+      page.getByRole('dialog', { name: 'Photo viewer' })
+    ).toBeVisible()
+    await expect
+      .poll(() => page.evaluate(() => window.scrollY))
+      .toBe(scrollPosition)
   })
 
-  test.fixme('lightbox contains focus and restores it to the opener', async ({
+  for (const viewport of [viewports[0], viewports[2]]) {
+    test(`modal focus is contained at the ${viewport.name} viewport`, async ({
+      page,
+    }) => {
+      await page.setViewportSize(viewport)
+      await openGalleryWithFixture(page, interactionManifest)
+      await page.getByRole('button', { name: 'Open Photo one' }).click()
+
+      const dialog = page.getByRole('dialog', { name: 'Photo viewer' })
+      const close = page.getByRole('button', { name: 'Close photo' })
+      const previous = page.getByRole('button', { name: 'Previous photo' })
+      const next = page.getByRole('button', { name: 'Next photo' })
+
+      await expect(dialog).toHaveAttribute('aria-modal', 'true')
+      await expect(dialog).toHaveAccessibleDescription(
+        'Photo 1 of 3: Photo one.'
+      )
+      await expect(close).toBeFocused()
+
+      await page.keyboard.press('Shift+Tab')
+      await expect(next).toBeFocused()
+      await page.keyboard.press('Tab')
+      await expect(close).toBeFocused()
+      await page.keyboard.press('Tab')
+      await expect(previous).toBeFocused()
+      await page.keyboard.press('Tab')
+      await expect(next).toBeFocused()
+      await page.keyboard.press('Tab')
+      await expect(close).toBeFocused()
+    })
+  }
+
+  test('the page is inert while the modal is open and recovers on close', async ({
     page,
   }) => {
     await openGalleryWithFixture(page, interactionManifest)
     const opener = page.getByRole('button', { name: 'Open Photo one' })
+    const pageBackground = page.locator('.photos-page-background')
+    const backgroundHomeLink = page.locator('.navbar-top a')
 
     await opener.click()
-    await expect(page.locator('.photo-lightbox-close')).toBeFocused()
+    await expect(pageBackground).toHaveAttribute('inert', '')
+    await backgroundHomeLink.focus()
+    await expect(
+      page.getByRole('button', { name: 'Close photo' })
+    ).toBeFocused()
 
-    for (let index = 0; index < 5; index += 1) {
-      await page.keyboard.press('Tab')
-      await expect
-        .poll(() =>
-          page.evaluate(() =>
-            document
-              .querySelector('[role="dialog"]')
-              ?.contains(document.activeElement)
-          )
-        )
-        .toBe(true)
-    }
+    const galleryUrl = page.url()
+    await backgroundHomeLink.click({ force: true })
+    expect(page.url()).toBe(galleryUrl)
+
+    await page.keyboard.press('Escape')
+    await expect(pageBackground).not.toHaveAttribute('inert', '')
+    await expect(page.getByRole('link', { name: 'HOME' })).toBeVisible()
+  })
+
+  test('closing after navigation restores the original opener', async ({
+    page,
+  }) => {
+    await openGalleryWithFixture(page, interactionManifest)
+    const secondOpener = page.getByRole('button', { name: 'Open Photo two' })
+
+    await secondOpener.click()
+    await page.keyboard.press('ArrowRight')
+    await expectSelectedPhoto(page, 'Photo three')
+    await page.getByRole('button', { name: 'Close photo' }).click()
+    await expect(secondOpener).toBeFocused()
+
+    await page.keyboard.press('Enter')
+    await page.getByRole('button', { name: 'Previous photo' }).click()
+    await expectSelectedPhoto(page, 'Photo one')
+    await page.keyboard.press('Escape')
+    await expect(secondOpener).toBeFocused()
+  })
+
+  test('a failed full-size request leaves the modal operable', async ({
+    page,
+  }) => {
+    await openGalleryWithFixture(
+      page,
+      makeManifest([
+        {
+          id: 'failure-section',
+          title: 'Failure section',
+          albums: [makeAlbum('failure-album', null, ['broken'])],
+        },
+      ])
+    )
+    await page.route('**/broken-full.svg', (route) => route.abort())
+    const opener = page.getByRole('button', { name: 'Open Photo broken' })
+
+    await opener.click()
+    const fullImage = page.getByRole('img', { name: 'Photo broken' })
+    await expect(fullImage).toBeVisible()
+    await expect
+      .poll(() => fullImage.evaluate((image) => image.complete))
+      .toBe(true)
+    expect(await fullImage.evaluate((image) => image.naturalWidth)).toBe(0)
+    await expect(
+      page.getByRole('button', { name: 'Close photo' })
+    ).toBeFocused()
 
     await page.keyboard.press('Escape')
     await expect(opener).toBeFocused()

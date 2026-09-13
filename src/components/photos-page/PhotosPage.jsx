@@ -1,4 +1,12 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import {
+  useCallback,
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react'
 import Fade from '../react-reveal/in-and-out/Fade'
 import Navbar from '../navbar/Navbar'
 import PhotoAlbum from 'react-photo-album'
@@ -24,6 +32,41 @@ const getPhotoManifest = () => {
 }
 
 const getAlbumPhotoCount = (album) => album.photos.length
+
+const getPhotoName = (photo, index) =>
+  photo.alt?.trim() || photo.title?.trim() || `Photo ${index + 1}`
+
+const renderPhotoOpener = ({
+  photo,
+  layout,
+  imageProps,
+  wrapperStyle,
+  onOpen,
+}) => {
+  return (
+    <button
+      className="photo-opener"
+      type="button"
+      style={wrapperStyle}
+      aria-label={`Open ${getPhotoName(photo, layout.index)}`}
+      onClick={(event) => onOpen(layout.index, event.currentTarget)}
+    >
+      <img
+        {...imageProps}
+        alt=""
+        aria-hidden="true"
+        style={{ display: 'block', width: '100%', height: '100%' }}
+      />
+    </button>
+  )
+}
+
+const getFocusableElements = (container) =>
+  Array.from(
+    container.querySelectorAll(
+      'button:not([disabled]):not([tabindex="-1"]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((element) => !element.hidden)
 
 const getGallerySettings = (width) => {
   if (width < 1000) {
@@ -99,6 +142,11 @@ export default function PhotosPage({ manifest = getPhotoManifest() }) {
   )
 
   const [lightbox, setLightbox] = useState(null)
+  const dialogRef = useRef(null)
+  const closeButtonRef = useRef(null)
+  const lightboxOpenerRef = useRef(null)
+  const shouldRestoreFocusRef = useRef(false)
+  const lightboxStatusId = useId()
 
   const selectedAlbum =
     lightbox !== null
@@ -110,7 +158,16 @@ export default function PhotosPage({ manifest = getPhotoManifest() }) {
       ? selectedAlbum.photos[lightbox.index]
       : null
 
+  const isLightboxOpen = selectedPhoto !== null
+
+  const openLightbox = useCallback((albumKey, index, opener) => {
+    lightboxOpenerRef.current = opener
+    shouldRestoreFocusRef.current = false
+    setLightbox({ albumKey, index })
+  }, [])
+
   const closeLightbox = useCallback(() => {
+    shouldRestoreFocusRef.current = true
     setLightbox(null)
   }, [])
 
@@ -139,105 +196,203 @@ export default function PhotosPage({ manifest = getPhotoManifest() }) {
   }, [lightbox, selectedAlbum])
 
   useEffect(() => {
-    if (!selectedPhoto) return undefined
+    if (!isLightboxOpen) return undefined
 
-    const handleKeyDown = (event) => {
-      if (event.key === 'Escape') {
-        closeLightbox()
-      }
-
-      if (event.key === 'ArrowLeft') {
-        showPreviousPhoto()
-      }
-
-      if (event.key === 'ArrowRight') {
-        showNextPhoto()
-      }
-    }
-
+    const previousBodyOverflow = document.body.style.overflow
     document.body.style.overflow = 'hidden'
-    window.addEventListener('keydown', handleKeyDown)
 
     return () => {
-      document.body.style.overflow = ''
-      window.removeEventListener('keydown', handleKeyDown)
+      document.body.style.overflow = previousBodyOverflow
     }
-  }, [closeLightbox, selectedPhoto, showNextPhoto, showPreviousPhoto])
+  }, [isLightboxOpen])
+
+  useLayoutEffect(() => {
+    if (!isLightboxOpen) return undefined
+
+    closeButtonRef.current?.focus()
+    return undefined
+  }, [isLightboxOpen])
+
+  useEffect(() => {
+    if (isLightboxOpen || !shouldRestoreFocusRef.current) return undefined
+
+    const opener = lightboxOpenerRef.current
+    shouldRestoreFocusRef.current = false
+
+    const focusFrame = window.requestAnimationFrame(() => {
+      if (opener?.isConnected) {
+        opener.focus()
+      }
+    })
+
+    return () => {
+      window.cancelAnimationFrame(focusFrame)
+    }
+  }, [isLightboxOpen])
+
+  const handleLightboxKeyDown = useCallback(
+    (event) => {
+      if (!selectedPhoto || !selectedAlbum) return
+
+      if (event.key === 'Escape') {
+        event.preventDefault()
+        closeLightbox()
+        return
+      }
+
+      if (event.key === 'ArrowLeft' && selectedAlbum.photos.length > 1) {
+        event.preventDefault()
+        showPreviousPhoto()
+        return
+      }
+
+      if (event.key === 'ArrowRight' && selectedAlbum.photos.length > 1) {
+        event.preventDefault()
+        showNextPhoto()
+        return
+      }
+
+      if (event.key !== 'Tab' || !dialogRef.current) return
+
+      const focusableElements = getFocusableElements(dialogRef.current)
+      if (focusableElements.length === 0) {
+        event.preventDefault()
+        dialogRef.current.focus()
+        return
+      }
+
+      const firstElement = focusableElements[0]
+      const lastElement = focusableElements.at(-1)
+      const activeElement = document.activeElement
+
+      if (
+        event.shiftKey &&
+        (activeElement === firstElement ||
+          !dialogRef.current.contains(activeElement))
+      ) {
+        event.preventDefault()
+        lastElement.focus()
+      } else if (
+        !event.shiftKey &&
+        (activeElement === lastElement ||
+          !dialogRef.current.contains(activeElement))
+      ) {
+        event.preventDefault()
+        firstElement.focus()
+      }
+    },
+    [
+      closeLightbox,
+      selectedAlbum,
+      selectedPhoto,
+      showNextPhoto,
+      showPreviousPhoto,
+    ]
+  )
+
+  useLayoutEffect(() => {
+    if (!isLightboxOpen) return undefined
+
+    window.addEventListener('keydown', handleLightboxKeyDown)
+
+    return () => {
+      window.removeEventListener('keydown', handleLightboxKeyDown)
+    }
+  }, [handleLightboxKeyDown, isLightboxOpen])
+
+  const lightboxStatus = selectedPhoto
+    ? `Photo ${lightbox.index + 1} of ${selectedAlbum.photos.length}${
+        selectedAlbum.title ? ` in ${selectedAlbum.title}` : ''
+      }: ${getPhotoName(selectedPhoto, lightbox.index)}.`
+    : ''
 
   return (
     <div className="photos-page">
-      <Navbar top />
+      <div className="photos-page-background" inert={isLightboxOpen}>
+        <Navbar top />
 
-      <Fade duration={1000}>
-        <div className="photos-intro">
-          <h2>Photos</h2>
-          <p>
-            Photography is one of my hobbies. Enjoy some that I&apos;ve taken!
-          </p>
-          <p>Currently I&apos;m using a Sony A7R V.</p>
-          <p>Browse by section and album, then click a photo to enlarge it.</p>
+        <Fade duration={1000}>
+          <div className="photos-intro">
+            <h2>Photos</h2>
+            <p>
+              Photography is one of my hobbies. Enjoy some that I&apos;ve taken!
+            </p>
+            <p>Currently I&apos;m using a Sony A7R V.</p>
+            <p>
+              Browse by section and album, then choose a photo to enlarge it.
+            </p>
+          </div>
+        </Fade>
+
+        <div className="photo-container">
+          {sections.length > 0 ? (
+            sections.map((section) => (
+              <section className="photo-section" key={section.id}>
+                <div className="photo-section-header">
+                  <h3>{section.title}</h3>
+                </div>
+
+                <div className="photo-section-albums">
+                  {section.albums.map((album) => {
+                    const albumKey = `${section.id}/${album.id}`
+
+                    return (
+                      <section className="photo-album-section" key={albumKey}>
+                        <div className="photo-album-header">
+                          {album.title ? <h4>{album.title}</h4> : null}
+                          <p>
+                            {getAlbumPhotoCount(album)}{' '}
+                            {getAlbumPhotoCount(album) === 1
+                              ? 'photo'
+                              : 'photos'}
+                          </p>
+                        </div>
+
+                        <div className="photo-album-grid">
+                          <PhotoAlbum
+                            {...gallerySettings}
+                            photos={album.photos}
+                            renderPhoto={(renderProps) =>
+                              renderPhotoOpener({
+                                ...renderProps,
+                                onOpen: (index, opener) =>
+                                  openLightbox(albumKey, index, opener),
+                              })
+                            }
+                          />
+                        </div>
+                      </section>
+                    )
+                  })}
+                </div>
+              </section>
+            ))
+          ) : (
+            <p>No photos available yet.</p>
+          )}
         </div>
-      </Fade>
-
-      <div className="photo-container">
-        {sections.length > 0 ? (
-          sections.map((section) => (
-            <section className="photo-section" key={section.id}>
-              <div className="photo-section-header">
-                <h3>{section.title}</h3>
-              </div>
-
-              <div className="photo-section-albums">
-                {section.albums.map((album) => (
-                  <section
-                    className="photo-album-section"
-                    key={`${section.id}/${album.id}`}
-                  >
-                    <div className="photo-album-header">
-                      {album.title ? <h4>{album.title}</h4> : null}
-                      <p>
-                        {getAlbumPhotoCount(album)}{' '}
-                        {getAlbumPhotoCount(album) === 1 ? 'photo' : 'photos'}
-                      </p>
-                    </div>
-
-                    <div className="photo-album-grid">
-                      <PhotoAlbum
-                        {...gallerySettings}
-                        photos={album.photos}
-                        onClick={({ index }) => {
-                          setLightbox({
-                            albumKey: `${section.id}/${album.id}`,
-                            index,
-                          })
-                        }}
-                      />
-                    </div>
-                  </section>
-                ))}
-              </div>
-            </section>
-          ))
-        ) : (
-          <p>No photos available yet.</p>
-        )}
       </div>
 
       {selectedPhoto ? (
         <div
+          ref={dialogRef}
           className="photo-lightbox"
           role="dialog"
           aria-modal="true"
-          aria-label={selectedPhoto.alt || selectedPhoto.title || 'Photo'}
+          aria-label="Photo viewer"
+          aria-describedby={lightboxStatusId}
+          tabIndex="-1"
         >
           <button
             className="photo-lightbox-backdrop"
             type="button"
-            aria-label="Close photo"
+            aria-hidden="true"
+            tabIndex="-1"
             onClick={closeLightbox}
           />
 
           <button
+            ref={closeButtonRef}
             className="photo-lightbox-close"
             type="button"
             aria-label="Close photo"
@@ -267,12 +422,20 @@ export default function PhotosPage({ manifest = getPhotoManifest() }) {
           <div className="photo-lightbox-content">
             <img
               src={selectedPhoto.fullSrc}
-              alt={selectedPhoto.alt || selectedPhoto.title || 'Selected photo'}
+              alt={getPhotoName(selectedPhoto, lightbox.index)}
             />
 
             {selectedPhoto.title ? (
               <p className="photo-lightbox-caption">{selectedPhoto.title}</p>
             ) : null}
+
+            <p
+              className="photo-lightbox-status"
+              id={lightboxStatusId}
+              aria-live="polite"
+            >
+              {lightboxStatus}
+            </p>
           </div>
 
           {selectedAlbum.photos.length > 1 ? (
