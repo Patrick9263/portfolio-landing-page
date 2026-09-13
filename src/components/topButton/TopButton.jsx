@@ -1,60 +1,54 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './TopButton.css'
-import { Link } from 'react-scroll'
 
 const TopButton = () => {
   const [topButtonVisible, setTopButtonVisible] = useState(false)
 
-  const scrollFunction = () => {
-    if (
-      document.body.scrollTop > window.innerHeight + 63 ||
-      document.documentElement.scrollTop > window.innerHeight + 63
-    ) {
-      setTopButtonVisible(true)
-    } else {
-      setTopButtonVisible(false)
+  useEffect(() => {
+    const updateVisibility = () => {
+      const scrollTop = Math.max(
+        document.body.scrollTop,
+        document.documentElement.scrollTop
+      )
+
+      setTopButtonVisible(scrollTop > window.innerHeight + 63)
     }
-  }
 
-  window.onscroll = function () {
-    scrollFunction()
-  }
+    updateVisibility()
+    window.addEventListener('scroll', updateVisibility, { passive: true })
+    window.addEventListener('resize', updateVisibility)
 
-  window.onload = function () {
-    scrollFunction()
-  }
+    return () => {
+      window.removeEventListener('scroll', updateVisibility)
+      window.removeEventListener('resize', updateVisibility)
+    }
+  }, [])
 
   return (
-    <Link
-      activeClass="active"
-      to="about"
-      spy={true}
-      smooth={true}
-      duration={500}
-      offset={-63}
+    <a
+      className={`topButton ${topButtonVisible ? 'on' : 'off'}`}
+      href="#home"
+      aria-label="Go to top"
+      aria-hidden={!topButtonVisible}
+      tabIndex={topButtonVisible ? undefined : -1}
+      title="Go to top"
     >
-      <button
-        className={'topButton ' + (topButtonVisible ? 'on' : 'off')}
-        title="Go to top"
-        type="button"
+      <svg
+        className="topButton-icon"
+        aria-hidden="true"
+        viewBox="0 0 24 24"
+        focusable="false"
       >
-        <svg
-          className="topButton-icon"
-          aria-hidden="true"
-          viewBox="0 0 24 24"
-          focusable="false"
-        >
-          <path
-            d="M12 19V5M6.5 10.5L12 5l5.5 5.5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2.25"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      </button>
-    </Link>
+        <path
+          d="M12 19V5M6.5 10.5L12 5l5.5 5.5"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.25"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </a>
   )
 }
 

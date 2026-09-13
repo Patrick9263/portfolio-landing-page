@@ -1,81 +1,92 @@
-import { useState } from 'react'
-import { Link } from 'react-scroll'
+import { useEffect, useRef, useState } from 'react'
 import MobileNav from '../mobileNav/MobileNav'
 import './Navbar.css'
 
-const Navbar = (props) => {
-  const { top = false } = props
-  const [mobilenavVisible, setMobilenavVisible] = useState(false)
-  const [hamburgerClass, setHamburgerClass] = useState('')
-  const toggleMobilenavVisible = () => {
-    setMobilenavVisible(!mobilenavVisible)
-    if (hamburgerClass === '') {
-      setHamburgerClass('open')
-    } else {
-      setHamburgerClass('')
+const NAV_ITEMS = [
+  { href: '#home', label: 'Home' },
+  { href: '#about', label: 'About' },
+  { href: '#experience', label: 'Experience' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#contact', label: 'Contact' },
+]
+
+const Navbar = ({ top = false }) => {
+  const [mobileNavVisible, setMobileNavVisible] = useState(false)
+  const menuButtonRef = useRef(null)
+
+  useEffect(() => {
+    if (!mobileNavVisible) return undefined
+
+    const handleEscape = (event) => {
+      if (event.key !== 'Escape') return
+
+      setMobileNavVisible(false)
+      menuButtonRef.current?.focus()
     }
-  }
+
+    window.addEventListener('keydown', handleEscape)
+    return () => window.removeEventListener('keydown', handleEscape)
+  }, [mobileNavVisible])
+
+  useEffect(() => {
+    const desktopQuery = window.matchMedia('(min-width: 600px)')
+    const closeMenuAtDesktopWidth = (event) => {
+      if (event.matches) setMobileNavVisible(false)
+    }
+
+    desktopQuery.addEventListener('change', closeMenuAtDesktopWidth)
+    return () =>
+      desktopQuery.removeEventListener('change', closeMenuAtDesktopWidth)
+  }, [])
 
   if (top) {
     return (
-      <div className="navbar-top">
-        <div style={{ marginLeft: '5%' }}>
-          <div className="navlink-wrapper">
-            <a href="/" rel="noopener noreferrer">
-              HOME
-            </a>
-          </div>
+      <nav className="navbar-top" aria-label="Gallery navigation">
+        <div className="gallery-nav-home">
+          <a href="/">Home</a>
         </div>
-      </div>
+      </nav>
     )
   }
 
+  const closeMobileNav = () => setMobileNavVisible(false)
+
   return (
-    <div className="navbar">
-      <div className="navlinks">
-        <div className="navlink-wrapper">
-          <Link to="home" spy={true} smooth={true} duration={500}>
-            HOME
-          </Link>
-        </div>
-        <div className="navlink-wrapper">
-          <Link to="about" spy={true} smooth={true} duration={500}>
-            ABOUT
-          </Link>
-        </div>
-        <div className="navlink-wrapper">
-          <Link to="experience" spy={true} smooth={true} duration={500}>
-            EXPERIENCE
-          </Link>
-        </div>
-        <div className="navlink-wrapper">
-          <Link to="projects" spy={true} smooth={true} duration={500}>
-            PROJECTS
-          </Link>
-        </div>
-        <div className="navlink-wrapper">
-          <Link to="contact" spy={true} smooth={true} duration={500}>
-            CONTACT
-          </Link>
-        </div>
-      </div>
+    <nav className="navbar" aria-label="Primary navigation">
+      <ul className="navlinks">
+        {NAV_ITEMS.map(({ href, label }) => (
+          <li className="navlink-wrapper" key={href}>
+            <a href={href}>{label}</a>
+          </li>
+        ))}
+      </ul>
+
       <div className="hamburger">
         <button
+          ref={menuButtonRef}
           id="hamburger-icon"
-          className={hamburgerClass}
-          onClick={toggleMobilenavVisible}
+          className={mobileNavVisible ? 'open' : ''}
+          type="button"
+          aria-label={
+            mobileNavVisible ? 'Close navigation menu' : 'Open navigation menu'
+          }
+          aria-expanded={mobileNavVisible}
+          aria-controls="mobile-navigation"
+          onClick={() => setMobileNavVisible((visible) => !visible)}
         >
-          <span></span>
-          <span></span>
-          <span></span>
-          <span></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
         </button>
       </div>
+
       <MobileNav
-        toggleMobilenavVisible={toggleMobilenavVisible}
-        mobilenavVisible={mobilenavVisible}
+        links={NAV_ITEMS}
+        onNavigate={closeMobileNav}
+        visible={mobileNavVisible}
       />
-    </div>
+    </nav>
   )
 }
 

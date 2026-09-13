@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import useReducedMotion from '../../../hooks/useReducedMotion'
 
 const Bounce = ({
   children,
@@ -9,11 +10,13 @@ const Bounce = ({
 }) => {
   const ref = useRef(null)
   const [isVisible, setIsVisible] = useState(false)
+  const prefersReducedMotion = useReducedMotion()
+  const shouldShow = isVisible || prefersReducedMotion
 
   useEffect(() => {
     const node = ref.current
 
-    if (!node || isVisible) {
+    if (!node || isVisible || prefersReducedMotion) {
       return undefined
     }
 
@@ -32,12 +35,12 @@ const Bounce = ({
     observer.observe(node)
 
     return () => observer.disconnect()
-  }, [fraction, isVisible])
+  }, [fraction, isVisible, prefersReducedMotion])
 
   const childArray = React.Children.toArray(children)
 
   return (
-    <div ref={ref}>
+    <div className="reveal-bounce" ref={ref}>
       {childArray.map((child, index) => {
         const itemDelay = cascade ? delay + index * 120 : delay
 
@@ -45,9 +48,11 @@ const Bounce = ({
           <div
             key={child.key || index}
             style={{
-              opacity: isVisible ? 1 : 0,
-              transform: isVisible ? 'none' : 'scale(0.92)',
-              transition: `opacity ${duration}ms cubic-bezier(0.34, 1.56, 0.64, 1) ${itemDelay}ms, transform ${duration}ms cubic-bezier(0.34, 1.56, 0.64, 1) ${itemDelay}ms`,
+              opacity: shouldShow ? 1 : 0,
+              transform: shouldShow ? 'none' : 'scale(0.92)',
+              transition: prefersReducedMotion
+                ? 'none'
+                : `opacity ${duration}ms cubic-bezier(0.34, 1.56, 0.64, 1) ${itemDelay}ms, transform ${duration}ms cubic-bezier(0.34, 1.56, 0.64, 1) ${itemDelay}ms`,
             }}
           >
             {child}

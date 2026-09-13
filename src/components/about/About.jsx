@@ -1,17 +1,19 @@
 import './About.css'
 import Typewriter from 'typewriter-effect'
-import { Link } from 'react-scroll'
 import Fade from '../react-reveal/in-and-out/Fade'
 import Section from '../section/Section'
 import Skills from '../skills/Skills'
+import useReducedMotion from '../../hooks/useReducedMotion'
 
 const About = () => {
+  const prefersReducedMotion = useReducedMotion()
+
   return (
     <Section title="About">
       <div className="about-content">
         <Fade duration={1000}>
           <div className="about-text">
-            <h2>Who am I?</h2>
+            <h3>Who am I?</h3>
             <p>
               I'm Patrick!{' '}
               {/* <span role="img" aria-label="lightning">
@@ -39,41 +41,34 @@ const About = () => {
                 </span>{' '} */}
                 - I love
               </p>
-              <Typewriter
-                options={{
-                  strings: [
-                    'learning new technologies.',
-                    'solving complex problems.',
-                    'collaborating with others.',
-                  ],
-                  autoStart: true,
-                  loop: true,
-                }}
-              />
+              {prefersReducedMotion ? (
+                <p>learning new technologies.</p>
+              ) : (
+                <Typewriter
+                  component="span"
+                  options={{
+                    strings: [
+                      'learning new technologies.',
+                      'solving complex problems.',
+                      'collaborating with others.',
+                    ],
+                    autoStart: true,
+                    loop: true,
+                  }}
+                />
+              )}
             </div>
             <p>
               I've spent my time seeking and learning new technologies and forms
               of digital expression. This has led to me working on some fun
               personal{' '}
-              <Link
-                className="textLink"
-                to="projects"
-                spy={true}
-                smooth={true}
-                duration={500}
-              >
+              <a className="textLink" href="#projects">
                 projects
-              </Link>
+              </a>
               , gaining{' '}
-              <Link
-                className="textLink"
-                to="experience"
-                spy={true}
-                smooth={true}
-                duration={500}
-              >
+              <a className="textLink" href="#experience">
                 great experience
-              </Link>
+              </a>
               , and working with some great people.
             </p>
             <div className="location-wrapper">

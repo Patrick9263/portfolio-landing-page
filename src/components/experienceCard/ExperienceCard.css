@@ -30,7 +30,7 @@
   align-items: center;
   justify-content: center;
 }
-.experience-card-top > h2 {
+.experience-card-top > h3 {
   position: absolute;
   top: 30px;
   text-align: center;
@@ -44,7 +44,7 @@
 .container {
   width: 100%;
 }
-.container > h2 {
+.container > h3 {
   width: 100%;
   position: absolute;
   top: 30px;
@@ -82,12 +82,14 @@
   flex-direction: column;
   justify-content: space-between;
 }
-.experience-card-bottom h2 {
+.experience-card-bottom h4 {
   margin: 0;
+  font-size: 1.5em;
 }
-.experience-card-bottom h3 {
+.experience-date {
   margin: 20px 0;
   font-size: 18px;
+  font-weight: 700;
 }
 .experience-card-bottom ul {
   list-style-type: disc;

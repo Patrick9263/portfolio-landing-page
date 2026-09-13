@@ -31,7 +31,7 @@ const ExperienceCard = ({ experience, companyColor = 'white' }) => {
             ></div>
 
             <div className="container">
-              <h2 style={{ color: companyColor }}>{company}</h2>
+              <h3 style={{ color: companyColor }}>{company}</h3>
             </div>
 
             <div className="image-wrapper">
@@ -63,10 +63,10 @@ const ExperienceCard = ({ experience, companyColor = 'white' }) => {
 
           <div className="experience-card-bottom">
             <div>
-              <h2>{title}</h2>
-              <h3>
+              <h4>{title}</h4>
+              <p className="experience-date">
                 {dateFrom} - {dateTo}
-              </h3>
+              </p>
 
               <ul className="experience-card-bullet-list">
                 {info.map((point, idx) => (

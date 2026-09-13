@@ -35,10 +35,14 @@
   font-weight: 600;
   color: white;
   text-decoration: none;
-  cursor: pointer;
+  text-transform: uppercase;
+}
+.gallery-nav-home {
+  margin-left: 5%;
 }
 .navlink-wrapper {
   width: 20%;
+  list-style: none;
 }
 .navlinks {
   font-family:
@@ -52,7 +56,13 @@
   letter-spacing: 0.02em;
   display: flex;
   width: 100%;
+  margin: 0;
+  padding: 0;
   justify-content: space-evenly;
+}
+.navlinks a {
+  display: inline-block;
+  padding: 10px 12px;
 }
 #hamburger-icon {
   width: 35px;
@@ -68,6 +78,10 @@
   -o-transition: 0.5s ease-in-out;
   transition: 0.5s ease-in-out;
   cursor: pointer;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
 }
 #hamburger-icon span {
   display: block;
@@ -141,14 +155,5 @@
     position: absolute;
     right: 30px;
     cursor: pointer;
-
-    button {
-      padding: 0;
-      background: none;
-      border: none;
-      color: inherit;
-      font: inherit;
-      cursor: pointer;
-    }
   }
 }
