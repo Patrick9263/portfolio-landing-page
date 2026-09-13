@@ -1,0 +1,48 @@
+# Keep routine maintenance predictable for this small portfolio. Minor and patch
+# npm updates are grouped by runtime exposure; major npm updates stay separate
+# for deliberate review. GitHub Actions updates share one weekly PR because the
+# workflow's CI gate validates them together. Nothing here enables auto-merge.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:00"
+      timezone: America/New_York
+    open-pull-requests-limit: 5
+    groups:
+      production-minor-and-patch:
+        dependency-type: production
+        update-types:
+          - minor
+          - patch
+      development-minor-and-patch:
+        dependency-type: development
+        update-types:
+          - minor
+          - patch
+      production-security:
+        applies-to: security-updates
+        dependency-type: production
+        patterns:
+          - "*"
+      development-security:
+        applies-to: security-updates
+        dependency-type: development
+        patterns:
+          - "*"
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "09:30"
+      timezone: America/New_York
+    open-pull-requests-limit: 2
+    groups:
+      github-actions:
+        patterns:
+          - "*"
