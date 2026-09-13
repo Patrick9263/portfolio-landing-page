@@ -50,6 +50,89 @@ Its fixtures are injected only on localhost and use isolated in-memory image res
 does not require `photos-source/` or modify committed gallery data or assets. Lint and formatting
 cover `src`, the browser tests, and Playwright configuration. Check other changed files separately.
 
+## Photo publishing workflow
+
+The deployable gallery is the committed combination of `src/data/photos.json` and `public/photos/`.
+Originals live only in the gitignored `photos-source/` directory, which may be missing or contain a
+partial working set. Normal builds and CI use the committed output and never require originals.
+
+### Import or update one album
+
+Put the new or updated originals for a single album in one flat local directory. Target the published
+section and album by their stable IDs, not their display titles. Start with a dry run:
+
+```bash
+npm run photos:import -- \
+  --section current \
+  --album current \
+  --source photos-source/current \
+  --dry-run
+```
+
+Review the reported additions, replacements, retained photo IDs, conflicts, and affected output
+paths. Then repeat the command without `--dry-run`. Files that are absent from the local directory are
+retained; an import never removes published photos. Matching IDs retain their manifest position,
+title, alt text, and URLs, while their generated variants are replaced only when the bytes or derived
+dimensions change. Genuinely new IDs append after existing photos in deterministic natural filename
+order (`img2` before `img10`). Filename order is a fallback, not capture chronology.
+
+The source directory must contain supported images only and cannot contain nested directories. The
+import validates image readability, IDs, source-name collisions, and every manifest/output-path
+collision before it can switch published output.
+
+To add an album to an existing section, explicitly provide its editorial title and the path that a
+future complete `photos-source/<section>/...` inventory would use:
+
+```bash
+npm run photos:import -- \
+  --section 2026 \
+  --album nyc-marathon \
+  --source photos-source/2026/NYC-Marathon \
+  --create-album \
+  --album-title "NYC Marathon" \
+  --source-path "NYC-Marathon" \
+  --dry-run
+```
+
+Add `--create-section --section-title "2026"` when the section is also new. Section IDs do not need
+to be years, and the tool never invents a `Highlights` album. New sections and albums append to their
+respective manifest arrays. An optional `--output-path` overrides the default `<section-id>/<album-id>`
+for a new album only.
+
+### Remove published photos intentionally
+
+Pruning is separate from import and accepts exact photo IDs in one selected album. Review first:
+
+```bash
+npm run photos:prune -- \
+  --section 2026 \
+  --album nyc-marathon \
+  --photo finish-line \
+  --dry-run
+```
+
+Then repeat with `--confirm-prune` instead of `--dry-run`. Repeat `--photo <id>` to remove more than
+one known photo. Missing local source files are never used as removal evidence, and unrelated albums
+and assets are preserved.
+
+`npm run photos:build -- --replace-all` remains the deliberately destructive full-inventory workflow.
+Use it only when `photos-source/` is known to contain the complete gallery; it can remove anything not
+present in that inventory. It is not the command for routine album work.
+
+### Review, recovery, and publishing
+
+Each import or prune creates a staged copy of the currently published assets, applies only the planned
+album changes there, writes a staged manifest, and then switches both into place with backups. A
+decode, generation, staging, rename, manifest-write, or final-switch failure restores the prior
+filesystem state without using Git, so unrelated uncommitted files are not discarded. Temporary stage
+and backup paths are cleaned after success or handled failure.
+
+After a successful operation, inspect `git diff -- src/data/photos.json public/photos`, run the full
+development gate above, commit the intended manifest/assets together, and publish through the normal
+pull-request workflow. If an operation reports a failure, confirm the committed gallery still builds;
+rerun the dry run after fixing the named source/path/ID. Use Git only to restore a known committed
+revision, not to reconstruct missing originals.
+
 ## Contact form
 
 Production submissions use the Formspree endpoint configured in `ContactForm.jsx`. Before any real

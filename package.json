@@ -33,6 +33,8 @@
     "lint": "eslint \"src/**/*.{js,jsx}\" \"tests/**/*.mjs\" \"playwright.config.js\"",
     "lint:fix": "eslint \"src/**/*.{js,jsx}\" \"tests/**/*.mjs\" \"playwright.config.js\" --fix",
     "photos:build": "node scripts/build-photos.mjs",
+    "photos:import": "node scripts/build-photos.mjs import-album",
+    "photos:prune": "node scripts/build-photos.mjs prune-album",
     "test:photos": "node --test scripts/build-photos.test.mjs",
     "test:browser:install": "playwright install chromium",
     "test:browser": "playwright test"

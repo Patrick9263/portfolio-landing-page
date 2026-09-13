@@ -71,6 +71,8 @@ npm run lint               # eslint source and browser-test JavaScript
 npm run lint:fix           # eslint --fix
 npm run format             # prettier source and browser-test files
 npm run format:check       # verify Prettier formatting
+npm run photos:import -- --help # album-scoped additive/update workflow
+npm run photos:prune -- --help  # explicit album-scoped removal workflow
 npm run photos:build -- --replace-all  # explicit full-inventory gallery replacement
 npm run test:photos        # synthetic generator contract checks
 npm run test:browser:install # install Chromium once for local browser tests
@@ -118,9 +120,9 @@ this section synchronized with changes to the workflow or scripts.
 ## Traps
 
 - **Gallery ordering is not an implicit filesystem contract.** `scripts/build-photos.mjs` currently
-  reads directory entries without an explicit sort; manifest array order drives the gallery. Define
-  and test editorial order and deterministic fallbacks when changing it, preserve existing sequences
-  during migration, and do not infer capture chronology from filenames or filesystem order.
+  preserves manifest order and appends new imports using a deterministic natural-name fallback;
+  manifest array order still drives the gallery. Define and test editorial order when changing it,
+  preserve existing sequences during migration, and do not infer capture chronology from filenames.
 - **Global section styles affect nested gallery sections.** `src/App.css` applies padding to every
   `section`. Check those rules and existing gallery media queries when nesting albums or years, so
   margins and padding do not compound.
