@@ -1,16 +1,24 @@
 import './Section.css'
 import Fade from '../react-reveal/in-and-out/Fade'
 
-const Section = (props) => {
+const Section = ({ children, title }) => {
+  const sectionId = title.toLowerCase()
+
   return (
-    <section className={props.title.toLowerCase()}>
+    <section
+      className={sectionId}
+      id={sectionId}
+      aria-labelledby={`${sectionId}-heading`}
+    >
       <Fade left duration={1000} distance="70px">
-        <h1 className="section-title">{props.title}</h1>
+        <h2 className="section-title" id={`${sectionId}-heading`}>
+          {title}
+        </h2>
       </Fade>
       <Fade right duration={1000}>
         <div className="underline"></div>
       </Fade>
-      {props.children}
+      {children}
     </section>
   )
 }

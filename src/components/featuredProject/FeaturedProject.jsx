@@ -37,12 +37,9 @@ const FeaturedProject = ({ name, link, description, colour, languages }) => {
           ></div>
 
           <div className="featured-project-top">
+            <h3 className="visually-hidden">{name}</h3>
             {logoSrc ? (
-              <img
-                className="featured-project-image"
-                src={logoSrc}
-                alt={`${name}-logo`}
-              />
+              <img className="featured-project-image" src={logoSrc} alt="" />
             ) : null}
           </div>
 

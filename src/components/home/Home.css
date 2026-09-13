@@ -110,6 +110,8 @@ a.scroll-down:active,
 }
 .greeting-text {
   margin: 15px;
+  font-size: 2em;
+  font-weight: 700;
 }
 .name {
   color: #1bdbdb;

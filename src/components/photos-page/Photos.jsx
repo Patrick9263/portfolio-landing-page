@@ -5,14 +5,8 @@ const Photos = () => {
   return (
     <Section title="Photos">
       <div className="photos-preview">
-        <a
-          href="/?photos=true"
-          rel="noopener noreferrer"
-          className="open-gallery-anchor"
-        >
-          <button className="open-gallery-button" type="button">
-            Open gallery
-          </button>
+        <a href="/?photos=true" className="open-gallery-button">
+          Open gallery
         </a>
       </div>
     </Section>

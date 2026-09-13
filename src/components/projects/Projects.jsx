@@ -37,14 +37,12 @@ const Projects = () => {
         <Fade bottom duration={1000} distance="20px">
           <div className="more-projects-wrapper">
             <a
-              className="project-link"
+              className="more-projects-button"
               href="https://github.com/Patrick9263"
               target="_blank"
               rel="noopener noreferrer"
             >
-              <button className="more-projects-button" type="button">
-                more projects
-              </button>
+              More projects
             </a>
           </div>
         </Fade>

@@ -2,9 +2,9 @@ import { useState } from 'react'
 import './Home.css'
 import Fade from '../react-reveal/in-and-out/Fade'
 import Bounce from '../react-reveal/in-and-out/Bounce'
-import { Link } from 'react-scroll'
 import Typewriter from 'typewriter-effect'
 import Navbar from '../navbar/Navbar'
+import useReducedMotion from '../../hooks/useReducedMotion'
 import profile from '../../images/patrick.png'
 import profileAvif from '../../images/patrick-240.avif'
 import profileWebp from '../../images/patrick-240.webp'
@@ -13,9 +13,10 @@ import github from '../../images/social/github.png'
 
 const Home = () => {
   const [profileStatus, setProfileStatus] = useState('loading')
+  const prefersReducedMotion = useReducedMotion()
 
   return (
-    <div className="home-wrapper">
+    <header className="home-wrapper" id="home">
       <div className="home">
         <div className="greeting">
           <Fade bottom distance="40px">
@@ -40,26 +41,31 @@ const Home = () => {
               </picture>
             </div>
 
-            <h1 className="hi-greeting-text">
+            <h1 className="hi-greeting-text" id="home-heading">
               Hi, I&apos;m <span className="name">Patrick Smith</span>.{' '}
             </h1>
 
-            <h1 className="greeting-text">
-              <Typewriter
-                options={{
-                  strings: [
-                    "I'm a software engineer.",
-                    'I like to design websites.',
-                    'I love learning new tech.',
-                  ],
-                  autoStart: true,
-                  loop: true,
-                  deleteSpeed: 10,
-                  cursor: '<',
-                  delay: 100,
-                }}
-              />
-            </h1>
+            <p className="greeting-text">
+              {prefersReducedMotion ? (
+                "I'm a software engineer."
+              ) : (
+                <Typewriter
+                  component="span"
+                  options={{
+                    strings: [
+                      "I'm a software engineer.",
+                      'I like to design websites.',
+                      'I love learning new tech.',
+                    ],
+                    autoStart: true,
+                    loop: true,
+                    deleteSpeed: 10,
+                    cursor: '<',
+                    delay: 100,
+                  }}
+                />
+              )}
+            </p>
 
             <div className="home-link-container">
               <Bounce cascade>
@@ -89,14 +95,7 @@ const Home = () => {
           </Fade>
 
           <div className="scroll-down">
-            <Link
-              activeClass="active"
-              to="about"
-              spy={true}
-              smooth={true}
-              offset={-63}
-              duration={500}
-            >
+            <a href="#about" aria-label="Go to About section">
               <svg
                 className="scroll-down-icon"
                 aria-hidden="true"
@@ -105,13 +104,13 @@ const Home = () => {
               >
                 <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 14.5L6.5 11l1.4-1.4 4.1 4.1 4.1-4.1L17.5 11 12 16.5Z" />
               </svg>
-            </Link>
+            </a>
           </div>
         </div>
 
         <Navbar />
       </div>
-    </div>
+    </header>
   )
 }
 

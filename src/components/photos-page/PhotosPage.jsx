@@ -307,7 +307,7 @@ export default function PhotosPage({ manifest = getPhotoManifest() }) {
     : ''
 
   return (
-    <div className="photos-page">
+    <main className="photos-page" id="main-content" tabIndex={-1}>
       <div className="photos-page-background" inert={isLightboxOpen}>
         <Navbar top />
 
@@ -457,6 +457,6 @@ export default function PhotosPage({ manifest = getPhotoManifest() }) {
           ) : null}
         </div>
       ) : null}
-    </div>
+    </main>
   )
 }
