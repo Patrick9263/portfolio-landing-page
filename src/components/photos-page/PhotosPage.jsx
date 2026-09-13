@@ -3,9 +3,27 @@ import Fade from '../react-reveal/in-and-out/Fade'
 import Navbar from '../navbar/Navbar'
 import PhotoAlbum from 'react-photo-album'
 import photoManifest from '../../data/photos.json'
+import { getRenderablePhotoSections } from './galleryManifest'
 import './PhotosPage.css'
 
-const getAlbumPhotoCount = (album) => album.photos?.length || 0
+const LOCAL_FIXTURE_HOSTS = new Set(['127.0.0.1', 'localhost', '[::1]'])
+
+const getPhotoManifest = () => {
+  if (
+    typeof window !== 'undefined' &&
+    LOCAL_FIXTURE_HOSTS.has(window.location.hostname) &&
+    Object.prototype.hasOwnProperty.call(
+      window,
+      '__PORTFOLIO_GALLERY_TEST_MANIFEST__'
+    )
+  ) {
+    return window.__PORTFOLIO_GALLERY_TEST_MANIFEST__
+  }
+
+  return photoManifest
+}
+
+const getAlbumPhotoCount = (album) => album.photos.length
 
 const getGallerySettings = (width) => {
   if (width < 1000) {
@@ -60,23 +78,22 @@ const useViewportWidth = () => {
   return width
 }
 
-export default function PhotosPage() {
+export default function PhotosPage({ manifest = getPhotoManifest() }) {
   const viewportWidth = useViewportWidth()
   const gallerySettings = getGallerySettings(viewportWidth)
 
-  const sections = photoManifest.sections.filter((section) =>
-    section.albums?.some((album) => getAlbumPhotoCount(album) > 0)
+  const sections = useMemo(
+    () => getRenderablePhotoSections(manifest),
+    [manifest]
   )
 
   const allAlbums = useMemo(
     () =>
       sections.flatMap((section) =>
-        section.albums
-          .filter((album) => getAlbumPhotoCount(album) > 0)
-          .map((album) => ({
-            ...album,
-            albumKey: `${section.id}/${album.id}`,
-          }))
+        section.albums.map((album) => ({
+          ...album,
+          albumKey: `${section.id}/${album.id}`,
+        }))
       ),
     [sections]
   )
@@ -171,35 +188,33 @@ export default function PhotosPage() {
               </div>
 
               <div className="photo-section-albums">
-                {section.albums
-                  .filter((album) => getAlbumPhotoCount(album) > 0)
-                  .map((album) => (
-                    <section
-                      className="photo-album-section"
-                      key={`${section.id}/${album.id}`}
-                    >
-                      <div className="photo-album-header">
-                        {album.title ? <h4>{album.title}</h4> : null}
-                        <p>
-                          {getAlbumPhotoCount(album)}{' '}
-                          {getAlbumPhotoCount(album) === 1 ? 'photo' : 'photos'}
-                        </p>
-                      </div>
+                {section.albums.map((album) => (
+                  <section
+                    className="photo-album-section"
+                    key={`${section.id}/${album.id}`}
+                  >
+                    <div className="photo-album-header">
+                      {album.title ? <h4>{album.title}</h4> : null}
+                      <p>
+                        {getAlbumPhotoCount(album)}{' '}
+                        {getAlbumPhotoCount(album) === 1 ? 'photo' : 'photos'}
+                      </p>
+                    </div>
 
-                      <div className="photo-album-grid">
-                        <PhotoAlbum
-                          {...gallerySettings}
-                          photos={album.photos}
-                          onClick={({ index }) => {
-                            setLightbox({
-                              albumKey: `${section.id}/${album.id}`,
-                              index,
-                            })
-                          }}
-                        />
-                      </div>
-                    </section>
-                  ))}
+                    <div className="photo-album-grid">
+                      <PhotoAlbum
+                        {...gallerySettings}
+                        photos={album.photos}
+                        onClick={({ index }) => {
+                          setLightbox({
+                            albumKey: `${section.id}/${album.id}`,
+                            index,
+                          })
+                        }}
+                      />
+                    </div>
+                  </section>
+                ))}
               </div>
             </section>
           ))

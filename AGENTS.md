@@ -67,27 +67,29 @@ screens, one-photo albums, empty albums/data, and multiple album/year sections.
 npm run dev                # vite dev server
 npm run build              # vite build
 npm run preview            # preview a production build locally
-npm run lint               # eslint "src/**/*.{js,jsx}"
+npm run lint               # eslint source and browser-test JavaScript
 npm run lint:fix           # eslint --fix
-npm run format             # prettier --write "src/**/*.{js,jsx,css,json,md}"
-npm run format:check       # prettier --check "src/**/*.{js,jsx,css,json,md}"
+npm run format             # prettier source and browser-test files
+npm run format:check       # verify Prettier formatting
 npm run photos:build -- --replace-all  # explicit full-inventory gallery replacement
 npm run test:photos        # synthetic generator contract checks
+npm run test:browser:install # install Chromium once for local browser tests
+npm run test:browser       # regressions against a prior production build in dist/
 ```
 
-Focused Node tests cover the photo generator contract. The local correctness gate to run before every
-push is:
+Focused Node tests cover the photo generator contract, and Playwright covers the built gallery. The
+local correctness gate to run before every push is:
 
 ```bash
-npm run lint && npm run format:check && npm run test:photos && npm run build
+npm run lint && npm run format:check && npm run test:photos && npm run build && npm run test:browser
 ```
 
-CI installs the committed lockfile with Node 22, then runs the same lint, formatting, photo-test, and
-build gate.
-Use Node 22 for local validation where available and report any mismatch. The lint/format scripts
-cover `src/` only, not the generator, root documentation, or configuration; check changed files
-outside that scope explicitly. Keep this section synchronized with changes to the workflow or
-scripts. If tests are added, include their command in the local gate and CI.
+CI installs the committed lockfile with Node 22, runs the same gate, and installs the matching
+Playwright Chromium binary immediately before the browser test. Run `npm run test:browser:install`
+once locally before the gate. Use Node 22 for local validation where available and report any
+mismatch. Lint and formatting cover `src/`, the browser tests, and Playwright config, but not the
+generator, root documentation, or workflow. Check changed files outside that scope explicitly. Keep
+this section synchronized with changes to the workflow or scripts.
 
 ## Working sessions and Git
 
