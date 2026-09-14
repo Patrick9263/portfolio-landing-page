@@ -4,8 +4,8 @@
   "private": true,
   "homepage": "https://patricksmith.io",
   "dependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "react-photo-album": "^2.3.0",
     "typewriter-effect": "^2.18.2"
   },
