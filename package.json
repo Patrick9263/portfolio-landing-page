@@ -6,7 +6,7 @@
   "dependencies": {
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "react-photo-album": "^2.3.0",
+    "react-photo-album": "^3.6.1",
     "typewriter-effect": "^2.18.2"
   },
   "devDependencies": {

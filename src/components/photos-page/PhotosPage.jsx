@@ -10,6 +10,7 @@ import {
 import Fade from '../react-reveal/in-and-out/Fade'
 import Navbar from '../navbar/Navbar'
 import PhotoAlbum from 'react-photo-album'
+import 'react-photo-album/styles.css'
 import photoManifest from '../../data/photos.json'
 import { getRenderablePhotoSections } from './galleryManifest'
 import './PhotosPage.css'
@@ -36,30 +37,11 @@ const getAlbumPhotoCount = (album) => album.photos.length
 const getPhotoName = (photo, index) =>
   photo.alt?.trim() || photo.title?.trim() || `Photo ${index + 1}`
 
-const renderPhotoOpener = ({
-  photo,
-  layout,
-  imageProps,
-  wrapperStyle,
-  onOpen,
-}) => {
-  return (
-    <button
-      className="photo-opener"
-      type="button"
-      style={wrapperStyle}
-      aria-label={`Open ${getPhotoName(photo, layout.index)}`}
-      onClick={(event) => onOpen(layout.index, event.currentTarget)}
-    >
-      <img
-        {...imageProps}
-        alt=""
-        aria-hidden="true"
-        style={{ display: 'block', width: '100%', height: '100%' }}
-      />
-    </button>
-  )
-}
+const getClickablePhotos = (photos) =>
+  photos.map((photo, index) => ({
+    ...photo,
+    label: `Open ${getPhotoName(photo, index)}`,
+  }))
 
 const getFocusableElements = (container) =>
   Array.from(
@@ -351,13 +333,13 @@ export default function PhotosPage({ manifest = getPhotoManifest() }) {
                         <div className="photo-album-grid">
                           <PhotoAlbum
                             {...gallerySettings}
-                            photos={album.photos}
-                            renderPhoto={(renderProps) =>
-                              renderPhotoOpener({
-                                ...renderProps,
-                                onOpen: (index, opener) =>
-                                  openLightbox(albumKey, index, opener),
-                              })
+                            photos={getClickablePhotos(album.photos)}
+                            componentsProps={{
+                              button: { className: 'photo-opener' },
+                              image: { alt: '', 'aria-hidden': 'true' },
+                            }}
+                            onClick={({ index, event }) =>
+                              openLightbox(albumKey, index, event.currentTarget)
                             }
                           />
                         </div>
