@@ -1,0 +1,269 @@
+{
+  "layoutVersion": 1,
+  "sections": [
+    {
+      "id": "current",
+      "title": "Current",
+      "albums": [
+        {
+          "id": "current",
+          "title": null,
+          "sourcePath": ".",
+          "outputPath": "current",
+          "photos": [
+            {
+              "id": "dsc00782",
+              "title": "DSC00782",
+              "alt": "DSC00782"
+            },
+            {
+              "id": "dsc00857",
+              "title": "DSC00857",
+              "alt": "DSC00857"
+            },
+            {
+              "id": "dsc00881",
+              "title": "DSC00881",
+              "alt": "DSC00881"
+            },
+            {
+              "id": "dsc00887",
+              "title": "DSC00887",
+              "alt": "DSC00887"
+            },
+            {
+              "id": "dsc00912",
+              "title": "DSC00912",
+              "alt": "DSC00912"
+            },
+            {
+              "id": "dsc00930",
+              "title": "DSC00930",
+              "alt": "DSC00930"
+            },
+            {
+              "id": "dsc00962",
+              "title": "DSC00962",
+              "alt": "DSC00962"
+            },
+            {
+              "id": "dsc01008",
+              "title": "DSC01008",
+              "alt": "DSC01008"
+            },
+            {
+              "id": "dsc01164",
+              "title": "DSC01164",
+              "alt": "DSC01164"
+            },
+            {
+              "id": "dsc01247",
+              "title": "DSC01247",
+              "alt": "DSC01247"
+            },
+            {
+              "id": "dsc01261",
+              "title": "DSC01261",
+              "alt": "DSC01261"
+            },
+            {
+              "id": "dsc01303",
+              "title": "DSC01303",
+              "alt": "DSC01303"
+            },
+            {
+              "id": "dsc01314",
+              "title": "DSC01314",
+              "alt": "DSC01314"
+            },
+            {
+              "id": "dsc01316",
+              "title": "DSC01316",
+              "alt": "DSC01316"
+            },
+            {
+              "id": "dsc01323",
+              "title": "DSC01323",
+              "alt": "DSC01323"
+            },
+            {
+              "id": "dsc01327",
+              "title": "DSC01327",
+              "alt": "DSC01327"
+            },
+            {
+              "id": "dsc01592",
+              "title": "DSC01592",
+              "alt": "DSC01592"
+            },
+            {
+              "id": "dsc01593",
+              "title": "DSC01593",
+              "alt": "DSC01593"
+            },
+            {
+              "id": "dsc01621",
+              "title": "DSC01621",
+              "alt": "DSC01621"
+            },
+            {
+              "id": "dsc01645",
+              "title": "DSC01645",
+              "alt": "DSC01645"
+            },
+            {
+              "id": "dsc01665",
+              "title": "DSC01665",
+              "alt": "DSC01665"
+            },
+            {
+              "id": "dsc01693",
+              "title": "DSC01693",
+              "alt": "DSC01693"
+            },
+            {
+              "id": "dsc01700",
+              "title": "DSC01700",
+              "alt": "DSC01700"
+            },
+            {
+              "id": "dsc01720",
+              "title": "DSC01720",
+              "alt": "DSC01720"
+            },
+            {
+              "id": "dsc01721",
+              "title": "DSC01721",
+              "alt": "DSC01721"
+            },
+            {
+              "id": "dsc01726",
+              "title": "DSC01726",
+              "alt": "DSC01726"
+            },
+            {
+              "id": "dsc01742",
+              "title": "DSC01742",
+              "alt": "DSC01742"
+            },
+            {
+              "id": "dsc01749",
+              "title": "DSC01749",
+              "alt": "DSC01749"
+            },
+            {
+              "id": "dsc01755",
+              "title": "DSC01755",
+              "alt": "DSC01755"
+            },
+            {
+              "id": "dsc01795",
+              "title": "DSC01795",
+              "alt": "DSC01795"
+            },
+            {
+              "id": "dsc01853-1",
+              "title": "DSC01853 1",
+              "alt": "DSC01853 1"
+            },
+            {
+              "id": "dsc01856",
+              "title": "DSC01856",
+              "alt": "DSC01856"
+            },
+            {
+              "id": "dsc01905",
+              "title": "DSC01905",
+              "alt": "DSC01905"
+            },
+            {
+              "id": "dsc01970",
+              "title": "DSC01970",
+              "alt": "DSC01970"
+            },
+            {
+              "id": "dsc02089",
+              "title": "DSC02089",
+              "alt": "DSC02089"
+            },
+            {
+              "id": "dsc02107",
+              "title": "DSC02107",
+              "alt": "DSC02107"
+            },
+            {
+              "id": "dsc02113-1",
+              "title": "DSC02113 1",
+              "alt": "DSC02113 1"
+            },
+            {
+              "id": "dsc02115",
+              "title": "DSC02115",
+              "alt": "DSC02115"
+            },
+            {
+              "id": "dsc02142",
+              "title": "DSC02142",
+              "alt": "DSC02142"
+            },
+            {
+              "id": "dsc02149",
+              "title": "DSC02149",
+              "alt": "DSC02149"
+            },
+            {
+              "id": "dsc02154",
+              "title": "DSC02154",
+              "alt": "DSC02154"
+            },
+            {
+              "id": "dsc02163",
+              "title": "DSC02163",
+              "alt": "DSC02163"
+            },
+            {
+              "id": "dsc02305",
+              "title": "DSC02305",
+              "alt": "DSC02305"
+            },
+            {
+              "id": "dsc02346",
+              "title": "DSC02346",
+              "alt": "DSC02346"
+            },
+            {
+              "id": "dsc02378",
+              "title": "DSC02378",
+              "alt": "DSC02378"
+            },
+            {
+              "id": "dsc02471",
+              "title": "DSC02471",
+              "alt": "DSC02471"
+            },
+            {
+              "id": "dsc02510",
+              "title": "DSC02510",
+              "alt": "DSC02510"
+            },
+            {
+              "id": "dsc02628",
+              "title": "DSC02628",
+              "alt": "DSC02628"
+            },
+            {
+              "id": "dsc02699",
+              "title": "DSC02699",
+              "alt": "DSC02699"
+            },
+            {
+              "id": "dsc02714",
+              "title": "DSC02714",
+              "alt": "DSC02714"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -4,24 +4,24 @@
   "private": true,
   "homepage": "https://patricksmith.io",
   "dependencies": {
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
     "react-photo-album": "^3.6.1",
     "typewriter-effect": "^2.18.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
     "@playwright/test": "^1.63.0",
-    "@vitejs/plugin-react": "^6.0.2",
+    "@vitejs/plugin-react": "^6.1.1",
     "eslint": "^9.39.4",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^7.1.1",
-    "globals": "^17.6.0",
-    "prettier": "^3.8.4",
+    "globals": "^17.12.0",
+    "prettier": "^3.9.6",
     "sharp": "^0.35.4",
-    "vite": "^8.0.16"
+    "vite": "^8.3.0"
   },
   "scripts": {
     "start": "vite",
@@ -33,6 +33,9 @@
     "lint": "eslint \"src/**/*.{js,jsx}\" \"tests/**/*.mjs\" \"playwright.config.js\"",
     "lint:fix": "eslint \"src/**/*.{js,jsx}\" \"tests/**/*.mjs\" \"playwright.config.js\" --fix",
     "photos:build": "node scripts/build-photos.mjs",
+    "photos:sync": "node scripts/build-photos.mjs sync",
+    "photos:import": "node scripts/build-photos.mjs import-album",
+    "photos:prune": "node scripts/build-photos.mjs prune-album",
     "test:photos": "node --test scripts/build-photos.test.mjs",
     "test:browser:install": "playwright install chromium",
     "test:browser": "playwright test"
