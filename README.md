@@ -55,7 +55,8 @@ cover `src`, the browser tests, and Playwright configuration. Check other change
 The gallery has three committed layers:
 
 - `src/data/photo-layout.json` is the human-authored source of truth for section, album, and photo
-  order; stable IDs; display titles; source/output mappings; and per-photo title/alt text.
+  order; stable IDs; display titles; source mappings; initial output routes; and per-photo title/alt
+  text.
 - `src/data/photos.json` is the resolved schema-v2 render manifest. It combines authored fields with
   processor-derived URLs and dimensions and is what the React gallery imports.
 - `public/photos/` contains the generated thumbnail and full-display assets.
@@ -77,6 +78,11 @@ dimensions. It applies authored section, album, and photo order plus titles and 
 instead of guessing when either metadata layer has missing, extra, duplicate, colliding, or malformed
 IDs. Repeating sync is deterministic and idempotent. A pure reorder should change
 `src/data/photos.json` but not `public/photos/`.
+
+An album's `sourcePath` remains a metadata-only pointer to future local source inventory. Its
+`outputPath` is chosen when the album is created but becomes stable once the album is published;
+changing it through layout editing or `photos:sync` is rejected because existing asset URLs are not
+moved or rewritten. Published asset-route changes require a future explicit migration workflow.
 
 ### Import or update one album
 
@@ -122,7 +128,7 @@ npm run photos:import -- \
 Add `--create-section --section-title "2026"` when the section is also new. Section IDs do not need
 to be years, and the tool never invents a `Highlights` album. New sections and albums append to their
 respective authored arrays. An optional `--output-path` overrides the default `<section-id>/<album-id>`
-for a new album only.
+for a new album only; the chosen route becomes stable after publication.
 
 ### Remove published photos intentionally
 

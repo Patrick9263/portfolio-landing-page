@@ -28,9 +28,12 @@ concrete task benefit, with the maintenance and deployment tradeoffs explained.
 
 - `photos-source/` contains local source images and is intentionally gitignored.
 - `src/data/photo-layout.json` is the authored source of truth for stable IDs, generic ordered
-  sections/albums/photos, titles, alt text, and source/output mappings. Sections may be years or
-  authored non-year groupings. `src/data/photos.json` is the resolved schema-v2 render manifest with
-  generated URLs and dimensions; do not edit its authored fields directly.
+  sections/albums/photos, titles, alt text, source mappings, and initial output routes. Sections may
+  be years or authored non-year groupings. `src/data/photos.json` is the resolved schema-v2 render
+  manifest with generated URLs and dimensions; do not edit its authored fields directly.
+- An album's `sourcePath` may be changed as metadata, but its `outputPath` is stable after the album is
+  published. Reconciliation must reject a changed published `outputPath`; moving or rewriting assets
+  requires a separate explicit migration workflow.
 - `npm run photos:sync` resolves layout-only edits without originals or asset writes. The generator
   reads `photos-source/<section>/<album>/`; section-level images require an album explicitly
   configured with `sourcePath: "."`.

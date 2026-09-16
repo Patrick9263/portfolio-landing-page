@@ -414,6 +414,11 @@ export const resolveLayout = (
           `${layoutFile} references album "${section.id}/${album.id}", but ${dataFile} has no generated record for it.`
         )
       }
+      if (album.outputPath !== generatedAlbum.outputPath) {
+        throw new Error(
+          `Album "${section.id}/${album.id}" in ${layoutFile} has outputPath "${album.outputPath}", but its published record in ${dataFile} uses "${generatedAlbum.outputPath}". outputPath is stable after publication; restore the published value or use a future explicit asset-path migration workflow.`
+        )
+      }
       generatedAlbums.delete(album.id)
       const generatedPhotos = new Map(
         generatedAlbum.photos.map((photo) => [photo.id, photo])

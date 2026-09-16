@@ -260,7 +260,81 @@ test('sync applies authored section, album, and photo order without touching ass
       albumFrom(synced, 'current', 'events').photos[0].title,
       'Authored title'
     )
+    assert.equal(
+      albumFrom(synced, 'current', 'events').photos[0].alt,
+      'Authored alt'
+    )
     assert.deepEqual(await snapshotPath(fixture.dataFile), syncedBytes)
+    assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), assetsBefore)
+  })
+})
+
+test('published outputPath changes fail every operation before writes', async () => {
+  await withFixture(async (fixture) => {
+    const manifest = await writePublishedFixture(fixture)
+    const layout = layoutFromManifest(manifest)
+    albumFrom(layout, 'current', 'events').outputPath = 'moved/events'
+    await fs.writeFile(fixture.layoutFile, JSON.stringify(layout, null, 2))
+    const beforeLayout = await snapshotPath(fixture.layoutFile)
+    const beforeManifest = await snapshotPath(fixture.dataFile)
+    const beforeAssets = await snapshotPath(fixture.publicPhotosDir)
+
+    await assert.rejects(
+      syncPhotos(fixture),
+      /outputPath is stable after publication/
+    )
+    assert.deepEqual(await snapshotPath(fixture.layoutFile), beforeLayout)
+    assert.deepEqual(await snapshotPath(fixture.dataFile), beforeManifest)
+    assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), beforeAssets)
+
+    await makeImage(path.join(fixture.sourceDir, 'selected', 'new-photo.png'))
+    await assert.rejects(
+      importAlbum(importOptions(fixture)),
+      /outputPath is stable after publication/
+    )
+    await assert.rejects(
+      pruneAlbum({
+        sectionId: 'current',
+        albumId: 'events',
+        photoIds: ['replace-me'],
+        confirm: true,
+        publicPhotosDir: fixture.publicPhotosDir,
+        dataFile: fixture.dataFile,
+        layoutFile: fixture.layoutFile,
+      }),
+      /outputPath is stable after publication/
+    )
+    await assert.rejects(
+      buildPhotos({
+        sourceDir: fixture.sourceDir,
+        publicPhotosDir: fixture.publicPhotosDir,
+        dataFile: fixture.dataFile,
+        layoutFile: fixture.layoutFile,
+      }),
+      /outputPath is stable after publication/
+    )
+    assert.deepEqual(await snapshotPath(fixture.layoutFile), beforeLayout)
+    assert.deepEqual(await snapshotPath(fixture.dataFile), beforeManifest)
+    assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), beforeAssets)
+  })
+})
+
+test('sourcePath remains metadata-only editable without touching assets', async () => {
+  await withFixture(async (fixture) => {
+    const manifest = await writePublishedFixture(fixture)
+    const layout = layoutFromManifest(manifest)
+    albumFrom(layout, 'current', 'events').sourcePath = 'Renamed Source'
+    await fs.writeFile(fixture.layoutFile, JSON.stringify(layout, null, 2))
+    const assetsBefore = await snapshotPath(fixture.publicPhotosDir)
+
+    const result = await syncPhotos(fixture)
+    const synced = await readManifest(fixture.dataFile)
+
+    assert.equal(result.changed, true)
+    assert.equal(
+      albumFrom(synced, 'current', 'events').sourcePath,
+      'Renamed Source'
+    )
     assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), assetsBefore)
   })
 })
@@ -560,7 +634,7 @@ test('album import dry run reports a candidate without changing published files'
   })
 })
 
-test('new album creation requires explicit editorial metadata and appends the album', async () => {
+test('new album creation accepts an explicit stable outputPath', async () => {
   await withFixture(async (fixture) => {
     await writePublishedFixture(fixture)
     await makeImage(path.join(fixture.sourceDir, 'selected', 'opening.png'))
@@ -581,6 +655,7 @@ test('new album creation requires explicit editorial metadata and appends the al
         createAlbum: true,
         albumTitle: 'New Album',
         sourcePath: 'New Album',
+        outputPath: 'published/custom-album',
       })
     )
     const section = (await readManifest(fixture.dataFile)).sections.find(
@@ -591,6 +666,25 @@ test('new album creation requires explicit editorial metadata and appends the al
       ['events', 'other', 'new-album']
     )
     assert.equal(section.albums.at(-1).sourcePath, 'New Album')
+    assert.equal(section.albums.at(-1).outputPath, 'published/custom-album')
+    assert.equal(
+      section.albums.at(-1).photos[0].src,
+      '/photos/thumbs/published/custom-album/opening.webp'
+    )
+    assert.equal(
+      albumFrom(
+        JSON.parse(await fs.readFile(fixture.layoutFile, 'utf8')),
+        'current',
+        'new-album'
+      ).outputPath,
+      'published/custom-album'
+    )
+    await fs.access(
+      path.join(
+        fixture.publicPhotosDir,
+        'full/published/custom-album/opening.webp'
+      )
+    )
   })
 })
 
