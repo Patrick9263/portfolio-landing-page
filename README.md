@@ -52,9 +52,31 @@ cover `src`, the browser tests, and Playwright configuration. Check other change
 
 ## Photo publishing workflow
 
-The deployable gallery is the committed combination of `src/data/photos.json` and `public/photos/`.
+The gallery has three committed layers:
+
+- `src/data/photo-layout.json` is the human-authored source of truth for section, album, and photo
+  order; stable IDs; display titles; source/output mappings; and per-photo title/alt text.
+- `src/data/photos.json` is the resolved schema-v2 render manifest. It combines authored fields with
+  processor-derived URLs and dimensions and is what the React gallery imports.
+- `public/photos/` contains the generated thumbnail and full-display assets.
+
 Originals live only in the gitignored `photos-source/` directory, which may be missing or contain a
-partial working set. Normal builds and CI use the committed output and never require originals.
+partial working set. Normal builds and CI use the committed render manifest/assets and never require
+originals.
+
+### Edit hierarchy, order, or text without originals
+
+Edit `src/data/photo-layout.json`, keeping stable IDs unchanged, then reconcile the render manifest:
+
+```bash
+npm run photos:sync
+```
+
+Sync requires no originals, never writes image assets, and preserves matching generated URLs and
+dimensions. It applies authored section, album, and photo order plus titles and alt text. It fails
+instead of guessing when either metadata layer has missing, extra, duplicate, colliding, or malformed
+IDs. Repeating sync is deterministic and idempotent. A pure reorder should change
+`src/data/photos.json` but not `public/photos/`.
 
 ### Import or update one album
 
@@ -71,10 +93,13 @@ npm run photos:import -- \
 
 Review the reported additions, replacements, retained photo IDs, conflicts, and affected output
 paths. Then repeat the command without `--dry-run`. Files that are absent from the local directory are
-retained; an import never removes published photos. Matching IDs retain their manifest position,
+retained; an import never removes published photos. Matching IDs retain their authored position,
 title, alt text, and URLs, while their generated variants are replaced only when the bytes or derived
-dimensions change. Genuinely new IDs append after existing photos in deterministic natural filename
+dimensions change. Genuinely new IDs append to the authored album in deterministic natural filename
 order (`img2` before `img10`). Filename order is a fallback, not capture chronology.
+
+Stable IDs are identities, not rename hints. If a renamed source produces a different ID, import adds
+that ID and retains the old published photo until it is explicitly pruned.
 
 The source directory must contain supported images only and cannot contain nested directories. The
 import validates image readability, IDs, source-name collisions, and every manifest/output-path
@@ -96,7 +121,7 @@ npm run photos:import -- \
 
 Add `--create-section --section-title "2026"` when the section is also new. Section IDs do not need
 to be years, and the tool never invents a `Highlights` album. New sections and albums append to their
-respective manifest arrays. An optional `--output-path` overrides the default `<section-id>/<album-id>`
+respective authored arrays. An optional `--output-path` overrides the default `<section-id>/<album-id>`
 for a new album only.
 
 ### Remove published photos intentionally
@@ -112,8 +137,9 @@ npm run photos:prune -- \
 ```
 
 Then repeat with `--confirm-prune` instead of `--dry-run`. Repeat `--photo <id>` to remove more than
-one known photo. Missing local source files are never used as removal evidence, and unrelated albums
-and assets are preserved.
+one known photo. Prune removes those IDs from both metadata layers and deletes only their resolved
+assets. Missing local source files are never used as removal evidence, and unrelated albums and
+assets are preserved.
 
 `npm run photos:build -- --replace-all` remains the deliberately destructive full-inventory workflow.
 Use it only when `photos-source/` is known to contain the complete gallery; it can remove anything not
@@ -121,13 +147,14 @@ present in that inventory. It is not the command for routine album work.
 
 ### Review, recovery, and publishing
 
-Each import or prune creates a staged copy of the currently published assets, applies only the planned
-album changes there, writes a staged manifest, and then switches both into place with backups. A
-decode, generation, staging, rename, manifest-write, or final-switch failure restores the prior
-filesystem state without using Git, so unrelated uncommitted files are not discarded. Temporary stage
-and backup paths are cleaned after success or handled failure.
+Each import, prune, or full replacement stages the authored layout, resolved manifest, and affected
+asset tree, then switches them into place with backups as one logical operation. A decode, generation,
+validation, write, rename, or final-switch failure restores all prior layers without using Git, so
+unrelated uncommitted files are not discarded. Sync uses the same rollback approach for its
+metadata-only manifest write.
 
-After a successful operation, inspect `git diff -- src/data/photos.json public/photos`, run the full
+After a successful operation, inspect
+`git diff -- src/data/photo-layout.json src/data/photos.json public/photos`, run the full
 development gate above, commit the intended manifest/assets together, and publish through the normal
 pull-request workflow. If an operation reports a failure, confirm the committed gallery still builds;
 rerun the dry run after fixing the named source/path/ID. Use Git only to restore a known committed

@@ -9,7 +9,9 @@ import sharp from 'sharp'
 const DEFAULT_SOURCE_DIR = 'photos-source'
 const DEFAULT_PUBLIC_PHOTOS_DIR = 'public/photos'
 const DEFAULT_DATA_FILE = 'src/data/photos.json'
+const DEFAULT_LAYOUT_FILE = 'src/data/photo-layout.json'
 const SCHEMA_VERSION = 2
+const LAYOUT_VERSION = 1
 const ID_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
 
 const SUPPORTED_EXTENSIONS = new Set([
@@ -278,9 +280,188 @@ const validateManifest = (
           }
           assetPaths.set(assetKey, `${section.id}/${album.id}/${photo.id}`)
         }
+        if (
+          requirePublishedRecords &&
+          (!Number.isInteger(photo.width) ||
+            photo.width <= 0 ||
+            !Number.isInteger(photo.height) ||
+            photo.height <= 0)
+        ) {
+          throw new Error(
+            `Photo "${section.id}/${album.id}/${photo.id}" in ${dataFile} must have positive integer dimensions.`
+          )
+        }
       }
     }
   }
+}
+
+const validateLayout = (layout, layoutFile) => {
+  if (
+    layout?.layoutVersion !== LAYOUT_VERSION ||
+    !Array.isArray(layout.sections)
+  ) {
+    throw new Error(
+      `${layoutFile} must use gallery layout version ${LAYOUT_VERSION}.`
+    )
+  }
+
+  const shape = {
+    schemaVersion: SCHEMA_VERSION,
+    sections: layout.sections.map((section) => ({
+      ...section,
+      albums: Array.isArray(section?.albums)
+        ? section.albums.map((album) => ({
+            ...album,
+            photos: Array.isArray(album?.photos)
+              ? album.photos.map((photo) => ({
+                  ...photo,
+                  src: `/photos/layout-validation/${section.id}/${album.id}/${photo.id}-thumb.webp`,
+                  fullSrc: `/photos/layout-validation/${section.id}/${album.id}/${photo.id}-full.webp`,
+                  width: 1,
+                  height: 1,
+                }))
+              : album?.photos,
+          }))
+        : section?.albums,
+    })),
+  }
+  validateManifest(shape, layoutFile, { requirePublishedRecords: true })
+
+  for (const section of layout.sections) {
+    assertSafeId(section.id, `Section ID in ${layoutFile}`)
+    if (typeof section.title !== 'string' || !section.title.trim()) {
+      throw new Error(`Section "${section.id}" in ${layoutFile} needs a title.`)
+    }
+    for (const album of section.albums) {
+      assertSafeId(album.id, `Album ID in ${layoutFile}`)
+      if (
+        album.title !== null &&
+        (typeof album.title !== 'string' || !album.title.trim())
+      ) {
+        throw new Error(
+          `Album "${section.id}/${album.id}" in ${layoutFile} has an invalid title.`
+        )
+      }
+      for (const photo of album.photos) {
+        assertSafeId(photo.id, `Photo ID in ${layoutFile}`)
+        for (const field of ['src', 'fullSrc', 'width', 'height']) {
+          if (Object.hasOwn(photo, field)) {
+            throw new Error(
+              `Photo "${section.id}/${album.id}/${photo.id}" in ${layoutFile} must not contain generated field "${field}".`
+            )
+          }
+        }
+        for (const field of ['title', 'alt']) {
+          if (typeof photo[field] !== 'string') {
+            throw new Error(
+              `Photo "${section.id}/${album.id}/${photo.id}" in ${layoutFile} needs a string ${field}.`
+            )
+          }
+        }
+      }
+    }
+  }
+}
+
+const authoredLayoutFromManifest = (manifest) => ({
+  layoutVersion: LAYOUT_VERSION,
+  sections: manifest.sections.map((section) => ({
+    id: section.id,
+    title: section.title,
+    albums: section.albums.map((album) => ({
+      id: album.id,
+      title: album.title,
+      sourcePath: album.sourcePath,
+      outputPath: album.outputPath,
+      photos: album.photos.map((photo) => ({
+        id: photo.id,
+        title: photo.title,
+        alt: photo.alt,
+      })),
+    })),
+  })),
+})
+
+export const resolveLayout = (
+  layout,
+  generatedManifest,
+  { layoutFile = DEFAULT_LAYOUT_FILE, dataFile = DEFAULT_DATA_FILE } = {}
+) => {
+  validateLayout(layout, layoutFile)
+  validateManifest(generatedManifest, dataFile, {
+    requirePublishedRecords: true,
+  })
+
+  const generatedSections = new Map(
+    generatedManifest.sections.map((section) => [section.id, section])
+  )
+  const resolvedSections = layout.sections.map((section) => {
+    const generatedSection = generatedSections.get(section.id)
+    if (!generatedSection) {
+      throw new Error(
+        `${layoutFile} references section "${section.id}", but ${dataFile} has no generated record for it.`
+      )
+    }
+    generatedSections.delete(section.id)
+    const generatedAlbums = new Map(
+      generatedSection.albums.map((album) => [album.id, album])
+    )
+    const albums = section.albums.map((album) => {
+      const generatedAlbum = generatedAlbums.get(album.id)
+      if (!generatedAlbum) {
+        throw new Error(
+          `${layoutFile} references album "${section.id}/${album.id}", but ${dataFile} has no generated record for it.`
+        )
+      }
+      generatedAlbums.delete(album.id)
+      const generatedPhotos = new Map(
+        generatedAlbum.photos.map((photo) => [photo.id, photo])
+      )
+      const photos = album.photos.map((photo) => {
+        const generatedPhoto = generatedPhotos.get(photo.id)
+        if (!generatedPhoto) {
+          throw new Error(
+            `${layoutFile} references photo "${section.id}/${album.id}/${photo.id}", but ${dataFile} has no generated record for it.`
+          )
+        }
+        generatedPhotos.delete(photo.id)
+        return {
+          id: photo.id,
+          src: generatedPhoto.src,
+          fullSrc: generatedPhoto.fullSrc,
+          width: generatedPhoto.width,
+          height: generatedPhoto.height,
+          title: photo.title,
+          alt: photo.alt,
+        }
+      })
+      if (generatedPhotos.size > 0) {
+        throw new Error(
+          `${dataFile} contains photo "${section.id}/${album.id}/${generatedPhotos.keys().next().value}" that is missing from ${layoutFile}.`
+        )
+      }
+      return {
+        id: album.id,
+        title: album.title,
+        sourcePath: album.sourcePath,
+        outputPath: album.outputPath,
+        photos,
+      }
+    })
+    if (generatedAlbums.size > 0) {
+      throw new Error(
+        `${dataFile} contains album "${section.id}/${generatedAlbums.keys().next().value}" that is missing from ${layoutFile}.`
+      )
+    }
+    return { id: section.id, title: section.title, albums }
+  })
+  if (generatedSections.size > 0) {
+    throw new Error(
+      `${dataFile} contains section "${generatedSections.keys().next().value}" that is missing from ${layoutFile}.`
+    )
+  }
+  return { schemaVersion: SCHEMA_VERSION, sections: resolvedSections }
 }
 
 const getEntries = async (dir) => fs.readdir(dir, { withFileTypes: true })
@@ -324,6 +505,41 @@ const readExistingManifest = async (
   const manifest = JSON.parse(await fs.readFile(dataFile, 'utf8'))
   validateManifest(manifest, dataFile, { requirePublishedRecords })
   return manifest
+}
+
+const readExistingLayout = async (layoutFile) => {
+  if (!(await pathExists(layoutFile))) return null
+  const layout = JSON.parse(await fs.readFile(layoutFile, 'utf8'))
+  validateLayout(layout, layoutFile)
+  return layout
+}
+
+const jsonEqual = (left, right) =>
+  JSON.stringify(left) === JSON.stringify(right)
+
+const readPublishedState = async ({
+  dataFile,
+  layoutFile,
+  requireExisting = true,
+}) => {
+  const [manifest, layout] = await Promise.all([
+    readExistingManifest(dataFile, { requirePublishedRecords: true }),
+    readExistingLayout(layoutFile),
+  ])
+  if (!manifest && !layout && !requireExisting) return { manifest, layout }
+  if (!manifest) throw new Error(`${dataFile} does not exist.`)
+  if (!layout) {
+    throw new Error(
+      `${layoutFile} does not exist. The authored layout is required for gallery operations.`
+    )
+  }
+  const resolved = resolveLayout(layout, manifest, { layoutFile, dataFile })
+  if (!jsonEqual(resolved, manifest)) {
+    throw new Error(
+      `${layoutFile} and ${dataFile} are out of sync. Run npm run photos:sync before importing, pruning, or replacing assets.`
+    )
+  }
+  return { manifest, layout }
 }
 
 const orderFromExisting = (items, existingItems = []) => {
@@ -572,54 +788,78 @@ const generateCandidate = async (sections, stagePhotosDir) => {
 const replaceGeneratedOutput = async ({
   stagePhotosDir,
   stageDataFile,
+  stageLayoutFile,
   publicPhotosDir,
   dataFile,
+  layoutFile,
   onSwitchStep = () => {},
 }) => {
   const suffix = randomUUID()
-  const photosBackup = `${publicPhotosDir}.backup-${suffix}`
-  const dataBackup = `${dataFile}.backup-${suffix}`
-  const hadPhotos = await pathExists(publicPhotosDir)
-  const hadData = await pathExists(dataFile)
-  let photosBackedUp = false
-  let dataBackedUp = false
-  let photosInstalled = false
-  let dataInstalled = false
+  const resources = [
+    stagePhotosDir && {
+      name: 'photos',
+      stage: stagePhotosDir,
+      target: publicPhotosDir,
+      directory: true,
+    },
+    stageLayoutFile && {
+      name: 'layout',
+      stage: stageLayoutFile,
+      target: layoutFile,
+      directory: false,
+    },
+    stageDataFile && {
+      name: 'manifest',
+      stage: stageDataFile,
+      target: dataFile,
+      directory: false,
+    },
+  ].filter(Boolean)
 
-  await fs.mkdir(path.dirname(publicPhotosDir), { recursive: true })
-  await fs.mkdir(path.dirname(dataFile), { recursive: true })
+  for (const resource of resources) {
+    resource.backup = `${resource.target}.backup-${suffix}`
+    resource.hadTarget = await pathExists(resource.target)
+    resource.backedUp = false
+    resource.installed = false
+    await fs.mkdir(path.dirname(resource.target), { recursive: true })
+  }
 
   try {
-    if (hadPhotos) {
-      await onSwitchStep('backup-photos')
-      await fs.rename(publicPhotosDir, photosBackup)
-      photosBackedUp = true
+    for (const resource of resources) {
+      if (resource.hadTarget) {
+        await onSwitchStep(`backup-${resource.name}`)
+        await fs.rename(resource.target, resource.backup)
+        resource.backedUp = true
+      }
     }
-    if (hadData) {
-      await onSwitchStep('backup-manifest')
-      await fs.rename(dataFile, dataBackup)
-      dataBackedUp = true
+    for (const resource of resources) {
+      await onSwitchStep(`install-${resource.name}`)
+      await fs.rename(resource.stage, resource.target)
+      resource.installed = true
     }
-    await onSwitchStep('install-photos')
-    await fs.rename(stagePhotosDir, publicPhotosDir)
-    photosInstalled = true
-    await onSwitchStep('install-manifest')
-    await fs.rename(stageDataFile, dataFile)
-    dataInstalled = true
   } catch (error) {
-    if (photosInstalled && (await pathExists(publicPhotosDir))) {
-      await fs.rm(publicPhotosDir, { recursive: true })
+    for (const resource of [...resources].reverse()) {
+      if (resource.installed && (await pathExists(resource.target))) {
+        await fs.rm(resource.target, {
+          recursive: resource.directory,
+          force: true,
+        })
+      }
+      if (resource.backedUp) {
+        await fs.rename(resource.backup, resource.target)
+      }
     }
-    if (dataInstalled && (await pathExists(dataFile))) await fs.rm(dataFile)
-    if (photosBackedUp) await fs.rename(photosBackup, publicPhotosDir)
-    if (dataBackedUp) await fs.rename(dataBackup, dataFile)
     throw error
   }
 
-  if (photosBackedUp) {
-    await fs.rm(photosBackup, { recursive: true, force: true })
+  for (const resource of resources) {
+    if (resource.backedUp) {
+      await fs.rm(resource.backup, {
+        recursive: resource.directory,
+        force: true,
+      })
+    }
   }
-  if (dataBackedUp) await fs.rm(dataBackup, { force: true })
 }
 
 const findAlbum = (manifest, sectionId, albumId) => {
@@ -797,6 +1037,41 @@ const writeStagedManifest = async (manifest, stageDataFile) => {
   await fs.writeFile(stageDataFile, `${JSON.stringify(manifest, null, 2)}\n`)
 }
 
+export const syncPhotos = async ({
+  dataFile = DEFAULT_DATA_FILE,
+  layoutFile = DEFAULT_LAYOUT_FILE,
+  onSwitchStep,
+} = {}) => {
+  const [manifest, layout] = await Promise.all([
+    readExistingManifest(dataFile, { requirePublishedRecords: true }),
+    readExistingLayout(layoutFile),
+  ])
+  if (!manifest)
+    throw new Error(`${dataFile} does not exist; nothing can be synced.`)
+  if (!layout)
+    throw new Error(`${layoutFile} does not exist; nothing can be synced.`)
+
+  const resolved = resolveLayout(layout, manifest, { layoutFile, dataFile })
+  if (jsonEqual(resolved, manifest)) return { manifest, changed: false }
+
+  await fs.mkdir(path.dirname(dataFile), { recursive: true })
+  const stageRoot = await fs.mkdtemp(
+    path.join(path.dirname(dataFile), '.photo-sync-stage-')
+  )
+  const stageDataFile = path.join(stageRoot, 'photos.json')
+  try {
+    await writeStagedManifest(resolved, stageDataFile)
+    await replaceGeneratedOutput({
+      stageDataFile,
+      dataFile,
+      onSwitchStep,
+    })
+    return { manifest: resolved, changed: true }
+  } finally {
+    await fs.rm(stageRoot, { recursive: true, force: true })
+  }
+}
+
 export const importAlbum = async ({
   sectionId,
   albumId,
@@ -810,6 +1085,7 @@ export const importAlbum = async ({
   dryRun = false,
   publicPhotosDir = DEFAULT_PUBLIC_PHOTOS_DIR,
   dataFile = DEFAULT_DATA_FILE,
+  layoutFile = DEFAULT_LAYOUT_FILE,
   onGeneratePhoto = () => {},
   onPlan = () => {},
   onSwitchStep,
@@ -820,17 +1096,11 @@ export const importAlbum = async ({
   assertSafeId(sectionId, 'Section ID')
   assertSafeId(albumId, 'Album ID')
 
-  const existingManifest = await readExistingManifest(dataFile, {
-    requirePublishedRecords: true,
-  })
-  if (!existingManifest) {
-    throw new Error(
-      `${dataFile} does not exist. Album import requires an existing schema-v2 published manifest.`
-    )
-  }
+  const { manifest: existingManifest, layout: existingLayout } =
+    await readPublishedState({ dataFile, layoutFile })
 
   const { section: existingSection, album: existingAlbum } = findAlbum(
-    existingManifest,
+    existingLayout,
     sectionId,
     albumId
   )
@@ -887,12 +1157,20 @@ export const importAlbum = async ({
   }
 
   const sourcePhotos = await inspectAlbumSource(sourceAlbumDir)
-  const candidateManifest = cloneManifest(existingManifest)
-  let { section, album } = findAlbum(candidateManifest, sectionId, albumId)
+  const candidateLayout = cloneManifest(existingLayout)
+  const candidateGenerated = cloneManifest(existingManifest)
+  let { section, album } = findAlbum(candidateLayout, sectionId, albumId)
+  let { section: generatedSection, album: generatedAlbum } = findAlbum(
+    candidateGenerated,
+    sectionId,
+    albumId
+  )
 
   if (!section) {
     section = { id: sectionId, title: sectionTitle, albums: [] }
-    candidateManifest.sections.push(section)
+    candidateLayout.sections.push(section)
+    generatedSection = { id: sectionId, title: sectionTitle, albums: [] }
+    candidateGenerated.sections.push(generatedSection)
   }
   if (!album) {
     album = {
@@ -903,9 +1181,13 @@ export const importAlbum = async ({
       photos: [],
     }
     section.albums.push(album)
+    generatedAlbum = { ...album, photos: [] }
+    generatedSection.albums.push(generatedAlbum)
   }
 
-  const existingPhotos = new Map(album.photos.map((photo) => [photo.id, photo]))
+  const existingPhotos = new Map(
+    generatedAlbum.photos.map((photo) => [photo.id, photo])
+  )
   const plannedRecords = sourcePhotos.map((sourcePhoto) => ({
     sourcePhoto,
     photoRecord:
@@ -917,19 +1199,25 @@ export const importAlbum = async ({
       .filter(({ photoRecord }) => !existingPhotos.has(photoRecord.id))
       .map(({ photoRecord }) => photoRecord.id)
   )
+  const newRecords = plannedRecords
+    .filter(({ photoRecord }) => newIds.has(photoRecord.id))
+    .map(({ photoRecord }) => photoRecord)
   album.photos = [
     ...album.photos,
-    ...plannedRecords
-      .filter(({ photoRecord }) => newIds.has(photoRecord.id))
-      .map(({ photoRecord }) => photoRecord),
+    ...newRecords.map(({ id, title, alt }) => ({ id, title, alt })),
   ]
-  validateManifest(candidateManifest, dataFile)
+  generatedAlbum.photos = [...generatedAlbum.photos, ...newRecords]
+  validateLayout(candidateLayout, layoutFile)
+  validateManifest(candidateGenerated, dataFile, {
+    requirePublishedRecords: false,
+  })
 
   const stageParent = path.dirname(publicPhotosDir)
   await fs.mkdir(stageParent, { recursive: true })
   const stageRoot = await fs.mkdtemp(path.join(stageParent, '.photos-stage-'))
   const stagePhotosDir = path.join(stageRoot, 'photos')
   const stageDataFile = path.join(stageRoot, 'photos.json')
+  const stageLayoutFile = path.join(stageRoot, 'photo-layout.json')
 
   try {
     await stagePublishedGallery(publicPhotosDir, stagePhotosDir)
@@ -982,8 +1270,17 @@ export const importAlbum = async ({
       }
     }
 
-    album.photos = album.photos.map((photo) => generated.get(photo.id) || photo)
-    validateManifest(candidateManifest, dataFile)
+    generatedAlbum.photos = generatedAlbum.photos.map(
+      (photo) => generated.get(photo.id) || photo
+    )
+    const candidateManifest = resolveLayout(
+      candidateLayout,
+      candidateGenerated,
+      {
+        layoutFile,
+        dataFile,
+      }
+    )
 
     const retained = album.photos
       .map((photo) => photo.id)
@@ -1007,18 +1304,21 @@ export const importAlbum = async ({
 
     await onPlan(report)
     await writeStagedManifest(candidateManifest, stageDataFile)
+    await writeStagedManifest(candidateLayout, stageLayoutFile)
     if (dryRun || (newIds.size === 0 && updated.length === 0)) {
-      return { manifest: candidateManifest, report }
+      return { manifest: candidateManifest, layout: candidateLayout, report }
     }
 
     await replaceGeneratedOutput({
       stagePhotosDir,
       stageDataFile,
+      stageLayoutFile,
       publicPhotosDir,
       dataFile,
+      layoutFile,
       onSwitchStep,
     })
-    return { manifest: candidateManifest, report }
+    return { manifest: candidateManifest, layout: candidateLayout, report }
   } finally {
     await fs.rm(stageRoot, { recursive: true, force: true })
   }
@@ -1032,6 +1332,7 @@ export const pruneAlbum = async ({
   dryRun = false,
   publicPhotosDir = DEFAULT_PUBLIC_PHOTOS_DIR,
   dataFile = DEFAULT_DATA_FILE,
+  layoutFile = DEFAULT_LAYOUT_FILE,
   onPlan = () => {},
   onSwitchStep,
 } = {}) => {
@@ -1054,12 +1355,8 @@ export const pruneAlbum = async ({
     throw new Error('Each --photo ID may be specified only once.')
   }
 
-  const existingManifest = await readExistingManifest(dataFile, {
-    requirePublishedRecords: true,
-  })
-  if (!existingManifest) {
-    throw new Error(`${dataFile} does not exist; there is nothing to prune.`)
-  }
+  const { manifest: existingManifest, layout: existingLayout } =
+    await readPublishedState({ dataFile, layoutFile })
   const { album: existingAlbum } = findAlbum(
     existingManifest,
     sectionId,
@@ -1098,18 +1395,34 @@ export const pruneAlbum = async ({
     dryRun,
   }
   await onPlan(report)
-  if (dryRun) return { manifest: existingManifest, report }
+  if (dryRun)
+    return { manifest: existingManifest, layout: existingLayout, report }
 
-  const candidateManifest = cloneManifest(existingManifest)
-  const { album } = findAlbum(candidateManifest, sectionId, albumId)
-  album.photos = album.photos.filter((photo) => !photoIds.includes(photo.id))
-  validateManifest(candidateManifest, dataFile)
+  const candidateLayout = cloneManifest(existingLayout)
+  const candidateGenerated = cloneManifest(existingManifest)
+  const { album: layoutAlbum } = findAlbum(candidateLayout, sectionId, albumId)
+  const { album: generatedAlbum } = findAlbum(
+    candidateGenerated,
+    sectionId,
+    albumId
+  )
+  layoutAlbum.photos = layoutAlbum.photos.filter(
+    (photo) => !photoIds.includes(photo.id)
+  )
+  generatedAlbum.photos = generatedAlbum.photos.filter(
+    (photo) => !photoIds.includes(photo.id)
+  )
+  const candidateManifest = resolveLayout(candidateLayout, candidateGenerated, {
+    layoutFile,
+    dataFile,
+  })
 
   const stageParent = path.dirname(publicPhotosDir)
   await fs.mkdir(stageParent, { recursive: true })
   const stageRoot = await fs.mkdtemp(path.join(stageParent, '.photos-stage-'))
   const stagePhotosDir = path.join(stageRoot, 'photos')
   const stageDataFile = path.join(stageRoot, 'photos.json')
+  const stageLayoutFile = path.join(stageRoot, 'photo-layout.json')
 
   try {
     await stagePublishedGallery(publicPhotosDir, stagePhotosDir)
@@ -1130,14 +1443,17 @@ export const pruneAlbum = async ({
       )
     }
     await writeStagedManifest(candidateManifest, stageDataFile)
+    await writeStagedManifest(candidateLayout, stageLayoutFile)
     await replaceGeneratedOutput({
       stagePhotosDir,
       stageDataFile,
+      stageLayoutFile,
       publicPhotosDir,
       dataFile,
+      layoutFile,
       onSwitchStep,
     })
-    return { manifest: candidateManifest, report }
+    return { manifest: candidateManifest, layout: candidateLayout, report }
   } finally {
     await fs.rm(stageRoot, { recursive: true, force: true })
   }
@@ -1156,20 +1472,48 @@ export const buildPhotos = async ({
   sourceDir = DEFAULT_SOURCE_DIR,
   publicPhotosDir = DEFAULT_PUBLIC_PHOTOS_DIR,
   dataFile = DEFAULT_DATA_FILE,
+  layoutFile = DEFAULT_LAYOUT_FILE,
   onPlan = () => {},
+  onSwitchStep,
 } = {}) => {
-  const existingManifest = await readExistingManifest(dataFile)
-  const sections = await collectPlan(sourceDir, existingManifest)
+  const [existingManifest, existingLayout] = await Promise.all([
+    readExistingManifest(dataFile, { requirePublishedRecords: true }),
+    readExistingLayout(layoutFile),
+  ])
+  if (existingManifest && !existingLayout) {
+    throw new Error(
+      `${layoutFile} does not exist. Refusing to replace a published manifest without its authored layout.`
+    )
+  }
+  if (existingManifest && existingLayout) {
+    const resolved = resolveLayout(existingLayout, existingManifest, {
+      layoutFile,
+      dataFile,
+    })
+    if (!jsonEqual(resolved, existingManifest)) {
+      throw new Error(
+        `${layoutFile} and ${dataFile} are out of sync. Run npm run photos:sync before replacing assets.`
+      )
+    }
+  }
+  const sections = await collectPlan(sourceDir, existingLayout)
   await fs.mkdir(path.dirname(publicPhotosDir), { recursive: true })
   const stageRoot = await fs.mkdtemp(
     path.join(path.dirname(publicPhotosDir), '.photos-stage-')
   )
   const stagePhotosDir = path.join(stageRoot, 'photos')
   const stageDataFile = path.join(stageRoot, 'photos.json')
+  const stageLayoutFile = path.join(stageRoot, 'photo-layout.json')
 
   try {
-    const manifest = await generateCandidate(sections, stagePhotosDir)
-    await fs.writeFile(stageDataFile, `${JSON.stringify(manifest, null, 2)}\n`)
+    const generatedManifest = await generateCandidate(sections, stagePhotosDir)
+    const layout = authoredLayoutFromManifest(generatedManifest)
+    const manifest = resolveLayout(layout, generatedManifest, {
+      layoutFile,
+      dataFile,
+    })
+    await writeStagedManifest(manifest, stageDataFile)
+    await writeStagedManifest(layout, stageLayoutFile)
     const oldKeys = photoKeys(existingManifest)
     const newKeys = photoKeys(manifest)
     const additions = [...newKeys].filter((key) => !oldKeys.has(key)).length
@@ -1179,11 +1523,14 @@ export const buildPhotos = async ({
     await replaceGeneratedOutput({
       stagePhotosDir,
       stageDataFile,
+      stageLayoutFile,
       publicPhotosDir,
       dataFile,
+      layoutFile,
+      onSwitchStep,
     })
 
-    return { manifest, additions, removals }
+    return { manifest, layout, additions, removals }
   } finally {
     await fs.rm(stageRoot, { recursive: true, force: true })
   }
@@ -1194,6 +1541,7 @@ const isDirectRun =
 
 const HELP = `Photo gallery operations:
 
+  npm run photos:sync
   npm run photos:import -- --section <id> --album <id> --source <directory> [--dry-run]
   npm run photos:prune -- --section <id> --album <id> --photo <id> [--photo <id> ...] --confirm-prune
   npm run photos:build -- --replace-all
@@ -1276,6 +1624,17 @@ if (isDirectRun) {
       }
       if (command === '--help' || command === 'help') {
         console.log(HELP)
+        return
+      }
+
+      if (command === 'sync') {
+        if (rawArgs.length > 0) throw new Error(HELP)
+        const { changed } = await syncPhotos()
+        console.log(
+          changed
+            ? `Resolved ${DEFAULT_DATA_FILE} from ${DEFAULT_LAYOUT_FILE}.`
+            : `${DEFAULT_DATA_FILE} is already synchronized with ${DEFAULT_LAYOUT_FILE}.`
+        )
         return
       }
 

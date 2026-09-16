@@ -27,12 +27,17 @@ concrete task benefit, with the maintenance and deployment tradeoffs explained.
 ## Photography gallery and generated assets
 
 - `photos-source/` contains local source images and is intentionally gitignored.
-- The manifest uses generic ordered sections containing ordered albums. Sections may be years or
-  authored non-year groupings. The generator reads `photos-source/<section>/<album>/`; section-level
-  images require an album explicitly configured with `sourcePath: "."`.
+- `src/data/photo-layout.json` is the authored source of truth for stable IDs, generic ordered
+  sections/albums/photos, titles, alt text, and source/output mappings. Sections may be years or
+  authored non-year groupings. `src/data/photos.json` is the resolved schema-v2 render manifest with
+  generated URLs and dimensions; do not edit its authored fields directly.
+- `npm run photos:sync` resolves layout-only edits without originals or asset writes. The generator
+  reads `photos-source/<section>/<album>/`; section-level images require an album explicitly
+  configured with `sourcePath: "."`.
 - `npm run photos:build` uses Sharp to generate display images under `public/photos/full/`, thumbnails
-  under `public/photos/thumbs/`, and the static manifest `src/data/photos.json`.
-- `public/photos/` and `src/data/photos.json` are intentionally committed. A normal clone must build
+  under `public/photos/thumbs/`, and reconciles both committed metadata files.
+- `public/photos/`, `src/data/photo-layout.json`, and `src/data/photos.json` are intentionally
+  committed. A normal clone must build
   and deploy the existing gallery without originals or an asset-provider connection.
   Keep production-gallery regeneration out of normal install/build/CI. Test the generator using
   synthetic images in a temporary directory instead.
@@ -71,6 +76,7 @@ npm run lint               # eslint source and browser-test JavaScript
 npm run lint:fix           # eslint --fix
 npm run format             # prettier source and browser-test files
 npm run format:check       # verify Prettier formatting
+npm run photos:sync        # resolve authored layout changes; no originals/assets needed
 npm run photos:import -- --help # album-scoped additive/update workflow
 npm run photos:prune -- --help  # explicit album-scoped removal workflow
 npm run photos:build -- --replace-all  # explicit full-inventory gallery replacement
@@ -119,10 +125,10 @@ this section synchronized with changes to the workflow or scripts.
 
 ## Traps
 
-- **Gallery ordering is not an implicit filesystem contract.** `scripts/build-photos.mjs` currently
-  preserves manifest order and appends new imports using a deterministic natural-name fallback;
-  manifest array order still drives the gallery. Define and test editorial order when changing it,
-  preserve existing sequences during migration, and do not infer capture chronology from filenames.
+- **Gallery ordering is not an implicit filesystem contract.** `src/data/photo-layout.json` order is
+  authoritative. `scripts/build-photos.mjs` preserves retained authored IDs and appends new imports
+  using a deterministic natural-name fallback; `photos:sync` copies that order into the render
+  manifest without regenerating assets. Do not infer capture chronology from filenames.
 - **Global section styles affect nested gallery sections.** `src/App.css` applies padding to every
   `section`. Check those rules and existing gallery media queries when nesting albums or years, so
   margins and padding do not compound.
