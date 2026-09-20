@@ -37,6 +37,12 @@ concrete task benefit, with the maintenance and deployment tradeoffs explained.
 - `npm run photos:sync` resolves layout-only edits without originals or asset writes. The generator
   reads `photos-source/<section>/<album>/`; section-level images require an album explicitly
   configured with `sourcePath: "."`.
+- Optional render-manifest `srcSet` contains processor-derived responsive URLs and actual dimensions;
+  it must never be authored in `photo-layout.json`. Import/replacement generate these alongside the
+  legacy assets; sync preserves them and pruning removes only each selected photo's known files.
+  `npm run photos:variants` explicitly derives smaller WebPs from published full images, preserving
+  full/thumb bytes and requiring no originals. Do not run it in install/build/CI.
+  See `docs/performance/issue-28.md` for the measured strategy and reproduction commands.
 - `npm run photos:build` uses Sharp to generate display images under `public/photos/full/`, thumbnails
   under `public/photos/thumbs/`, and reconciles both committed metadata files.
 - `public/photos/`, `src/data/photo-layout.json`, and `src/data/photos.json` are intentionally
@@ -80,6 +86,9 @@ npm run lint:fix           # eslint --fix
 npm run format             # prettier source and browser-test files
 npm run format:check       # verify Prettier formatting
 npm run photos:sync        # resolve authored layout changes; no originals/assets needed
+npm run photos:variants    # explicit additive derivatives from committed full images
+npm run photos:check       # read-only variant metadata/file verification
+npm run measure:gallery -- /tmp/gallery.json # cold network/bundle report from prior dist/
 npm run photos:import -- --help # album-scoped additive/update workflow
 npm run photos:prune -- --help  # explicit album-scoped removal workflow
 npm run photos:build -- --replace-all  # explicit full-inventory gallery replacement
@@ -132,6 +141,10 @@ this section synchronized with changes to the workflow or scripts.
   authoritative. `scripts/build-photos.mjs` preserves retained authored IDs and appends new imports
   using a deterministic natural-name fallback; `photos:sync` copies that order into the render
   manifest without regenerating assets. Do not infer capture chronology from filenames.
+- **react-photo-album v3 adds a fallback width candidate.** Its `srcSet` helper appends `photo.src`
+  at `photo.width` unless that width already exists. Keep the renderer's dimensions matched to its
+  largest real candidate so thumbnail URLs never acquire misleading full-image width descriptors.
+  Its `sizes` prop describes the album container; keep it synchronized with the CSS container widths.
 - **Global section styles affect nested gallery sections.** `src/App.css` applies padding to every
   `section`. Check those rules and existing gallery media queries when nesting albums or years, so
   margins and padding do not compound.

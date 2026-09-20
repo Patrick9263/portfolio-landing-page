@@ -40,6 +40,15 @@ const getPhotoName = (photo, index) =>
 const getClickablePhotos = (photos) =>
   photos.map((photo, index) => ({
     ...photo,
+    // v3 appends photo.src at photo.width unless that width is in srcSet.
+    // Use the largest actual candidate's dimensions to avoid labeling a
+    // 900px-bounding-box thumbnail with the full image's width.
+    ...(photo.srcSet?.length
+      ? {
+          width: photo.srcSet.at(-1).width,
+          height: photo.srcSet.at(-1).height,
+        }
+      : {}),
     label: `Open ${getPhotoName(photo, index)}`,
   }))
 
@@ -334,6 +343,35 @@ export default function PhotosPage({ manifest = getPhotoManifest() }) {
                           <PhotoAlbum
                             {...gallerySettings}
                             photos={getClickablePhotos(album.photos)}
+                            sizes={{
+                              size: '1280px',
+                              sizes: [
+                                {
+                                  viewport: '(max-width: 700px)',
+                                  size: 'calc(100vw - 32px)',
+                                },
+                                {
+                                  viewport: '(max-width: 768px)',
+                                  size: 'calc(100vw - 48px)',
+                                },
+                                {
+                                  viewport: '(max-width: 1000px)',
+                                  size: '720px',
+                                },
+                                {
+                                  viewport: '(max-width: 1060px)',
+                                  size: 'calc(100vw - 80px)',
+                                },
+                                {
+                                  viewport: '(max-width: 1400px)',
+                                  size: '980px',
+                                },
+                                {
+                                  viewport: '(max-width: 1499px)',
+                                  size: '1120px',
+                                },
+                              ],
+                            }}
                             componentsProps={{
                               button: { className: 'photo-opener' },
                               image: { alt: '', 'aria-hidden': 'true' },

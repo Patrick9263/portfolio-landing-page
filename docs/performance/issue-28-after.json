@@ -1,0 +1,1384 @@
+{
+  "node": "v22.23.2",
+  "photos": 50,
+  "assets": {
+    "thumbs": 2554726,
+    "full": 5764076,
+    "variants": 6667850
+  },
+  "visits": [
+    {
+      "profile": {
+        "name": "phone",
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "route": "/",
+      "javascript": {
+        "bytes": 281745,
+        "gzipBytes": 89873
+      },
+      "javascriptUrls": [
+        "/assets/index-B8JK6SOI.js"
+      ],
+      "initialImages": {
+        "requests": 4,
+        "bodyBytes": 53817,
+        "transferBytes": 55017,
+        "urls": [
+          "/assets/patrick-240-0mMyv0Ah.avif",
+          "/assets/linkedin-CG2kxCxr.png",
+          "/assets/godaddy-Vhx1CUXg.png",
+          "/assets/travelers-Bkptu6-s.png"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "phone",
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "route": "/?photos=true",
+      "javascript": {
+        "bytes": 321341,
+        "gzipBytes": 98617
+      },
+      "javascriptUrls": [
+        "/assets/index-B8JK6SOI.js",
+        "/assets/PhotosPage-DKGiJcP6.js"
+      ],
+      "initialImages": {
+        "requests": 9,
+        "bodyBytes": 183936,
+        "transferBytes": 186636,
+        "urls": [
+          "/photos/responsive/400/current/dsc00782.webp",
+          "/photos/responsive/400/current/dsc00857.webp",
+          "/photos/responsive/400/current/dsc00881.webp",
+          "/photos/responsive/400/current/dsc00887.webp",
+          "/photos/responsive/400/current/dsc00912.webp",
+          "/photos/responsive/400/current/dsc00962.webp",
+          "/photos/responsive/400/current/dsc01008.webp",
+          "/photos/responsive/400/current/dsc01164.webp",
+          "/photos/responsive/400/current/dsc00930.webp"
+        ]
+      },
+      "allGalleryImages": {
+        "requests": 50,
+        "bodyBytes": 697422,
+        "transferBytes": 712422,
+        "urls": [
+          "/photos/responsive/400/current/dsc00782.webp",
+          "/photos/responsive/400/current/dsc00857.webp",
+          "/photos/responsive/400/current/dsc00881.webp",
+          "/photos/responsive/400/current/dsc00887.webp",
+          "/photos/responsive/400/current/dsc00912.webp",
+          "/photos/responsive/400/current/dsc00962.webp",
+          "/photos/responsive/400/current/dsc01008.webp",
+          "/photos/responsive/400/current/dsc01164.webp",
+          "/photos/responsive/400/current/dsc00930.webp",
+          "/photos/responsive/400/current/dsc01247.webp",
+          "/photos/responsive/400/current/dsc01303.webp",
+          "/photos/responsive/400/current/dsc01261.webp",
+          "/photos/responsive/400/current/dsc01314.webp",
+          "/photos/responsive/400/current/dsc01316.webp",
+          "/photos/responsive/400/current/dsc01323.webp",
+          "/photos/responsive/400/current/dsc01327.webp",
+          "/photos/responsive/400/current/dsc01592.webp",
+          "/photos/responsive/400/current/dsc01593.webp",
+          "/photos/responsive/400/current/dsc01621.webp",
+          "/photos/responsive/400/current/dsc01645.webp",
+          "/photos/responsive/400/current/dsc01665.webp",
+          "/photos/responsive/400/current/dsc01693.webp",
+          "/photos/responsive/400/current/dsc01700.webp",
+          "/photos/responsive/400/current/dsc01720.webp",
+          "/photos/responsive/400/current/dsc01721.webp",
+          "/photos/responsive/400/current/dsc01726.webp",
+          "/photos/responsive/400/current/dsc01742.webp",
+          "/photos/responsive/400/current/dsc01749.webp",
+          "/photos/responsive/400/current/dsc01755.webp",
+          "/photos/responsive/400/current/dsc01795.webp",
+          "/photos/responsive/400/current/dsc01853-1.webp",
+          "/photos/responsive/400/current/dsc01856.webp",
+          "/photos/responsive/400/current/dsc01905.webp",
+          "/photos/responsive/400/current/dsc01970.webp",
+          "/photos/responsive/400/current/dsc02089.webp",
+          "/photos/responsive/400/current/dsc02107.webp",
+          "/photos/responsive/400/current/dsc02113-1.webp",
+          "/photos/responsive/400/current/dsc02115.webp",
+          "/photos/responsive/400/current/dsc02142.webp",
+          "/photos/responsive/400/current/dsc02149.webp",
+          "/photos/responsive/400/current/dsc02154.webp",
+          "/photos/responsive/400/current/dsc02163.webp",
+          "/photos/responsive/400/current/dsc02305.webp",
+          "/photos/responsive/400/current/dsc02346.webp",
+          "/photos/responsive/400/current/dsc02378.webp",
+          "/photos/responsive/400/current/dsc02471.webp",
+          "/photos/responsive/400/current/dsc02510.webp",
+          "/photos/responsive/400/current/dsc02628.webp",
+          "/photos/responsive/400/current/dsc02699.webp",
+          "/photos/responsive/400/current/dsc02714.webp"
+        ]
+      },
+      "fullBeforeLightbox": 0,
+      "selections": [
+        {
+          "src": "/photos/responsive/400/current/dsc00782.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc00857.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc00881.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc00887.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc00912.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc00930.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc00962.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01008.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01164.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01247.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01261.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01303.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01314.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01316.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01323.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01327.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01592.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01593.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01621.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01645.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01665.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01693.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01700.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01720.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01721.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01726.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01742.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01749.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01755.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01795.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01853-1.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01856.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01905.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01970.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02089.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02107.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02113-1.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02115.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02142.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02149.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02154.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02163.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02305.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02346.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02378.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02471.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02510.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02628.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02699.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02714.webp",
+          "width": 358
+        }
+      ],
+      "lightboxImages": {
+        "requests": 1,
+        "bodyBytes": 128632,
+        "transferBytes": 128932,
+        "urls": [
+          "/photos/full/current/dsc00782.webp"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "tablet",
+        "width": 820,
+        "height": 1180,
+        "dpr": 1
+      },
+      "route": "/",
+      "javascript": {
+        "bytes": 281745,
+        "gzipBytes": 89873
+      },
+      "javascriptUrls": [
+        "/assets/index-B8JK6SOI.js"
+      ],
+      "initialImages": {
+        "requests": 4,
+        "bodyBytes": 53817,
+        "transferBytes": 55017,
+        "urls": [
+          "/assets/patrick-240-0mMyv0Ah.avif",
+          "/assets/linkedin-CG2kxCxr.png",
+          "/assets/godaddy-Vhx1CUXg.png",
+          "/assets/travelers-Bkptu6-s.png"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "tablet",
+        "width": 820,
+        "height": 1180,
+        "dpr": 1
+      },
+      "route": "/?photos=true",
+      "javascript": {
+        "bytes": 321341,
+        "gzipBytes": 98617
+      },
+      "javascriptUrls": [
+        "/assets/index-B8JK6SOI.js",
+        "/assets/PhotosPage-DKGiJcP6.js"
+      ],
+      "initialImages": {
+        "requests": 5,
+        "bodyBytes": 286224,
+        "transferBytes": 287724,
+        "urls": [
+          "/photos/responsive/640/current/dsc00782.webp",
+          "/photos/responsive/640/current/dsc00857.webp",
+          "/photos/responsive/960/current/dsc00881.webp",
+          "/photos/responsive/960/current/dsc00887.webp",
+          "/photos/responsive/960/current/dsc00912.webp"
+        ]
+      },
+      "allGalleryImages": {
+        "requests": 50,
+        "bodyBytes": 2283986,
+        "transferBytes": 2298986,
+        "urls": [
+          "/photos/responsive/640/current/dsc00782.webp",
+          "/photos/responsive/640/current/dsc00857.webp",
+          "/photos/responsive/960/current/dsc00881.webp",
+          "/photos/responsive/960/current/dsc00887.webp",
+          "/photos/responsive/960/current/dsc00912.webp",
+          "/photos/responsive/640/current/dsc00930.webp",
+          "/photos/responsive/960/current/dsc00962.webp",
+          "/photos/responsive/960/current/dsc01008.webp",
+          "/photos/responsive/640/current/dsc01164.webp",
+          "/photos/responsive/960/current/dsc01247.webp",
+          "/photos/responsive/960/current/dsc01261.webp",
+          "/photos/responsive/960/current/dsc01303.webp",
+          "/photos/responsive/960/current/dsc01314.webp",
+          "/photos/responsive/640/current/dsc01316.webp",
+          "/photos/responsive/640/current/dsc01323.webp",
+          "/photos/responsive/960/current/dsc01327.webp",
+          "/photos/responsive/960/current/dsc01592.webp",
+          "/photos/responsive/960/current/dsc01593.webp",
+          "/photos/responsive/960/current/dsc01621.webp",
+          "/photos/responsive/960/current/dsc01645.webp",
+          "/photos/responsive/960/current/dsc01665.webp",
+          "/photos/responsive/640/current/dsc01693.webp",
+          "/photos/responsive/960/current/dsc01700.webp",
+          "/photos/responsive/960/current/dsc01720.webp",
+          "/photos/responsive/960/current/dsc01721.webp",
+          "/photos/responsive/960/current/dsc01726.webp",
+          "/photos/responsive/960/current/dsc01742.webp",
+          "/photos/responsive/960/current/dsc01749.webp",
+          "/photos/responsive/960/current/dsc01755.webp",
+          "/photos/responsive/960/current/dsc01795.webp",
+          "/photos/responsive/960/current/dsc01853-1.webp",
+          "/photos/responsive/960/current/dsc01856.webp",
+          "/photos/responsive/960/current/dsc01905.webp",
+          "/photos/responsive/960/current/dsc01970.webp",
+          "/photos/responsive/960/current/dsc02089.webp",
+          "/photos/responsive/960/current/dsc02107.webp",
+          "/photos/responsive/960/current/dsc02113-1.webp",
+          "/photos/responsive/960/current/dsc02115.webp",
+          "/photos/responsive/960/current/dsc02142.webp",
+          "/photos/responsive/960/current/dsc02149.webp",
+          "/photos/responsive/960/current/dsc02154.webp",
+          "/photos/responsive/960/current/dsc02163.webp",
+          "/photos/responsive/960/current/dsc02305.webp",
+          "/photos/responsive/960/current/dsc02346.webp",
+          "/photos/responsive/960/current/dsc02378.webp",
+          "/photos/responsive/960/current/dsc02471.webp",
+          "/photos/responsive/960/current/dsc02628.webp",
+          "/photos/responsive/960/current/dsc02510.webp",
+          "/photos/responsive/960/current/dsc02699.webp",
+          "/photos/responsive/960/current/dsc02714.webp"
+        ]
+      },
+      "fullBeforeLightbox": 0,
+      "selections": [
+        {
+          "src": "/photos/responsive/640/current/dsc00782.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc00857.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc00881.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc00887.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc00912.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc00930.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc00962.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01008.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01164.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01247.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01261.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01303.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01314.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01316.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01323.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01327.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01592.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01593.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01621.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01645.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01665.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01693.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01700.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01720.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01721.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01726.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01742.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01749.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01755.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01795.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01853-1.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01856.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01905.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01970.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02089.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02107.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02113-1.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02115.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02142.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02149.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02154.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02163.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02305.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02346.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02378.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02471.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02510.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02628.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02699.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc02714.webp",
+          "width": 720
+        }
+      ],
+      "lightboxImages": {
+        "requests": 1,
+        "bodyBytes": 128632,
+        "transferBytes": 128932,
+        "urls": [
+          "/photos/full/current/dsc00782.webp"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "dpr": 1
+      },
+      "route": "/",
+      "javascript": {
+        "bytes": 281745,
+        "gzipBytes": 89873
+      },
+      "javascriptUrls": [
+        "/assets/index-B8JK6SOI.js"
+      ],
+      "initialImages": {
+        "requests": 4,
+        "bodyBytes": 53817,
+        "transferBytes": 55017,
+        "urls": [
+          "/assets/patrick-240-0mMyv0Ah.avif",
+          "/assets/linkedin-CG2kxCxr.png",
+          "/assets/godaddy-Vhx1CUXg.png",
+          "/assets/travelers-Bkptu6-s.png"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "dpr": 1
+      },
+      "route": "/?photos=true",
+      "javascript": {
+        "bytes": 321341,
+        "gzipBytes": 98617
+      },
+      "javascriptUrls": [
+        "/assets/index-B8JK6SOI.js",
+        "/assets/PhotosPage-DKGiJcP6.js"
+      ],
+      "initialImages": {
+        "requests": 31,
+        "bodyBytes": 780226,
+        "transferBytes": 789526,
+        "urls": [
+          "/photos/responsive/400/current/dsc00782.webp",
+          "/photos/responsive/400/current/dsc00857.webp",
+          "/photos/responsive/400/current/dsc00881.webp",
+          "/photos/responsive/640/current/dsc00962.webp",
+          "/photos/responsive/640/current/dsc00887.webp",
+          "/photos/responsive/640/current/dsc01008.webp",
+          "/photos/responsive/640/current/dsc00912.webp",
+          "/photos/responsive/400/current/dsc01164.webp",
+          "/photos/responsive/400/current/dsc00930.webp",
+          "/photos/responsive/640/current/dsc01247.webp",
+          "/photos/responsive/640/current/dsc01261.webp",
+          "/photos/responsive/640/current/dsc01303.webp",
+          "/photos/responsive/400/current/dsc01314.webp",
+          "/photos/responsive/400/current/dsc01316.webp",
+          "/photos/responsive/400/current/dsc01323.webp",
+          "/photos/responsive/400/current/dsc01327.webp",
+          "/photos/responsive/640/current/dsc01592.webp",
+          "/photos/responsive/640/current/dsc01593.webp",
+          "/photos/responsive/640/current/dsc01621.webp",
+          "/photos/responsive/640/current/dsc01645.webp",
+          "/photos/responsive/640/current/dsc01665.webp",
+          "/photos/responsive/400/current/dsc01693.webp",
+          "/photos/responsive/640/current/dsc01700.webp",
+          "/photos/responsive/640/current/dsc01721.webp",
+          "/photos/responsive/640/current/dsc01720.webp",
+          "/photos/responsive/640/current/dsc01726.webp",
+          "/photos/responsive/640/current/dsc01742.webp",
+          "/photos/responsive/960/current/dsc01749.webp",
+          "/photos/responsive/640/current/dsc01755.webp",
+          "/photos/responsive/640/current/dsc01853-1.webp",
+          "/photos/responsive/640/current/dsc01795.webp"
+        ]
+      },
+      "allGalleryImages": {
+        "requests": 50,
+        "bodyBytes": 1231262,
+        "transferBytes": 1246262,
+        "urls": [
+          "/photos/responsive/400/current/dsc00782.webp",
+          "/photos/responsive/400/current/dsc00857.webp",
+          "/photos/responsive/400/current/dsc00881.webp",
+          "/photos/responsive/640/current/dsc00962.webp",
+          "/photos/responsive/640/current/dsc00887.webp",
+          "/photos/responsive/640/current/dsc01008.webp",
+          "/photos/responsive/640/current/dsc00912.webp",
+          "/photos/responsive/400/current/dsc01164.webp",
+          "/photos/responsive/400/current/dsc00930.webp",
+          "/photos/responsive/640/current/dsc01247.webp",
+          "/photos/responsive/640/current/dsc01261.webp",
+          "/photos/responsive/640/current/dsc01303.webp",
+          "/photos/responsive/400/current/dsc01314.webp",
+          "/photos/responsive/400/current/dsc01316.webp",
+          "/photos/responsive/400/current/dsc01323.webp",
+          "/photos/responsive/400/current/dsc01327.webp",
+          "/photos/responsive/640/current/dsc01592.webp",
+          "/photos/responsive/640/current/dsc01593.webp",
+          "/photos/responsive/640/current/dsc01621.webp",
+          "/photos/responsive/640/current/dsc01645.webp",
+          "/photos/responsive/640/current/dsc01665.webp",
+          "/photos/responsive/400/current/dsc01693.webp",
+          "/photos/responsive/640/current/dsc01700.webp",
+          "/photos/responsive/640/current/dsc01721.webp",
+          "/photos/responsive/640/current/dsc01720.webp",
+          "/photos/responsive/640/current/dsc01726.webp",
+          "/photos/responsive/640/current/dsc01742.webp",
+          "/photos/responsive/960/current/dsc01749.webp",
+          "/photos/responsive/640/current/dsc01755.webp",
+          "/photos/responsive/640/current/dsc01853-1.webp",
+          "/photos/responsive/640/current/dsc01795.webp",
+          "/photos/responsive/640/current/dsc01856.webp",
+          "/photos/responsive/640/current/dsc01905.webp",
+          "/photos/responsive/640/current/dsc01970.webp",
+          "/photos/responsive/640/current/dsc02089.webp",
+          "/photos/responsive/640/current/dsc02107.webp",
+          "/photos/responsive/640/current/dsc02113-1.webp",
+          "/photos/responsive/640/current/dsc02115.webp",
+          "/photos/responsive/640/current/dsc02142.webp",
+          "/photos/responsive/640/current/dsc02149.webp",
+          "/photos/responsive/640/current/dsc02154.webp",
+          "/photos/responsive/640/current/dsc02163.webp",
+          "/photos/responsive/640/current/dsc02305.webp",
+          "/photos/responsive/640/current/dsc02346.webp",
+          "/photos/responsive/640/current/dsc02378.webp",
+          "/photos/responsive/640/current/dsc02471.webp",
+          "/photos/responsive/640/current/dsc02510.webp",
+          "/photos/responsive/400/current/dsc02628.webp",
+          "/photos/responsive/400/current/dsc02699.webp",
+          "/photos/responsive/400/current/dsc02714.webp"
+        ]
+      },
+      "fullBeforeLightbox": 0,
+      "selections": [
+        {
+          "src": "/photos/responsive/400/current/dsc00782.webp",
+          "width": 145.09375
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc00857.webp",
+          "width": 145.09375
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc00881.webp",
+          "width": 387
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc00887.webp",
+          "width": 412.796875
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc00912.webp",
+          "width": 495.765625
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc00930.webp",
+          "width": 185.90625
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc00962.webp",
+          "width": 418.296875
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01008.webp",
+          "width": 408.40625
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01164.webp",
+          "width": 153.140625
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01247.webp",
+          "width": 538.421875
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01261.webp",
+          "width": 550.0625
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01303.webp",
+          "width": 559.921875
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01314.webp",
+          "width": 377.296875
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01316.webp",
+          "width": 167.6875
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01323.webp",
+          "width": 167.6875
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01327.webp",
+          "width": 377.296875
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01592.webp",
+          "width": 555
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01593.webp",
+          "width": 555
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01621.webp",
+          "width": 602.03125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01645.webp",
+          "width": 507.953125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01665.webp",
+          "width": 450
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc01693.webp",
+          "width": 200
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01700.webp",
+          "width": 450
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01720.webp",
+          "width": 602.03125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01721.webp",
+          "width": 507.953125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01726.webp",
+          "width": 602.03125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01742.webp",
+          "width": 507.953125
+        },
+        {
+          "src": "/photos/responsive/960/current/dsc01749.webp",
+          "width": 683.0625
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01755.webp",
+          "width": 426.921875
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01795.webp",
+          "width": 507.953125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01853-1.webp",
+          "width": 602.03125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01856.webp",
+          "width": 507.953125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01905.webp",
+          "width": 602.03125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01970.webp",
+          "width": 531.0625
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02089.webp",
+          "width": 578.921875
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02107.webp",
+          "width": 555
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02113-1.webp",
+          "width": 555
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02115.webp",
+          "width": 584.203125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02142.webp",
+          "width": 525.78125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02149.webp",
+          "width": 602.03125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02154.webp",
+          "width": 507.953125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02163.webp",
+          "width": 584.203125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02305.webp",
+          "width": 525.78125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02346.webp",
+          "width": 537.09375
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02378.webp",
+          "width": 572.890625
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02471.webp",
+          "width": 554.578125
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc02510.webp",
+          "width": 555.40625
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02628.webp",
+          "width": 380.765625
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02699.webp",
+          "width": 338.453125
+        },
+        {
+          "src": "/photos/responsive/400/current/dsc02714.webp",
+          "width": 380.765625
+        }
+      ],
+      "lightboxImages": {
+        "requests": 1,
+        "bodyBytes": 128632,
+        "transferBytes": 128932,
+        "urls": [
+          "/photos/full/current/dsc00782.webp"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "high-dpi",
+        "width": 390,
+        "height": 844,
+        "dpr": 3
+      },
+      "route": "/",
+      "javascript": {
+        "bytes": 281745,
+        "gzipBytes": 89873
+      },
+      "javascriptUrls": [
+        "/assets/index-B8JK6SOI.js"
+      ],
+      "initialImages": {
+        "requests": 4,
+        "bodyBytes": 53817,
+        "transferBytes": 55017,
+        "urls": [
+          "/assets/patrick-240-0mMyv0Ah.avif",
+          "/assets/linkedin-CG2kxCxr.png",
+          "/assets/godaddy-Vhx1CUXg.png",
+          "/assets/travelers-Bkptu6-s.png"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "high-dpi",
+        "width": 390,
+        "height": 844,
+        "dpr": 3
+      },
+      "route": "/?photos=true",
+      "javascript": {
+        "bytes": 321341,
+        "gzipBytes": 98617
+      },
+      "javascriptUrls": [
+        "/assets/index-B8JK6SOI.js",
+        "/assets/PhotosPage-DKGiJcP6.js"
+      ],
+      "initialImages": {
+        "requests": 9,
+        "bodyBytes": 582838,
+        "transferBytes": 585538,
+        "urls": [
+          "/photos/responsive/640/current/dsc00782.webp",
+          "/photos/responsive/640/current/dsc00857.webp",
+          "/photos/responsive/1200/current/dsc00881.webp",
+          "/photos/responsive/1200/current/dsc00887.webp",
+          "/photos/responsive/1200/current/dsc00962.webp",
+          "/photos/responsive/1200/current/dsc01008.webp",
+          "/photos/responsive/1200/current/dsc00912.webp",
+          "/photos/responsive/640/current/dsc01164.webp",
+          "/photos/responsive/640/current/dsc00930.webp"
+        ]
+      },
+      "allGalleryImages": {
+        "requests": 50,
+        "bodyBytes": 2945272,
+        "transferBytes": 2960272,
+        "urls": [
+          "/photos/responsive/640/current/dsc00782.webp",
+          "/photos/responsive/640/current/dsc00857.webp",
+          "/photos/responsive/1200/current/dsc00881.webp",
+          "/photos/responsive/1200/current/dsc00887.webp",
+          "/photos/responsive/1200/current/dsc00962.webp",
+          "/photos/responsive/1200/current/dsc01008.webp",
+          "/photos/responsive/1200/current/dsc00912.webp",
+          "/photos/responsive/640/current/dsc01164.webp",
+          "/photos/responsive/640/current/dsc00930.webp",
+          "/photos/responsive/1200/current/dsc01247.webp",
+          "/photos/responsive/1200/current/dsc01261.webp",
+          "/photos/responsive/1200/current/dsc01303.webp",
+          "/photos/responsive/640/current/dsc01316.webp",
+          "/photos/responsive/1200/current/dsc01314.webp",
+          "/photos/responsive/640/current/dsc01323.webp",
+          "/photos/responsive/1200/current/dsc01327.webp",
+          "/photos/responsive/1200/current/dsc01592.webp",
+          "/photos/responsive/1200/current/dsc01593.webp",
+          "/photos/responsive/1200/current/dsc01621.webp",
+          "/photos/responsive/1200/current/dsc01645.webp",
+          "/photos/responsive/1200/current/dsc01665.webp",
+          "/photos/responsive/640/current/dsc01693.webp",
+          "/photos/responsive/1200/current/dsc01700.webp",
+          "/photos/responsive/1200/current/dsc01720.webp",
+          "/photos/responsive/1200/current/dsc01721.webp",
+          "/photos/responsive/1200/current/dsc01726.webp",
+          "/photos/responsive/1200/current/dsc01742.webp",
+          "/photos/responsive/1200/current/dsc01749.webp",
+          "/photos/responsive/1200/current/dsc01755.webp",
+          "/photos/responsive/1200/current/dsc01795.webp",
+          "/photos/responsive/1200/current/dsc01853-1.webp",
+          "/photos/responsive/1200/current/dsc01856.webp",
+          "/photos/responsive/1200/current/dsc01905.webp",
+          "/photos/responsive/1200/current/dsc01970.webp",
+          "/photos/responsive/1200/current/dsc02089.webp",
+          "/photos/responsive/1200/current/dsc02107.webp",
+          "/photos/responsive/1200/current/dsc02113-1.webp",
+          "/photos/responsive/1200/current/dsc02115.webp",
+          "/photos/responsive/1200/current/dsc02142.webp",
+          "/photos/responsive/1200/current/dsc02149.webp",
+          "/photos/responsive/1200/current/dsc02154.webp",
+          "/photos/responsive/1200/current/dsc02163.webp",
+          "/photos/responsive/1200/current/dsc02305.webp",
+          "/photos/responsive/1200/current/dsc02346.webp",
+          "/photos/responsive/1200/current/dsc02378.webp",
+          "/photos/responsive/1200/current/dsc02471.webp",
+          "/photos/responsive/1200/current/dsc02510.webp",
+          "/photos/responsive/1200/current/dsc02628.webp",
+          "/photos/responsive/1200/current/dsc02714.webp",
+          "/photos/responsive/1200/current/dsc02699.webp"
+        ]
+      },
+      "fullBeforeLightbox": 0,
+      "selections": [
+        {
+          "src": "/photos/responsive/640/current/dsc00782.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc00857.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc00881.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc00887.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc00912.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc00930.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc00962.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01008.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01164.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01247.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01261.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01303.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01314.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01316.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01323.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01327.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01592.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01593.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01621.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01645.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01665.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/640/current/dsc01693.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01700.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01720.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01721.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01726.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01742.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01749.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01755.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01795.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01853-1.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01856.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01905.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc01970.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02089.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02107.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02113-1.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02115.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02142.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02149.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02154.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02163.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02305.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02346.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02378.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02471.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02510.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02628.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02699.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/responsive/1200/current/dsc02714.webp",
+          "width": 358
+        }
+      ],
+      "lightboxImages": {
+        "requests": 1,
+        "bodyBytes": 128632,
+        "transferBytes": 128932,
+        "urls": [
+          "/photos/full/current/dsc00782.webp"
+        ]
+      }
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "dsc00881",
+      "full": [
+        1280,
+        853
+      ],
+      "thumb": [
+        900,
+        600
+      ]
+    },
+    {
+      "id": "dsc00782",
+      "full": [
+        720,
+        1280
+      ],
+      "thumb": [
+        506,
+        900
+      ]
+    },
+    {
+      "id": "dsc01749",
+      "full": [
+        1280,
+        533
+      ],
+      "thumb": [
+        900,
+        375
+      ]
+    }
+  ],
+  "manifest": {
+    "bytes": 24313,
+    "gzipBytes": 2183
+  },
+  "galleryOnlyJavascript": {
+    "bytes": 39596,
+    "gzipBytes": 8744
+  }
+}

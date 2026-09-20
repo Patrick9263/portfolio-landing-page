@@ -16,6 +16,24 @@ const isRenderablePhoto = (photo) =>
   photo.width > 0 &&
   Number.isFinite(photo.height) &&
   photo.height > 0 &&
+  (photo.srcSet === undefined ||
+    (Array.isArray(photo.srcSet) &&
+      photo.srcSet.length > 0 &&
+      photo.srcSet.every(
+        (candidate, index) =>
+          isObject(candidate) &&
+          isNonEmptyString(candidate.src) &&
+          candidate.src.startsWith('/photos/responsive/') &&
+          Number.isInteger(candidate.width) &&
+          Number.isInteger(candidate.height) &&
+          candidate.width > (index ? photo.srcSet[index - 1].width : 0) &&
+          candidate.width < photo.width &&
+          candidate.height > 0 &&
+          candidate.height <= photo.height &&
+          Math.abs(
+            candidate.height - (candidate.width * photo.height) / photo.width
+          ) <= 1
+      ))) &&
   isOptionalString(photo.title) &&
   isOptionalString(photo.alt)
 

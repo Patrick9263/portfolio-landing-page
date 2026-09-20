@@ -1,0 +1,11 @@
+.gallery-route-state {
+  min-height: 100vh;
+  box-sizing: border-box;
+  padding: 64px 24px;
+  text-align: center;
+}
+
+.gallery-route-state a {
+  display: block;
+  margin: 24px auto;
+}
