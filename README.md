@@ -1,26 +1,14 @@
-<div align="center">
-  <h1>🌵<br>React Portfolio</h1>
-  <h3>Portfolio One-Pager made with ReactJs</h3>
-  <h3><a href="https://patricksmith.io/" target="_blank">Live Preview</a></h3>
-</div>
+# Patrick Smith portfolio
 
-<div align="center"><img src="https://user-images.githubusercontent.com/29565530/144163917-196b3e87-90e2-4615-b1c7-6a905533f34b.gif" /></div>
-<div align="center">
-  <p>Home background effect made with React-Particles</p>
-</div>
+[patricksmith.io](https://patricksmith.io) is Patrick Smith's static React + Vite portfolio. The
+normal site is a one-page portfolio; the full photography gallery is available at
+[`/?photos=true`](https://patricksmith.io/?photos=true). Project listings are committed static data
+in `src/data/`, so the site does not use Apollo or the GitHub API and needs no browser token or other
+asset-provider connection.
 
-<br>
-
-## 💬 Overview:
-
-A simple one-page react portfolio with clearly defined and modular components which can be easily swapped in and out depending on your use-case. Currently integrated with Apollo & Github API to call repositories with a user provided auth token.
-
-## 🛠️ Packages & APIs
-
-- [React](https://reactjs.org/)
-- [particles.js](https://github.com/VincentGarreau/particles.js/)
-- [react-reveal](https://github.com/rnosov/react-reveal)
-- [react-is-visible](https://github.com/lessp/react-is-visible)
+This project began with [Matthew Jigalin's portfolio-landing-page
+template](https://github.com/jigalin/portfolio-landing-page). See [LICENSE](LICENSE) for the retained
+MIT notices.
 
 ## Local development
 
@@ -34,12 +22,13 @@ npm run test:browser:install
 npm run dev
 ```
 
-Create a production build with `npm run build` and serve it locally with `npm run preview`.
+`npm ci` installs the committed lockfile. `npm run dev` starts Vite's development server; create a
+production build with `npm run build` and serve it locally with `npm run preview`. The Playwright
+browser suite needs Chromium once per machine, which `npm run test:browser:install` installs.
 
 ## Development checks
 
-Pull requests and pushes to `main` install the committed lockfile with Node 22, then run the same
-quality gate expected locally:
+Run the complete local pre-push gate with Node 22:
 
 ```bash
 npm run lint && npm run format:check && npm run test:photos && npm run build && npm run test:browser
@@ -48,12 +37,18 @@ npm run lint && npm run format:check && npm run test:photos && npm run build && 
 The browser suite launches Chromium against `dist/` through `vite preview`; run `npm run build` first.
 Its fixtures are injected only on localhost and use isolated in-memory image responses, so the suite
 does not require `photos-source/` or modify committed gallery data or assets. Lint and formatting
-cover `src`, the browser tests, and Playwright configuration. Check other changed files separately.
+cover `src`, the browser tests, and Playwright configuration. Check root documentation and other
+changed files separately.
+
+CI runs `npm ci`, then exactly the gate above, on pull requests and pushes to `main`. A successful
+push to `main` immediately deploys the built `dist/` site to GitHub Pages. There is no staging
+environment or manual deployment gate.
 
 ## Photo publishing workflow
 
-The gallery has three committed layers:
+The gallery has local originals plus three committed layers:
 
+- `photos-source/` holds local original images and is gitignored.
 - `src/data/photo-layout.json` is the human-authored source of truth for section, album, and photo
   order; stable IDs; display titles; source mappings; initial output routes; and per-photo title/alt
   text.
@@ -61,9 +56,9 @@ The gallery has three committed layers:
   processor-derived URLs and dimensions and is what the React gallery imports.
 - `public/photos/` contains the generated thumbnail and full-display assets.
 
-Originals live only in the gitignored `photos-source/` directory, which may be missing or contain a
-partial working set. Normal builds and CI use the committed render manifest/assets and never require
-originals.
+`photos-source/` may be missing from a clone or contain only a partial working set; finding it does
+not establish a complete-gallery inventory. The generated manifest and assets are intentionally
+committed, so normal builds and CI use them and never require originals or an external provider.
 
 ### Edit hierarchy, order, or text without originals
 
@@ -108,8 +103,9 @@ Stable IDs are identities, not rename hints. If a renamed source produces a diff
 that ID and retains the old published photo until it is explicitly pruned.
 
 The source directory must contain supported images only and cannot contain nested directories. The
-import validates image readability, IDs, source-name collisions, and every manifest/output-path
-collision before it can switch published output.
+album-scoped importer does not recursively discover arbitrary nested directories; pass exactly the
+flat directory for the selected album. It validates image readability, IDs, source-name collisions,
+and every manifest/output-path collision before it can switch published output.
 
 To add an album to an existing section, explicitly provide its editorial title and the path that a
 future complete `photos-source/<section>/...` inventory would use:
