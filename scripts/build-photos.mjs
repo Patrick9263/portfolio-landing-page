@@ -259,8 +259,38 @@ const validateManifest = (
         }
         canonicalPhotoIds.set(canonicalPhotoId, photo.id)
 
-        for (const field of ['src', 'fullSrc']) {
-          const assetPath = photo[field]
+        if (photo.srcSet !== undefined) {
+          if (!Array.isArray(photo.srcSet) || !photo.srcSet.length) {
+            throw new Error(`Photo "${photo.id}" has invalid srcSet.`)
+          }
+          let previousWidth = 0
+          for (const candidate of photo.srcSet) {
+            if (
+              !candidate ||
+              !Number.isInteger(candidate.width) ||
+              !Number.isInteger(candidate.height) ||
+              candidate.height <= 0 ||
+              candidate.width <= previousWidth ||
+              candidate.width >= photo.width ||
+              candidate.height > photo.height ||
+              Math.abs(
+                candidate.height -
+                  (candidate.width * photo.height) / photo.width
+              ) > 1 ||
+              candidate.src !== variantUrl(photo.fullSrc, candidate.width)
+            ) {
+              throw new Error(
+                `Photo "${photo.id}" has invalid responsive candidate.`
+              )
+            }
+            previousWidth = candidate.width
+          }
+        }
+        for (const [field, assetPath] of [
+          ['src', photo.src],
+          ['fullSrc', photo.fullSrc],
+          ...(photo.srcSet || []).map((candidate) => ['srcSet', candidate.src]),
+        ]) {
           if (!requirePublishedRecords && assetPath === undefined) continue
           if (
             typeof assetPath !== 'string' ||
@@ -345,7 +375,7 @@ const validateLayout = (layout, layoutFile) => {
       }
       for (const photo of album.photos) {
         assertSafeId(photo.id, `Photo ID in ${layoutFile}`)
-        for (const field of ['src', 'fullSrc', 'width', 'height']) {
+        for (const field of ['src', 'fullSrc', 'width', 'height', 'srcSet']) {
           if (Object.hasOwn(photo, field)) {
             throw new Error(
               `Photo "${section.id}/${album.id}/${photo.id}" in ${layoutFile} must not contain generated field "${field}".`
@@ -437,6 +467,7 @@ export const resolveLayout = (
           fullSrc: generatedPhoto.fullSrc,
           width: generatedPhoto.width,
           height: generatedPhoto.height,
+          ...(generatedPhoto.srcSet ? { srcSet: generatedPhoto.srcSet } : {}),
           title: photo.title,
           alt: photo.alt,
         }
@@ -715,6 +746,64 @@ const collectPlan = async (sourceDir, existingManifest) => {
   return orderedSections
 }
 
+// Width descriptors, not bounding boxes. Every candidate is strictly narrower
+// than its full source. Deriving from WebP is an additional lossy generation.
+const VARIANT_WIDTHS = [400, 640, 960, 1200]
+const variantUrl = (fullSrc, width) => {
+  if (!fullSrc?.startsWith('/photos/full/')) {
+    throw new Error('Responsive source must be a published full image.')
+  }
+  return `/photos/responsive/${width}/${fullSrc.slice('/photos/full/'.length)}`
+}
+const photoAssetUrls = (photo) => [
+  photo.src,
+  photo.fullSrc,
+  ...(photo.srcSet || []).map((v) => v.src),
+]
+
+const generateVariants = async (photo, stagePhotosDir) => {
+  const source = path.join(
+    stagePhotosDir,
+    assetRelativePath(photo.fullSrc, photo.id)
+  )
+  const metadata = await sharp(source).metadata()
+  if (metadata.width !== photo.width || metadata.height !== photo.height) {
+    throw new Error(
+      `Full image dimensions disagree with manifest for "${photo.id}".`
+    )
+  }
+  const candidates = []
+  for (const width of VARIANT_WIDTHS.filter(
+    (width) => width < metadata.width
+  )) {
+    const src = variantUrl(photo.fullSrc, width)
+    const target = path.join(stagePhotosDir, assetRelativePath(src, photo.id))
+    if (
+      (await pathExists(target)) &&
+      !photo.srcSet?.some((v) => v.src === src)
+    ) {
+      throw new Error(`Refusing responsive output-path collision at "${src}".`)
+    }
+    await fs.mkdir(path.dirname(target), { recursive: true })
+    const info = await sharp(source)
+      .resize({ width, withoutEnlargement: true })
+      .webp({ quality: 72 })
+      .toFile(target)
+    candidates.push({ src, width: info.width, height: info.height })
+  }
+  // Updates may shrink the source. Remove only formerly owned derivatives.
+  for (const old of photo.srcSet || []) {
+    if (!candidates.some((v) => v.src === old.src)) {
+      await fs.rm(
+        path.join(stagePhotosDir, assetRelativePath(old.src, photo.id)),
+        { force: true }
+      )
+    }
+  }
+  const { srcSet: _old, ...record } = photo
+  return { ...record, ...(candidates.length ? { srcSet: candidates } : {}) }
+}
+
 const generateCandidate = async (sections, stagePhotosDir) => {
   const generatedSections = []
 
@@ -765,15 +854,20 @@ const generateCandidate = async (sections, stagePhotosDir) => {
 
         const metadata = await sharp(fullOutputPath).metadata()
         const title = photo.existing?.title || toTitle(photo.file)
-        photos.push({
-          id: photo.id,
-          src: `/photos/thumbs/${album.outputPath}/${outputFile}`,
-          fullSrc: `/photos/full/${album.outputPath}/${outputFile}`,
-          width: metadata.width,
-          height: metadata.height,
-          title,
-          alt: photo.existing?.alt || title,
-        })
+        photos.push(
+          await generateVariants(
+            {
+              id: photo.id,
+              src: `/photos/thumbs/${album.outputPath}/${outputFile}`,
+              fullSrc: `/photos/full/${album.outputPath}/${outputFile}`,
+              width: metadata.width,
+              height: metadata.height,
+              title,
+              alt: photo.existing?.alt || title,
+            },
+            stagePhotosDir
+          )
+        )
       }
 
       albums.push({
@@ -1031,11 +1125,14 @@ const generateImportedPhoto = async ({
     )
   }
 
-  return {
-    ...photoRecord,
-    width: metadata.width,
-    height: metadata.height,
-  }
+  return generateVariants(
+    {
+      ...photoRecord,
+      width: metadata.width,
+      height: metadata.height,
+    },
+    stagePhotosDir
+  )
 }
 
 const writeStagedManifest = async (manifest, stageDataFile) => {
@@ -1262,7 +1359,23 @@ export const importAlbum = async ({
             )
           ),
         ])
+        const sameVariants =
+          jsonEqual(prior.srcSet, generatedPhoto.srcSet) &&
+          (
+            await Promise.all(
+              (generatedPhoto.srcSet || []).map((v) =>
+                filesEqual(
+                  path.join(
+                    publicPhotosDir,
+                    assetRelativePath(v.src, prior.id)
+                  ),
+                  path.join(stagePhotosDir, assetRelativePath(v.src, prior.id))
+                )
+              )
+            )
+          ).every(Boolean)
         if (
+          sameVariants &&
           sameThumb &&
           sameFull &&
           prior.width === generatedPhoto.width &&
@@ -1290,10 +1403,14 @@ export const importAlbum = async ({
     const retained = album.photos
       .map((photo) => photo.id)
       .filter((id) => !newIds.has(id) && !updated.includes(id))
-    const affectedOutputPaths = plannedRecords.flatMap(({ photoRecord }) => [
-      photoRecord.src,
-      photoRecord.fullSrc,
-    ])
+    const affectedOutputPaths = [
+      ...new Set(
+        plannedRecords.flatMap(({ photoRecord }) => [
+          ...photoAssetUrls(photoRecord),
+          ...photoAssetUrls(generated.get(photoRecord.id)),
+        ])
+      ),
+    ]
     const report = {
       operation: 'import',
       target: `${sectionId}/${albumId}`,
@@ -1393,10 +1510,7 @@ export const pruneAlbum = async ({
       .filter((id) => !photoIds.includes(id)),
     removals: [...photoIds],
     conflicts: [],
-    affectedOutputPaths: removedPhotos.flatMap((photo) => [
-      photo.src,
-      photo.fullSrc,
-    ]),
+    affectedOutputPaths: removedPhotos.flatMap(photoAssetUrls),
     dryRun,
   }
   await onPlan(report)
@@ -1432,20 +1546,12 @@ export const pruneAlbum = async ({
   try {
     await stagePublishedGallery(publicPhotosDir, stagePhotosDir)
     for (const photo of removedPhotos) {
-      await fs.rm(
-        path.join(
-          stagePhotosDir,
-          assetRelativePath(photo.src, `Photo "${photo.id}"`)
-        ),
-        { force: true }
-      )
-      await fs.rm(
-        path.join(
-          stagePhotosDir,
-          assetRelativePath(photo.fullSrc, `Photo "${photo.id}"`)
-        ),
-        { force: true }
-      )
+      for (const url of photoAssetUrls(photo)) {
+        await fs.rm(
+          path.join(stagePhotosDir, assetRelativePath(url, photo.id)),
+          { force: true }
+        )
+      }
     }
     await writeStagedManifest(candidateManifest, stageDataFile)
     await writeStagedManifest(candidateLayout, stageLayoutFile)
@@ -1536,6 +1642,50 @@ export const buildPhotos = async ({
     })
 
     return { manifest, layout, additions, removals }
+  } finally {
+    await fs.rm(stageRoot, { recursive: true, force: true })
+  }
+}
+
+// Explicit additive migration for an existing source-less gallery. Full and
+// thumbnail files are copied byte-for-byte into the transaction, never encoded.
+export const addResponsiveVariants = async ({
+  publicPhotosDir = DEFAULT_PUBLIC_PHOTOS_DIR,
+  dataFile = DEFAULT_DATA_FILE,
+  layoutFile = DEFAULT_LAYOUT_FILE,
+  onSwitchStep,
+} = {}) => {
+  const { manifest, layout } = await readPublishedState({
+    dataFile,
+    layoutFile,
+  })
+  const stageRoot = await fs.mkdtemp(
+    path.join(path.dirname(publicPhotosDir), '.photos-stage-')
+  )
+  const stagePhotosDir = path.join(stageRoot, 'photos')
+  const stageDataFile = path.join(stageRoot, 'photos.json')
+  try {
+    await stagePublishedGallery(publicPhotosDir, stagePhotosDir)
+    for (const section of manifest.sections) {
+      for (const album of section.albums) {
+        for (let i = 0; i < album.photos.length; i++) {
+          album.photos[i] = await generateVariants(
+            album.photos[i],
+            stagePhotosDir
+          )
+        }
+      }
+    }
+    const resolved = resolveLayout(layout, manifest, { layoutFile, dataFile })
+    await writeStagedManifest(resolved, stageDataFile)
+    await replaceGeneratedOutput({
+      stagePhotosDir,
+      stageDataFile,
+      publicPhotosDir,
+      dataFile,
+      onSwitchStep,
+    })
+    return resolved
   } finally {
     await fs.rm(stageRoot, { recursive: true, force: true })
   }

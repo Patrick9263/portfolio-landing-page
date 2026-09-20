@@ -1,0 +1,1380 @@
+{
+  "node": "v22.23.2",
+  "photos": 50,
+  "assets": {
+    "thumbs": 2554726,
+    "full": 5764076,
+    "variants": 0
+  },
+  "visits": [
+    {
+      "profile": {
+        "name": "phone",
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "route": "/",
+      "javascript": {
+        "bytes": 303888,
+        "gzipBytes": 95742
+      },
+      "javascriptUrls": [
+        "/assets/index-Dk6UKhKB.js"
+      ],
+      "initialImages": {
+        "requests": 4,
+        "bodyBytes": 53817,
+        "transferBytes": 55017,
+        "urls": [
+          "/assets/patrick-240-0mMyv0Ah.avif",
+          "/assets/linkedin-CG2kxCxr.png",
+          "/assets/godaddy-Vhx1CUXg.png",
+          "/assets/travelers-Bkptu6-s.png"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "phone",
+        "width": 390,
+        "height": 844,
+        "dpr": 1
+      },
+      "route": "/?photos=true",
+      "javascript": {
+        "bytes": 303888,
+        "gzipBytes": 95742
+      },
+      "javascriptUrls": [
+        "/assets/index-Dk6UKhKB.js"
+      ],
+      "initialImages": {
+        "requests": 9,
+        "bodyBytes": 525672,
+        "transferBytes": 528372,
+        "urls": [
+          "/photos/thumbs/current/dsc00782.webp",
+          "/photos/thumbs/current/dsc00857.webp",
+          "/photos/thumbs/current/dsc00881.webp",
+          "/photos/thumbs/current/dsc00962.webp",
+          "/photos/thumbs/current/dsc00887.webp",
+          "/photos/thumbs/current/dsc00912.webp",
+          "/photos/thumbs/current/dsc01008.webp",
+          "/photos/thumbs/current/dsc00930.webp",
+          "/photos/thumbs/current/dsc01164.webp"
+        ]
+      },
+      "allGalleryImages": {
+        "requests": 50,
+        "bodyBytes": 2554726,
+        "transferBytes": 2569726,
+        "urls": [
+          "/photos/thumbs/current/dsc00782.webp",
+          "/photos/thumbs/current/dsc00857.webp",
+          "/photos/thumbs/current/dsc00881.webp",
+          "/photos/thumbs/current/dsc00962.webp",
+          "/photos/thumbs/current/dsc00887.webp",
+          "/photos/thumbs/current/dsc00912.webp",
+          "/photos/thumbs/current/dsc01008.webp",
+          "/photos/thumbs/current/dsc00930.webp",
+          "/photos/thumbs/current/dsc01164.webp",
+          "/photos/thumbs/current/dsc01247.webp",
+          "/photos/thumbs/current/dsc01261.webp",
+          "/photos/thumbs/current/dsc01303.webp",
+          "/photos/thumbs/current/dsc01314.webp",
+          "/photos/thumbs/current/dsc01316.webp",
+          "/photos/thumbs/current/dsc01323.webp",
+          "/photos/thumbs/current/dsc01327.webp",
+          "/photos/thumbs/current/dsc01592.webp",
+          "/photos/thumbs/current/dsc01593.webp",
+          "/photos/thumbs/current/dsc01621.webp",
+          "/photos/thumbs/current/dsc01645.webp",
+          "/photos/thumbs/current/dsc01665.webp",
+          "/photos/thumbs/current/dsc01693.webp",
+          "/photos/thumbs/current/dsc01700.webp",
+          "/photos/thumbs/current/dsc01720.webp",
+          "/photos/thumbs/current/dsc01721.webp",
+          "/photos/thumbs/current/dsc01742.webp",
+          "/photos/thumbs/current/dsc01726.webp",
+          "/photos/thumbs/current/dsc01749.webp",
+          "/photos/thumbs/current/dsc01755.webp",
+          "/photos/thumbs/current/dsc01795.webp",
+          "/photos/thumbs/current/dsc01853-1.webp",
+          "/photos/thumbs/current/dsc01856.webp",
+          "/photos/thumbs/current/dsc01905.webp",
+          "/photos/thumbs/current/dsc01970.webp",
+          "/photos/thumbs/current/dsc02089.webp",
+          "/photos/thumbs/current/dsc02107.webp",
+          "/photos/thumbs/current/dsc02113-1.webp",
+          "/photos/thumbs/current/dsc02115.webp",
+          "/photos/thumbs/current/dsc02142.webp",
+          "/photos/thumbs/current/dsc02149.webp",
+          "/photos/thumbs/current/dsc02154.webp",
+          "/photos/thumbs/current/dsc02163.webp",
+          "/photos/thumbs/current/dsc02305.webp",
+          "/photos/thumbs/current/dsc02346.webp",
+          "/photos/thumbs/current/dsc02378.webp",
+          "/photos/thumbs/current/dsc02471.webp",
+          "/photos/thumbs/current/dsc02510.webp",
+          "/photos/thumbs/current/dsc02628.webp",
+          "/photos/thumbs/current/dsc02714.webp",
+          "/photos/thumbs/current/dsc02699.webp"
+        ]
+      },
+      "fullBeforeLightbox": 0,
+      "selections": [
+        {
+          "src": "/photos/thumbs/current/dsc00782.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00857.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00881.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00887.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00912.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00930.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00962.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01008.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01164.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01247.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01261.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01303.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01314.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01316.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01323.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01327.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01592.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01593.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01621.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01645.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01665.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01693.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01700.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01720.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01721.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01726.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01742.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01749.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01755.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01795.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01853-1.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01856.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01905.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01970.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02089.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02107.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02113-1.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02115.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02142.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02149.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02154.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02163.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02305.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02346.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02378.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02471.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02510.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02628.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02699.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02714.webp",
+          "width": 358
+        }
+      ],
+      "lightboxImages": {
+        "requests": 1,
+        "bodyBytes": 128632,
+        "transferBytes": 128932,
+        "urls": [
+          "/photos/full/current/dsc00782.webp"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "tablet",
+        "width": 820,
+        "height": 1180,
+        "dpr": 1
+      },
+      "route": "/",
+      "javascript": {
+        "bytes": 303888,
+        "gzipBytes": 95742
+      },
+      "javascriptUrls": [
+        "/assets/index-Dk6UKhKB.js"
+      ],
+      "initialImages": {
+        "requests": 4,
+        "bodyBytes": 53817,
+        "transferBytes": 55017,
+        "urls": [
+          "/assets/patrick-240-0mMyv0Ah.avif",
+          "/assets/linkedin-CG2kxCxr.png",
+          "/assets/godaddy-Vhx1CUXg.png",
+          "/assets/travelers-Bkptu6-s.png"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "tablet",
+        "width": 820,
+        "height": 1180,
+        "dpr": 1
+      },
+      "route": "/?photos=true",
+      "javascript": {
+        "bytes": 303888,
+        "gzipBytes": 95742
+      },
+      "javascriptUrls": [
+        "/assets/index-Dk6UKhKB.js"
+      ],
+      "initialImages": {
+        "requests": 5,
+        "bodyBytes": 294288,
+        "transferBytes": 295788,
+        "urls": [
+          "/photos/thumbs/current/dsc00782.webp",
+          "/photos/thumbs/current/dsc00857.webp",
+          "/photos/thumbs/current/dsc00881.webp",
+          "/photos/thumbs/current/dsc00887.webp",
+          "/photos/thumbs/current/dsc00912.webp"
+        ]
+      },
+      "allGalleryImages": {
+        "requests": 50,
+        "bodyBytes": 2554726,
+        "transferBytes": 2569726,
+        "urls": [
+          "/photos/thumbs/current/dsc00782.webp",
+          "/photos/thumbs/current/dsc00857.webp",
+          "/photos/thumbs/current/dsc00881.webp",
+          "/photos/thumbs/current/dsc00887.webp",
+          "/photos/thumbs/current/dsc00912.webp",
+          "/photos/thumbs/current/dsc00930.webp",
+          "/photos/thumbs/current/dsc00962.webp",
+          "/photos/thumbs/current/dsc01008.webp",
+          "/photos/thumbs/current/dsc01164.webp",
+          "/photos/thumbs/current/dsc01247.webp",
+          "/photos/thumbs/current/dsc01303.webp",
+          "/photos/thumbs/current/dsc01261.webp",
+          "/photos/thumbs/current/dsc01314.webp",
+          "/photos/thumbs/current/dsc01316.webp",
+          "/photos/thumbs/current/dsc01323.webp",
+          "/photos/thumbs/current/dsc01327.webp",
+          "/photos/thumbs/current/dsc01592.webp",
+          "/photos/thumbs/current/dsc01593.webp",
+          "/photos/thumbs/current/dsc01621.webp",
+          "/photos/thumbs/current/dsc01645.webp",
+          "/photos/thumbs/current/dsc01665.webp",
+          "/photos/thumbs/current/dsc01693.webp",
+          "/photos/thumbs/current/dsc01720.webp",
+          "/photos/thumbs/current/dsc01700.webp",
+          "/photos/thumbs/current/dsc01721.webp",
+          "/photos/thumbs/current/dsc01726.webp",
+          "/photos/thumbs/current/dsc01742.webp",
+          "/photos/thumbs/current/dsc01749.webp",
+          "/photos/thumbs/current/dsc01755.webp",
+          "/photos/thumbs/current/dsc01795.webp",
+          "/photos/thumbs/current/dsc01853-1.webp",
+          "/photos/thumbs/current/dsc01856.webp",
+          "/photos/thumbs/current/dsc01905.webp",
+          "/photos/thumbs/current/dsc01970.webp",
+          "/photos/thumbs/current/dsc02107.webp",
+          "/photos/thumbs/current/dsc02089.webp",
+          "/photos/thumbs/current/dsc02113-1.webp",
+          "/photos/thumbs/current/dsc02115.webp",
+          "/photos/thumbs/current/dsc02142.webp",
+          "/photos/thumbs/current/dsc02149.webp",
+          "/photos/thumbs/current/dsc02154.webp",
+          "/photos/thumbs/current/dsc02163.webp",
+          "/photos/thumbs/current/dsc02305.webp",
+          "/photos/thumbs/current/dsc02346.webp",
+          "/photos/thumbs/current/dsc02378.webp",
+          "/photos/thumbs/current/dsc02471.webp",
+          "/photos/thumbs/current/dsc02510.webp",
+          "/photos/thumbs/current/dsc02628.webp",
+          "/photos/thumbs/current/dsc02699.webp",
+          "/photos/thumbs/current/dsc02714.webp"
+        ]
+      },
+      "fullBeforeLightbox": 0,
+      "selections": [
+        {
+          "src": "/photos/thumbs/current/dsc00782.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00857.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00881.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00887.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00912.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00930.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00962.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01008.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01164.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01247.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01261.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01303.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01314.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01316.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01323.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01327.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01592.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01593.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01621.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01645.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01665.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01693.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01700.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01720.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01721.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01726.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01742.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01749.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01755.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01795.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01853-1.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01856.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01905.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01970.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02089.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02107.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02113-1.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02115.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02142.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02149.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02154.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02163.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02305.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02346.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02378.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02471.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02510.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02628.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02699.webp",
+          "width": 720
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02714.webp",
+          "width": 720
+        }
+      ],
+      "lightboxImages": {
+        "requests": 1,
+        "bodyBytes": 128632,
+        "transferBytes": 128932,
+        "urls": [
+          "/photos/full/current/dsc00782.webp"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "dpr": 1
+      },
+      "route": "/",
+      "javascript": {
+        "bytes": 303888,
+        "gzipBytes": 95742
+      },
+      "javascriptUrls": [
+        "/assets/index-Dk6UKhKB.js"
+      ],
+      "initialImages": {
+        "requests": 4,
+        "bodyBytes": 53817,
+        "transferBytes": 55017,
+        "urls": [
+          "/assets/patrick-240-0mMyv0Ah.avif",
+          "/assets/linkedin-CG2kxCxr.png",
+          "/assets/godaddy-Vhx1CUXg.png",
+          "/assets/travelers-Bkptu6-s.png"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "desktop",
+        "width": 1440,
+        "height": 1000,
+        "dpr": 1
+      },
+      "route": "/?photos=true",
+      "javascript": {
+        "bytes": 303888,
+        "gzipBytes": 95742
+      },
+      "javascriptUrls": [
+        "/assets/index-Dk6UKhKB.js"
+      ],
+      "initialImages": {
+        "requests": 31,
+        "bodyBytes": 1601700,
+        "transferBytes": 1611000,
+        "urls": [
+          "/photos/thumbs/current/dsc00782.webp",
+          "/photos/thumbs/current/dsc00857.webp",
+          "/photos/thumbs/current/dsc00881.webp",
+          "/photos/thumbs/current/dsc00962.webp",
+          "/photos/thumbs/current/dsc00887.webp",
+          "/photos/thumbs/current/dsc00912.webp",
+          "/photos/thumbs/current/dsc01008.webp",
+          "/photos/thumbs/current/dsc00930.webp",
+          "/photos/thumbs/current/dsc01164.webp",
+          "/photos/thumbs/current/dsc01247.webp",
+          "/photos/thumbs/current/dsc01261.webp",
+          "/photos/thumbs/current/dsc01303.webp",
+          "/photos/thumbs/current/dsc01314.webp",
+          "/photos/thumbs/current/dsc01316.webp",
+          "/photos/thumbs/current/dsc01323.webp",
+          "/photos/thumbs/current/dsc01327.webp",
+          "/photos/thumbs/current/dsc01592.webp",
+          "/photos/thumbs/current/dsc01593.webp",
+          "/photos/thumbs/current/dsc01645.webp",
+          "/photos/thumbs/current/dsc01621.webp",
+          "/photos/thumbs/current/dsc01665.webp",
+          "/photos/thumbs/current/dsc01700.webp",
+          "/photos/thumbs/current/dsc01693.webp",
+          "/photos/thumbs/current/dsc01720.webp",
+          "/photos/thumbs/current/dsc01721.webp",
+          "/photos/thumbs/current/dsc01726.webp",
+          "/photos/thumbs/current/dsc01742.webp",
+          "/photos/thumbs/current/dsc01755.webp",
+          "/photos/thumbs/current/dsc01749.webp",
+          "/photos/thumbs/current/dsc01795.webp",
+          "/photos/thumbs/current/dsc01853-1.webp"
+        ]
+      },
+      "allGalleryImages": {
+        "requests": 50,
+        "bodyBytes": 2554726,
+        "transferBytes": 2569726,
+        "urls": [
+          "/photos/thumbs/current/dsc00782.webp",
+          "/photos/thumbs/current/dsc00857.webp",
+          "/photos/thumbs/current/dsc00881.webp",
+          "/photos/thumbs/current/dsc00962.webp",
+          "/photos/thumbs/current/dsc00887.webp",
+          "/photos/thumbs/current/dsc00912.webp",
+          "/photos/thumbs/current/dsc01008.webp",
+          "/photos/thumbs/current/dsc00930.webp",
+          "/photos/thumbs/current/dsc01164.webp",
+          "/photos/thumbs/current/dsc01247.webp",
+          "/photos/thumbs/current/dsc01261.webp",
+          "/photos/thumbs/current/dsc01303.webp",
+          "/photos/thumbs/current/dsc01314.webp",
+          "/photos/thumbs/current/dsc01316.webp",
+          "/photos/thumbs/current/dsc01323.webp",
+          "/photos/thumbs/current/dsc01327.webp",
+          "/photos/thumbs/current/dsc01592.webp",
+          "/photos/thumbs/current/dsc01593.webp",
+          "/photos/thumbs/current/dsc01645.webp",
+          "/photos/thumbs/current/dsc01621.webp",
+          "/photos/thumbs/current/dsc01665.webp",
+          "/photos/thumbs/current/dsc01700.webp",
+          "/photos/thumbs/current/dsc01693.webp",
+          "/photos/thumbs/current/dsc01720.webp",
+          "/photos/thumbs/current/dsc01721.webp",
+          "/photos/thumbs/current/dsc01726.webp",
+          "/photos/thumbs/current/dsc01742.webp",
+          "/photos/thumbs/current/dsc01755.webp",
+          "/photos/thumbs/current/dsc01749.webp",
+          "/photos/thumbs/current/dsc01795.webp",
+          "/photos/thumbs/current/dsc01853-1.webp",
+          "/photos/thumbs/current/dsc01856.webp",
+          "/photos/thumbs/current/dsc01970.webp",
+          "/photos/thumbs/current/dsc01905.webp",
+          "/photos/thumbs/current/dsc02089.webp",
+          "/photos/thumbs/current/dsc02107.webp",
+          "/photos/thumbs/current/dsc02113-1.webp",
+          "/photos/thumbs/current/dsc02115.webp",
+          "/photos/thumbs/current/dsc02142.webp",
+          "/photos/thumbs/current/dsc02149.webp",
+          "/photos/thumbs/current/dsc02154.webp",
+          "/photos/thumbs/current/dsc02163.webp",
+          "/photos/thumbs/current/dsc02305.webp",
+          "/photos/thumbs/current/dsc02378.webp",
+          "/photos/thumbs/current/dsc02346.webp",
+          "/photos/thumbs/current/dsc02471.webp",
+          "/photos/thumbs/current/dsc02510.webp",
+          "/photos/thumbs/current/dsc02628.webp",
+          "/photos/thumbs/current/dsc02699.webp",
+          "/photos/thumbs/current/dsc02714.webp"
+        ]
+      },
+      "fullBeforeLightbox": 0,
+      "selections": [
+        {
+          "src": "/photos/thumbs/current/dsc00782.webp",
+          "width": 145.09375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00857.webp",
+          "width": 145.09375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00881.webp",
+          "width": 387.078125
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00887.webp",
+          "width": 412.71875
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00912.webp",
+          "width": 495.71875
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00930.webp",
+          "width": 185.8125
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00962.webp",
+          "width": 418.4375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01008.webp",
+          "width": 408.375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01164.webp",
+          "width": 153.078125
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01247.webp",
+          "width": 538.515625
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01261.webp",
+          "width": 550.375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01303.webp",
+          "width": 559.609375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01314.webp",
+          "width": 377.390625
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01316.webp",
+          "width": 167.59375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01323.webp",
+          "width": 167.59375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01327.webp",
+          "width": 377.390625
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01592.webp",
+          "width": 555
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01593.webp",
+          "width": 555
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01621.webp",
+          "width": 601.921875
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01645.webp",
+          "width": 508.0625
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01665.webp",
+          "width": 450.0625
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01693.webp",
+          "width": 199.859375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01700.webp",
+          "width": 450.0625
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01720.webp",
+          "width": 601.921875
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01721.webp",
+          "width": 508.0625
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01726.webp",
+          "width": 601.921875
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01742.webp",
+          "width": 508.0625
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01749.webp",
+          "width": 683.125
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01755.webp",
+          "width": 426.859375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01795.webp",
+          "width": 508.0625
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01853-1.webp",
+          "width": 601.921875
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01856.webp",
+          "width": 508.0625
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01905.webp",
+          "width": 601.921875
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01970.webp",
+          "width": 531.109375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02089.webp",
+          "width": 578.875
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02107.webp",
+          "width": 555
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02113-1.webp",
+          "width": 555
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02115.webp",
+          "width": 584.203125
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02142.webp",
+          "width": 525.78125
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02149.webp",
+          "width": 601.921875
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02154.webp",
+          "width": 508.0625
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02163.webp",
+          "width": 584.203125
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02305.webp",
+          "width": 525.78125
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02346.webp",
+          "width": 537.203125
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02378.webp",
+          "width": 572.78125
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02471.webp",
+          "width": 554.484375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02510.webp",
+          "width": 555.5
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02628.webp",
+          "width": 380.8125
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02699.webp",
+          "width": 338.359375
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02714.webp",
+          "width": 380.8125
+        }
+      ],
+      "lightboxImages": {
+        "requests": 1,
+        "bodyBytes": 128632,
+        "transferBytes": 128932,
+        "urls": [
+          "/photos/full/current/dsc00782.webp"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "high-dpi",
+        "width": 390,
+        "height": 844,
+        "dpr": 3
+      },
+      "route": "/",
+      "javascript": {
+        "bytes": 303888,
+        "gzipBytes": 95742
+      },
+      "javascriptUrls": [
+        "/assets/index-Dk6UKhKB.js"
+      ],
+      "initialImages": {
+        "requests": 4,
+        "bodyBytes": 53817,
+        "transferBytes": 55017,
+        "urls": [
+          "/assets/patrick-240-0mMyv0Ah.avif",
+          "/assets/linkedin-CG2kxCxr.png",
+          "/assets/godaddy-Vhx1CUXg.png",
+          "/assets/travelers-Bkptu6-s.png"
+        ]
+      }
+    },
+    {
+      "profile": {
+        "name": "high-dpi",
+        "width": 390,
+        "height": 844,
+        "dpr": 3
+      },
+      "route": "/?photos=true",
+      "javascript": {
+        "bytes": 303888,
+        "gzipBytes": 95742
+      },
+      "javascriptUrls": [
+        "/assets/index-Dk6UKhKB.js"
+      ],
+      "initialImages": {
+        "requests": 9,
+        "bodyBytes": 525672,
+        "transferBytes": 528372,
+        "urls": [
+          "/photos/thumbs/current/dsc00782.webp",
+          "/photos/thumbs/current/dsc00857.webp",
+          "/photos/thumbs/current/dsc00881.webp",
+          "/photos/thumbs/current/dsc00887.webp",
+          "/photos/thumbs/current/dsc00962.webp",
+          "/photos/thumbs/current/dsc00912.webp",
+          "/photos/thumbs/current/dsc01008.webp",
+          "/photos/thumbs/current/dsc01164.webp",
+          "/photos/thumbs/current/dsc00930.webp"
+        ]
+      },
+      "allGalleryImages": {
+        "requests": 50,
+        "bodyBytes": 2554726,
+        "transferBytes": 2569726,
+        "urls": [
+          "/photos/thumbs/current/dsc00782.webp",
+          "/photos/thumbs/current/dsc00857.webp",
+          "/photos/thumbs/current/dsc00881.webp",
+          "/photos/thumbs/current/dsc00887.webp",
+          "/photos/thumbs/current/dsc00962.webp",
+          "/photos/thumbs/current/dsc00912.webp",
+          "/photos/thumbs/current/dsc01008.webp",
+          "/photos/thumbs/current/dsc01164.webp",
+          "/photos/thumbs/current/dsc00930.webp",
+          "/photos/thumbs/current/dsc01247.webp",
+          "/photos/thumbs/current/dsc01261.webp",
+          "/photos/thumbs/current/dsc01303.webp",
+          "/photos/thumbs/current/dsc01314.webp",
+          "/photos/thumbs/current/dsc01316.webp",
+          "/photos/thumbs/current/dsc01323.webp",
+          "/photos/thumbs/current/dsc01327.webp",
+          "/photos/thumbs/current/dsc01592.webp",
+          "/photos/thumbs/current/dsc01593.webp",
+          "/photos/thumbs/current/dsc01645.webp",
+          "/photos/thumbs/current/dsc01621.webp",
+          "/photos/thumbs/current/dsc01665.webp",
+          "/photos/thumbs/current/dsc01693.webp",
+          "/photos/thumbs/current/dsc01700.webp",
+          "/photos/thumbs/current/dsc01720.webp",
+          "/photos/thumbs/current/dsc01721.webp",
+          "/photos/thumbs/current/dsc01742.webp",
+          "/photos/thumbs/current/dsc01726.webp",
+          "/photos/thumbs/current/dsc01749.webp",
+          "/photos/thumbs/current/dsc01755.webp",
+          "/photos/thumbs/current/dsc01795.webp",
+          "/photos/thumbs/current/dsc01853-1.webp",
+          "/photos/thumbs/current/dsc01856.webp",
+          "/photos/thumbs/current/dsc01905.webp",
+          "/photos/thumbs/current/dsc01970.webp",
+          "/photos/thumbs/current/dsc02089.webp",
+          "/photos/thumbs/current/dsc02107.webp",
+          "/photos/thumbs/current/dsc02115.webp",
+          "/photos/thumbs/current/dsc02113-1.webp",
+          "/photos/thumbs/current/dsc02142.webp",
+          "/photos/thumbs/current/dsc02149.webp",
+          "/photos/thumbs/current/dsc02154.webp",
+          "/photos/thumbs/current/dsc02163.webp",
+          "/photos/thumbs/current/dsc02305.webp",
+          "/photos/thumbs/current/dsc02378.webp",
+          "/photos/thumbs/current/dsc02346.webp",
+          "/photos/thumbs/current/dsc02471.webp",
+          "/photos/thumbs/current/dsc02510.webp",
+          "/photos/thumbs/current/dsc02628.webp",
+          "/photos/thumbs/current/dsc02699.webp",
+          "/photos/thumbs/current/dsc02714.webp"
+        ]
+      },
+      "fullBeforeLightbox": 0,
+      "selections": [
+        {
+          "src": "/photos/thumbs/current/dsc00782.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00857.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00881.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00887.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00912.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00930.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc00962.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01008.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01164.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01247.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01261.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01303.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01314.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01316.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01323.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01327.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01592.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01593.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01621.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01645.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01665.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01693.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01700.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01720.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01721.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01726.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01742.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01749.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01755.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01795.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01853-1.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01856.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01905.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc01970.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02089.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02107.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02113-1.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02115.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02142.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02149.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02154.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02163.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02305.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02346.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02378.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02471.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02510.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02628.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02699.webp",
+          "width": 358
+        },
+        {
+          "src": "/photos/thumbs/current/dsc02714.webp",
+          "width": 358
+        }
+      ],
+      "lightboxImages": {
+        "requests": 1,
+        "bodyBytes": 128632,
+        "transferBytes": 128932,
+        "urls": [
+          "/photos/full/current/dsc00782.webp"
+        ]
+      }
+    }
+  ],
+  "dimensions": [
+    {
+      "id": "dsc00881",
+      "full": [
+        1280,
+        853
+      ],
+      "thumb": [
+        900,
+        600
+      ]
+    },
+    {
+      "id": "dsc00782",
+      "full": [
+        720,
+        1280
+      ],
+      "thumb": [
+        506,
+        900
+      ]
+    },
+    {
+      "id": "dsc01749",
+      "full": [
+        1280,
+        533
+      ],
+      "thumb": [
+        900,
+        375
+      ]
+    }
+  ],
+  "manifest": {
+    "bytes": 8779,
+    "gzipBytes": 1090
+  },
+  "galleryOnlyJavascript": {
+    "bytes": 0,
+    "gzipBytes": 0
+  }
+}

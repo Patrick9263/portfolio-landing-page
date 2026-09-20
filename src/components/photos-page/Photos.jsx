@@ -1,5 +1,5 @@
 import Section from '../section/Section'
-import './PhotosPage.css'
+import './Photos.css'
 
 const Photos = () => {
   return (

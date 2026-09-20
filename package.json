@@ -38,7 +38,10 @@
     "photos:prune": "node scripts/build-photos.mjs prune-album",
     "test:photos": "node --test scripts/build-photos.test.mjs",
     "test:browser:install": "playwright install chromium",
-    "test:browser": "playwright test"
+    "test:browser": "playwright test",
+    "photos:variants": "node scripts/add-photo-variants.mjs",
+    "measure:gallery": "node scripts/measure-gallery.mjs",
+    "photos:check": "node scripts/check-photo-variants.mjs"
   },
   "browserslist": {
     "production": [

@@ -5,6 +5,7 @@ import path from 'node:path'
 import test from 'node:test'
 import sharp from 'sharp'
 import {
+  addResponsiveVariants,
   buildPhotos,
   importAlbum,
   pruneAlbum,
@@ -1031,5 +1032,232 @@ test('prune switch failure rolls back the selected removal and preserves unrelat
     assert.deepEqual(await snapshotPath(fixture.dataFile), beforeManifest)
     assert.deepEqual(await snapshotPath(fixture.layoutFile), beforeLayout)
     assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), beforeAssets)
+  })
+})
+
+const variantFixture = async (fixture) => {
+  for (const [name, width, height] of [
+    ['landscape', 1600, 1000],
+    ['portrait', 720, 1280],
+    ['panorama', 1800, 600],
+    ['tiny', 32, 24],
+  ])
+    await makeImage(
+      path.join(fixture.sourceDir, 'current', 'events', `${name}.png`),
+      width,
+      height
+    )
+  await makeImage(
+    path.join(fixture.sourceDir, 'archive', 'other', 'keep.png'),
+    1300,
+    900
+  )
+  return buildPhotos(fixture)
+}
+const assertCandidateFiles = async (fixture, manifest) => {
+  for (const photo of manifest.sections.flatMap((s) =>
+    s.albums.flatMap((a) => a.photos)
+  )) {
+    for (const candidate of photo.srcSet || []) {
+      const metadata = await sharp(
+        path.join(
+          fixture.publicPhotosDir,
+          candidate.src.slice('/photos/'.length)
+        )
+      ).metadata()
+      assert.equal(metadata.width, candidate.width)
+      assert.equal(metadata.height, candidate.height)
+      assert.ok(candidate.width < photo.width)
+      assert.ok(candidate.height <= photo.height)
+    }
+  }
+}
+
+test('replacement creates actual no-upscale variants for landscape, portrait, panorama and tiny sources', async () => {
+  await withFixture(async (fixture) => {
+    const { manifest, layout } = await variantFixture(fixture)
+    const photos = albumFrom(manifest, 'current', 'events').photos
+    assert.deepEqual(
+      photos.find((p) => p.id === 'landscape').srcSet.map((v) => v.width),
+      [400, 640, 960, 1200]
+    )
+    assert.deepEqual(
+      photos.find((p) => p.id === 'portrait').srcSet.map((v) => v.width),
+      [400, 640]
+    )
+    assert.equal(photos.find((p) => p.id === 'tiny').srcSet, undefined)
+    assert.ok(
+      layout.sections.every((s) =>
+        s.albums.every((a) => a.photos.every((p) => !('srcSet' in p)))
+      )
+    )
+    await assertCandidateFiles(fixture, manifest)
+    const before = await snapshotPath(fixture.publicPhotosDir)
+    await buildPhotos(fixture)
+    assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), before)
+    await fs.rm(fixture.sourceDir, { recursive: true })
+    const edited = await readManifest(fixture.layoutFile)
+    edited.sections[0].title = 'Authored title'
+    await fs.writeFile(fixture.layoutFile, JSON.stringify(edited))
+    const synced = await syncPhotos(fixture)
+    assert.equal(synced.manifest.sections[0].title, 'Authored title')
+    assert.deepEqual(
+      synced.manifest.sections[0].albums[0].photos,
+      manifest.sections[0].albums[0].photos
+    )
+    await syncPhotos(fixture)
+    assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), before)
+  })
+})
+
+test('source-less migration is additive, repeatable, collision-safe and transactional', async () => {
+  await withFixture(async (fixture) => {
+    const { manifest } = await variantFixture(fixture)
+    for (const s of manifest.sections)
+      for (const a of s.albums) for (const p of a.photos) delete p.srcSet
+    await fs.writeFile(fixture.dataFile, JSON.stringify(manifest))
+    await fs.rm(path.join(fixture.publicPhotosDir, 'responsive'), {
+      recursive: true,
+    })
+    await fs.rm(fixture.sourceDir, { recursive: true })
+    const before = await snapshotPath(fixture.publicPhotosDir)
+    const beforeManifest = await snapshotPath(fixture.dataFile)
+    const beforeLayout = await snapshotPath(fixture.layoutFile)
+    await assert.rejects(
+      addResponsiveVariants({
+        ...fixture,
+        onSwitchStep: (step) => {
+          if (step === 'install-manifest') throw new Error('injected failure')
+        },
+      }),
+      /injected failure/
+    )
+    assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), before)
+    assert.deepEqual(await snapshotPath(fixture.dataFile), beforeManifest)
+    const collision = path.join(
+      fixture.publicPhotosDir,
+      'responsive/400/current/events/landscape.webp'
+    )
+    await fs.mkdir(path.dirname(collision), { recursive: true })
+    await fs.writeFile(collision, 'uncommitted experiment')
+    await assert.rejects(
+      addResponsiveVariants(fixture),
+      /output-path collision/
+    )
+    assert.equal(await fs.readFile(collision, 'utf8'), 'uncommitted experiment')
+    await fs.rm(collision)
+    const migrated = await addResponsiveVariants(fixture)
+    await assertCandidateFiles(fixture, migrated)
+    const after = await snapshotPath(fixture.publicPhotosDir)
+    for (const [file, bytes] of Object.entries(before))
+      assert.equal(after[file], bytes)
+    await addResponsiveVariants(fixture)
+    assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), after)
+    assert.deepEqual(await snapshotPath(fixture.layoutFile), beforeLayout)
+    await syncPhotos(fixture)
+    assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), after)
+  })
+})
+
+test('album updates, pruning and rollback own only the selected photo derivatives', async () => {
+  await withFixture(async (fixture) => {
+    await variantFixture(fixture)
+    const sourceAlbumDir = path.join(fixture.sourceDir, 'selected')
+    await makeImage(path.join(sourceAlbumDir, 'landscape.png'), 1000, 625)
+    await makeImage(path.join(sourceAlbumDir, 'new.png'), 1280, 720)
+    const options = importOptions(fixture, { sourceAlbumDir })
+    const before = await snapshotPath(fixture.publicPhotosDir)
+    const beforeManifest = await snapshotPath(fixture.dataFile)
+    await assert.rejects(
+      importAlbum({
+        ...options,
+        onSwitchStep: (step) => {
+          if (step === 'install-manifest') throw new Error('injected failure')
+        },
+      }),
+      /injected failure/
+    )
+    assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), before)
+    assert.deepEqual(await snapshotPath(fixture.dataFile), beforeManifest)
+    const { manifest, report } = await importAlbum(options)
+    assert.ok(report.updated.includes('landscape'))
+    assert.ok(
+      report.affectedOutputPaths.includes(
+        '/photos/responsive/1200/current/events/landscape.webp'
+      )
+    )
+    const after = await snapshotPath(fixture.publicPhotosDir)
+    for (const [file, bytes] of Object.entries(before))
+      if (!file.includes('/current/events/landscape.webp'))
+        assert.equal(after[file], bytes)
+    assert.equal(
+      after['responsive/1200/current/events/landscape.webp'],
+      undefined
+    )
+    await assertCandidateFiles(fixture, manifest)
+    const repeated = await importAlbum(options)
+    assert.deepEqual(repeated.report.updated, [])
+    assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), after)
+    const prune = {
+      ...fixture,
+      sectionId: 'current',
+      albumId: 'events',
+      photoIds: ['new'],
+      confirm: true,
+    }
+    await assert.rejects(
+      pruneAlbum({
+        ...prune,
+        onSwitchStep: (step) => {
+          if (step === 'install-manifest') throw new Error('injected failure')
+        },
+      }),
+      /injected failure/
+    )
+    assert.deepEqual(await snapshotPath(fixture.publicPhotosDir), after)
+    const removed = await pruneAlbum(prune)
+    assert.equal(removed.report.affectedOutputPaths.length, 6)
+    const pruned = await snapshotPath(fixture.publicPhotosDir)
+    for (const [file, bytes] of Object.entries(after)) {
+      if (file.endsWith('/new.webp')) assert.equal(pruned[file], undefined)
+      else assert.equal(pruned[file], bytes)
+    }
+  })
+})
+
+test('reconciliation rejects malformed candidates and authored derived fields', async () => {
+  await withFixture(async (fixture) => {
+    const { manifest, layout } = await variantFixture(fixture)
+    const cases = [
+      (p) => (p.srcSet[0].width = p.width),
+      (p) => (p.srcSet[0].height = 99999),
+      (p) => (p.srcSet[0].src = '/photos/full/current/events/landscape.webp'),
+      (p) => (p.srcSet[0].src = '/photos/responsive/400/../other.webp'),
+      (p) => p.srcSet.reverse(),
+      (p) => p.srcSet.push(p.srcSet[0]),
+      (p) => (p.srcSet = []),
+    ]
+    for (const mutate of cases) {
+      const invalid = cloneForTest(manifest)
+      mutate(
+        albumFrom(invalid, 'current', 'events').photos.find(
+          (p) => p.id === 'landscape'
+        )
+      )
+      assert.throws(() => resolveLayout(layout, invalid), /invalid/)
+    }
+    const authored = cloneForTest(layout)
+    albumFrom(authored, 'current', 'events').photos[0].srcSet = []
+    assert.throws(() => resolveLayout(authored, manifest), /srcSet|candidate/)
+    // A legacy record cannot claim another photo's responsive output as its fallback.
+    const collision = cloneForTest(manifest)
+    const photos = albumFrom(collision, 'current', 'events').photos
+    photos.find((p) => p.id === 'tiny').src = photos.find(
+      (p) => p.id === 'landscape'
+    ).srcSet[0].src
+    assert.throws(
+      () => resolveLayout(layout, collision),
+      /output-path collision/
+    )
   })
 })

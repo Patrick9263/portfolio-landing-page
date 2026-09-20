@@ -1,0 +1,11 @@
+/* Preview section on main page */
+.photos-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 16px 0 0;
+}
+
+.open-gallery-button {
+  margin: 0 auto;
+}
